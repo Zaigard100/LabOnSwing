@@ -15,7 +15,6 @@ public class Utils {
     static private ArrayList<Circle> circles;
     private String line ="";
 
-    private int iter = 0;
 
     public Utils(){
         triangles = new ArrayList<>();

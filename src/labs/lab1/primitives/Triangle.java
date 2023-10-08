@@ -15,14 +15,6 @@ public class Triangle extends JComponent {
         this.color = color;
     }
 
-    @Override
-    public void paint(Graphics g){
-        super.paint(g);
-        g.setColor(color);
-        g.drawPolygon(x_point,y_point,3);
-
-    }
-
 
     public void move(int dx, int dy){
         x_point[0]+=dx;

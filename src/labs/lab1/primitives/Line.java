@@ -2,7 +2,6 @@ package labs.lab1.primitives;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Line2D;
 
 public class Line extends JComponent {
     private Color color;
@@ -14,12 +13,6 @@ public class Line extends JComponent {
         this.y = y;
         this.x1 = x1;
         this.y1 = y1;
-    }
-
-    @Override
-    public void paint(Graphics g){
-        g.setColor(color);
-        g.drawLine(x,y,x1,y1);
     }
 
     public void move(int dx, int dy){
