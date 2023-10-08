@@ -169,25 +169,26 @@ public class Main {
             super(jFrame,"Create Circle",true);
 
             mainPanel = new JPanel();
+
             jPanel1 = new JPanel();
             jPanel2 = new JPanel();
             jPanel3 = new JPanel();
 
-            xField = new JTextField();
-            yField = new JTextField();
-            radiusField = new JTextField();
+            xField = new JTextField(5);
+            yField = new JTextField(5);
+            radiusField = new JTextField(5);
 
             jPanel1 = new JPanel();
-            jPanel1.add(new JLabel("X"),BorderLayout.EAST);
-            jPanel1.add(xField,BorderLayout.WEST);
+            jPanel1.add(new JLabel("X"));
+            jPanel1.add(xField);
 
-            jPanel1 = new JPanel();
-            jPanel2.add(new JLabel("Y"),BorderLayout.EAST);
-            jPanel2.add(yField,BorderLayout.WEST);
+            jPanel2 = new JPanel();
+            jPanel2.add(new JLabel("Y"));
+            jPanel2.add(yField);
 
             jPanel3 = new JPanel();
-            jPanel3.add(new JLabel("Radius"),BorderLayout.EAST);
-            jPanel3.add(radiusField,BorderLayout.WEST);
+            jPanel3.add(new JLabel("Radius"));
+            jPanel3.add(radiusField);
 
             mainPanel.add(jPanel1);
             mainPanel.add(jPanel2);
