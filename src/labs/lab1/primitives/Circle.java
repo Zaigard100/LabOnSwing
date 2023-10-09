@@ -6,20 +6,20 @@ import java.awt.*;
 public class Circle extends JComponent {
 
     int x,y;
-    int radius;
+    int diameter;
     Color color;
 
-    public Circle(int x, int y, int radius,Color color) {
+    public Circle(int x, int y, int diameter,Color color) {
         super();
         this.x = x;
         this.y = y;
-        this.radius = radius;
+        this.diameter = diameter;
         this.color = color;
     }
 
     public void move(int x,int y){
         this.x+=x;
-        this.x+=y;
+        this.y+=y;
     }
     public int getX() {
         return x;
@@ -37,12 +37,12 @@ public class Circle extends JComponent {
         this.y = y;
     }
 
-    public int getRadius() {
-        return radius;
+    public int getDiameter() {
+        return diameter;
     }
 
-    public void setRadius(int radius) {
-        this.radius = radius;
+    public void setDiameter(int diameter) {
+        this.diameter = diameter;
     }
 
     public Color getColor() {

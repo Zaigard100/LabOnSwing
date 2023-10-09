@@ -18,6 +18,8 @@ public class Line extends JComponent {
     public void move(int dx, int dy){
         x+=dx;
         y+=dy;
+        x1+=dx;
+        y1+=dx;
     }
 
     public int getX() {

@@ -17,7 +17,7 @@ public class Picture extends JComponent {
     protected void paintComponent(Graphics g){
         for(Circle c:utils.getCircles()){
             g.setColor(c.getColor());
-            g.drawOval(c.getX(),c.getY(),c.getRadius(),c.getRadius());
+            g.drawOval(c.getX(),c.getY(),c.getDiameter(),c.getDiameter());
         }
         for(Line l:utils.getLines()){
             g.setColor(l.getColor());

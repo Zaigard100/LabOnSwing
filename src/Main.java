@@ -71,7 +71,6 @@ public class Main {
 
         load = file.add(new JMenuItem("Load",'L'));
         del = file.add(new JMenuItem("Delete all",'D'));
-        del.setEnabled(false);
         file.addSeparator();
         exit = file.add(new JMenuItem("Exit"));
 
@@ -104,7 +103,6 @@ public class Main {
                     System.out.println(jFileChooser.getSelectedFile().getAbsolutePath());
                     utils.load(jFileChooser.getSelectedFile().getAbsolutePath());
                 }
-                del.setEnabled(true);
                 jPanel.repaint();
                 jPanel.revalidate();
                 jFrame.repaint();
@@ -117,7 +115,6 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 utils.dispose();
-                del.setEnabled(false);
                 jPanel.repaint();
                 jPanel.revalidate();
                 jFrame.repaint();
@@ -153,6 +150,10 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TransformCircle transformCircle = new TransformCircle();
+                transformCircle.c_list = new String[utils.getCircles().size()];
+                for(int i = 0;i<utils.getCircles().size();i++){
+                    transformCircle.c_list[i] = i+"";
+                }
                 transformCircle.setVisible(true);
             }
         });
@@ -160,14 +161,24 @@ public class Main {
         lin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                TransformLine transformLine = new TransformLine();
+                transformLine.l_list = new String[utils.getLines().size()];
+                for(int i = 0;i<utils.getLines().size();i++){
+                    transformLine.l_list[i] = i+"";
+                }
+                transformLine.setVisible(true);
             }
         });
 
         tri.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                TransformTriangle transformTriangle = new TransformTriangle();
+                transformTriangle.t_list = new String[utils.getTriangles().size()];
+                for(int i = 0;i<utils.getTriangles().size();i++){
+                    transformTriangle.t_list[i] = i+"";
+                    transformTriangle.setVisible(true);
+                }
             }
         });
 
@@ -269,6 +280,13 @@ public class Main {
             cancel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    xField.setText("");
+                    yField.setText("");
+                    diameterField.setText("");
+
+                    rField.setText("");
+                    gField.setText("");
+                    bField.setText("");
                     setVisible(false);
                 }
             });
@@ -287,6 +305,14 @@ public class Main {
                         int b = Integer.parseInt(bField.getText());
 
                         utils.getCircles().add(new Circle(x, y, radius, new Color(r, g, b)));
+
+                        xField.setText("");
+                        yField.setText("");
+                        diameterField.setText("");
+
+                        rField.setText("");
+                        gField.setText("");
+                        bField.setText("");
 
                         jPanel.repaint();
                         jPanel.revalidate();
@@ -381,6 +407,14 @@ public class Main {
             cancel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    xField.setText("");
+                    yField.setText("");
+                    x1Field.setText("");
+                    y1Field.setText("");
+
+                    rField.setText("");
+                    gField.setText("");
+                    bField.setText("");
                     setVisible(false);
                 }
             });
@@ -400,6 +434,15 @@ public class Main {
                         int b = Integer.parseInt(bField.getText());
 
                         utils.getLines().add(new Line(x, y, x1, y1, new Color(r, g, b)));
+
+                        xField.setText("");
+                        yField.setText("");
+                        x1Field.setText("");
+                        y1Field.setText("");
+
+                        rField.setText("");
+                        gField.setText("");
+                        bField.setText("");
 
                         jPanel.repaint();
                         jPanel.revalidate();
@@ -511,6 +554,16 @@ public class Main {
             cancel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    x1Field.setText("");
+                    y1Field.setText("");
+                    x2Field.setText("");
+                    y2Field.setText("");
+                    x3Field.setText("");
+                    y3Field.setText("");
+
+                    rField.setText("");
+                    gField.setText("");
+                    bField.setText("");
                     setVisible(false);
                 }
             });
@@ -532,6 +585,17 @@ public class Main {
                         int b = Integer.parseInt(bField.getText());
 
                         utils.getTriangles().add(new Triangle(x1, y1, x2, y2, x3, y3, new Color(r, g, b)));
+
+                        x1Field.setText("");
+                        y1Field.setText("");
+                        x2Field.setText("");
+                        y2Field.setText("");
+                        x3Field.setText("");
+                        y3Field.setText("");
+
+                        rField.setText("");
+                        gField.setText("");
+                        bField.setText("");
 
                         jPanel.repaint();
                         jPanel.revalidate();
@@ -556,28 +620,41 @@ public class Main {
     }
 
     public static class TransformCircle extends JDialog{
-        JComboBox jcb;
-
-        //
-
-        JButton cancel,edit,ok;
+        JComboBox jcb,circle_list;
+        TextField field1,field2,field3;
+        JButton cancel,edit;
         JPanel jPanel1,jPanel2,jPanel3;
+        protected String[] c_list;
         public TransformCircle(){
-
+            c_list = new String[utils.getCircles().size()];
+            for(int i = 0;i<utils.getCircles().size();i++){
+                c_list[i] = i+"";
+            }
+            circle_list = new JComboBox(c_list);
             jcb = new JComboBox(new String[]{"move", "x", "y", "diameter", "color"});
-            //TODO Центор доделать
             cancel = new JButton("Cancel");
             edit = new JButton("Edit");
-            ok = new JButton("Ok");
+
+            int width = 300;
+            int hight = 150;
 
             jPanel1 = new JPanel();
             jPanel2 = new JPanel();
             jPanel3 = new JPanel();
 
+            field1 = new TextField(5);
+            field2 = new TextField(5);
+            field3 = new TextField(5);
+
+            jPanel1.add(new JLabel("Circle № "));
+            jPanel1.add(circle_list);
             jPanel1.add(jcb);
-            jPanel1.add(ok);
             jPanel1.setBounds(0,0,325,75);
 
+            jPanel2.add(new JLabel(" DX "));
+            jPanel2.add(field1);
+            jPanel2.add(new JLabel(" DY "));
+            jPanel2.add(field2);
             jPanel2.setBounds(0,75,325,75);
 
             jPanel3.add(cancel);
@@ -588,7 +665,368 @@ public class Main {
             add(jPanel2,BorderLayout.CENTER);
             add(jPanel3,BorderLayout.SOUTH);
 
-            setSize(325,225);
+            setBounds((screen_w-width)/2,(screen_h-hight)/2,width,hight);
+            jcb.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    jPanel2.removeAll();
+
+                    String item = (String)jcb.getSelectedItem();
+
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+
+                    if(item.equals("move")){
+                        jPanel2.add(new JLabel(" DX "));
+                        jPanel2.add(field1);
+                        jPanel2.add(new JLabel(" DY "));
+                        jPanel2.add(field2);
+                    }else if(item.equals("x")){
+                        jPanel2.add(new JLabel(" X "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("y")){
+                        jPanel2.add(new JLabel(" Y "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("diameter")){
+                        jPanel2.add(new JLabel(" Diameter "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("color")){
+                        jPanel2.add(new JLabel(" R "));
+                        jPanel2.add(field1);
+                        jPanel2.add(new JLabel(" G "));
+                        jPanel2.add(field2);
+                        jPanel2.add(new JLabel(" B "));
+                        jPanel2.add(field3);
+                    }
+
+                    jPanel2.repaint();
+                    jPanel2.revalidate();
+
+                }
+            });
+
+            cancel.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+                    setVisible(false);
+                }
+            });
+
+            edit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    String item = (String)jcb.getSelectedItem();
+                    if(item.equals("move")){
+                        utils.getCircles().get((int)circle_list.getSelectedIndex()).move(Integer.parseInt(field1.getText()),Integer.parseInt(field2.getText()));
+                    }else if(item.equals("x")){
+                        utils.getCircles().get((int)circle_list.getSelectedIndex()).setX(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("y")){
+                        utils.getCircles().get((int)circle_list.getSelectedIndex()).setY(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("diameter")){
+                        utils.getCircles().get((int)circle_list.getSelectedIndex()).setDiameter(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("color")){
+                        utils.getCircles().get((int)circle_list.getSelectedIndex()).setColor(new Color(Integer.parseInt(field1.getText()),Integer.parseInt(field2.getText()),Integer.parseInt(field3.getText())));
+                    }
+
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+
+                    jPanel2.repaint();
+                    jPanel2.revalidate();
+                    jPanel.repaint();
+                    jPanel.revalidate();
+                    jFrame.repaint();
+                    jFrame.revalidate();
+                }
+            });
+
+        }
+
+    }
+
+    public static class TransformLine extends JDialog{
+        JComboBox jcb,line_list;
+        TextField field1,field2,field3;
+        JButton cancel,edit;
+        JPanel jPanel1,jPanel2,jPanel3;
+        protected String[] l_list;
+        public TransformLine(){
+            l_list = new String[utils.getLines().size()];
+            for(int i = 0;i<utils.getLines().size();i++){
+                l_list[i] = i+"";
+            }
+            line_list = new JComboBox(l_list);
+            jcb = new JComboBox(new String[]{"move", "x", "y", "x1","y1","color"});
+            cancel = new JButton("Cancel");
+            edit = new JButton("Edit");
+
+            int width = 300;
+            int hight = 150;
+
+            jPanel1 = new JPanel();
+            jPanel2 = new JPanel();
+            jPanel3 = new JPanel();
+
+            field1 = new TextField(5);
+            field2 = new TextField(5);
+            field3 = new TextField(5);
+
+            jPanel1.add(new JLabel("Line № "));
+            jPanel1.add(line_list);
+            jPanel1.add(jcb);
+            jPanel1.setBounds(0,0,325,75);
+
+            jPanel2.add(new JLabel(" DX "));
+            jPanel2.add(field1);
+            jPanel2.add(new JLabel(" DY "));
+            jPanel2.add(field2);
+            jPanel2.setBounds(0,75,325,75);
+
+            jPanel3.add(cancel);
+            jPanel3.add(edit);
+            jPanel3.setBounds(0,150,325,75);
+
+            add(jPanel1,BorderLayout.NORTH);
+            add(jPanel2,BorderLayout.CENTER);
+            add(jPanel3,BorderLayout.SOUTH);
+
+            setBounds((screen_w-width)/2,(screen_h-hight)/2,width,hight);
+            jcb.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    jPanel2.removeAll();
+
+                    String item = (String)jcb.getSelectedItem();
+
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+
+                    if(item.equals("move")){
+                        jPanel2.add(new JLabel(" DX "));
+                        jPanel2.add(field1);
+                        jPanel2.add(new JLabel(" DY "));
+                        jPanel2.add(field2);
+                    }else if(item.equals("x")){
+                        jPanel2.add(new JLabel(" X "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("y")){
+                        jPanel2.add(new JLabel(" Y "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("x1")){
+                        jPanel2.add(new JLabel(" X1 "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("y1")){
+                        jPanel2.add(new JLabel(" Y1 "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("color")){
+                        jPanel2.add(new JLabel(" R "));
+                        jPanel2.add(field1);
+                        jPanel2.add(new JLabel(" G "));
+                        jPanel2.add(field2);
+                        jPanel2.add(new JLabel(" B "));
+                        jPanel2.add(field3);
+                    }
+
+                    jPanel2.repaint();
+                    jPanel2.revalidate();
+
+                }
+            });
+
+            cancel.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+                    setVisible(false);
+                }
+            });
+
+            edit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    String item = (String)jcb.getSelectedItem();
+                    if(item.equals("move")){
+                        utils.getLines().get((int)line_list.getSelectedIndex()).move(Integer.parseInt(field1.getText()),Integer.parseInt(field2.getText()));
+                    }else if(item.equals("x")){
+                        utils.getLines().get((int)line_list.getSelectedIndex()).setX(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("y")){
+                        utils.getLines().get((int)line_list.getSelectedIndex()).setY(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("x1")){
+                        utils.getLines().get((int)line_list.getSelectedIndex()).setX1(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("y1")){
+                        utils.getLines().get((int)line_list.getSelectedIndex()).setY1(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("color")){
+                        utils.getLines().get((int)line_list.getSelectedIndex()).setColor(new Color(Integer.parseInt(field1.getText()),Integer.parseInt(field2.getText()),Integer.parseInt(field3.getText())));
+                    }
+
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+
+                    jPanel2.repaint();
+                    jPanel2.revalidate();
+                    jPanel.repaint();
+                    jPanel.revalidate();
+                    jFrame.repaint();
+                    jFrame.revalidate();
+                }
+            });
+
+        }
+
+    }
+
+    public static class TransformTriangle extends JDialog{
+        JComboBox jcb,triangle_list;
+        TextField field1,field2,field3;
+        JButton cancel,edit;
+        JPanel jPanel1,jPanel2,jPanel3;
+        protected String[] t_list;
+        public TransformTriangle(){
+            t_list = new String[utils.getTriangles().size()];
+            for(int i = 0;i<utils.getTriangles().size();i++){
+                t_list[i] = i+"";
+            }
+            triangle_list = new JComboBox(t_list);
+            jcb = new JComboBox(new String[]{"move","x1","y1","x2","y2","x3","y3","color"});
+            cancel = new JButton("Cancel");
+            edit = new JButton("Edit");
+
+            int width = 300;
+            int hight = 150;
+
+            jPanel1 = new JPanel();
+            jPanel2 = new JPanel();
+            jPanel3 = new JPanel();
+
+            field1 = new TextField(5);
+            field2 = new TextField(5);
+            field3 = new TextField(5);
+
+            jPanel1.add(new JLabel("Triangle № "));
+            jPanel1.add(triangle_list);
+            jPanel1.add(jcb);
+            jPanel1.setBounds(0,0,325,75);
+
+            jPanel2.add(new JLabel(" DX "));
+            jPanel2.add(field1);
+            jPanel2.add(new JLabel(" DY "));
+            jPanel2.add(field2);
+            jPanel2.setBounds(0,75,325,75);
+
+            jPanel3.add(cancel);
+            jPanel3.add(edit);
+            jPanel3.setBounds(0,150,325,75);
+
+            add(jPanel1,BorderLayout.NORTH);
+            add(jPanel2,BorderLayout.CENTER);
+            add(jPanel3,BorderLayout.SOUTH);
+
+            setBounds((screen_w-width)/2,(screen_h-hight)/2,width,hight);
+            jcb.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    jPanel2.removeAll();
+
+                    String item = (String)jcb.getSelectedItem();
+
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+
+                    if(item.equals("move")){
+                        jPanel2.add(new JLabel(" DX "));
+                        jPanel2.add(field1);
+                        jPanel2.add(new JLabel(" DY "));
+                        jPanel2.add(field2);
+                    }else if(item.equals("x1")){
+                        jPanel2.add(new JLabel(" X1 "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("y1")){
+                        jPanel2.add(new JLabel(" Y1 "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("x2")){
+                        jPanel2.add(new JLabel(" X2 "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("y2")){
+                        jPanel2.add(new JLabel(" Y2 "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("x3")){
+                        jPanel2.add(new JLabel(" X3 "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("y3")){
+                        jPanel2.add(new JLabel(" Y3 "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("color")){
+                        jPanel2.add(new JLabel(" R "));
+                        jPanel2.add(field1);
+                        jPanel2.add(new JLabel(" G "));
+                        jPanel2.add(field2);
+                        jPanel2.add(new JLabel(" B "));
+                        jPanel2.add(field3);
+                    }
+
+                    jPanel2.repaint();
+                    jPanel2.revalidate();
+
+                }
+            });
+
+            cancel.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+                    setVisible(false);
+                }
+            });
+
+            edit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    String item = (String)jcb.getSelectedItem();
+                    if(item.equals("move")){
+                        utils.getTriangles().get((int)triangle_list.getSelectedIndex()).move(Integer.parseInt(field1.getText()),Integer.parseInt(field2.getText()));
+                    }else if(item.equals("x1")){
+                        utils.getTriangles().get((int)triangle_list.getSelectedIndex()).setX1(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("y1")){
+                        utils.getTriangles().get((int)triangle_list.getSelectedIndex()).setY1(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("x2")){
+                        utils.getTriangles().get((int)triangle_list.getSelectedIndex()).setX2(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("y2")){
+                        utils.getTriangles().get((int)triangle_list.getSelectedIndex()).setY2(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("x3")){
+                        utils.getTriangles().get((int)triangle_list.getSelectedIndex()).setX3(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("y3")){
+                        utils.getTriangles().get((int)triangle_list.getSelectedIndex()).setY3(Integer.parseInt(field1.getText()));
+                    }else if(item.equals("color")){
+                        utils.getTriangles().get((int)triangle_list.getSelectedIndex()).setColor(new Color(Integer.parseInt(field1.getText()),Integer.parseInt(field2.getText()),Integer.parseInt(field3.getText())));
+                    }
+
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+
+                    jPanel2.repaint();
+                    jPanel2.revalidate();
+                    jPanel.repaint();
+                    jPanel.revalidate();
+                    jFrame.repaint();
+                    jFrame.revalidate();
+                }
+            });
 
         }
 
