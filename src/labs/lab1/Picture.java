@@ -13,6 +13,7 @@ public class Picture extends JComponent {
     public Picture(Utils utils){
         this.utils = utils;
     }
+
     @Override
     protected void paintComponent(Graphics g){
         for(Circle c:utils.getCircles()){
