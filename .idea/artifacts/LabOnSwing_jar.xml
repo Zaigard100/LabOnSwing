@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LabOnSwing:jar">
+    <output-path>$USER_HOME$/jetbrains/LabOnSwing/artifacts/LabOnSwing_jar</output-path>
+    <root id="archive" name="LabOnSwing.jar">
+      <element id="module-output" name="LabOnSwing" />
+    </root>
+  </artifact>
+</component>

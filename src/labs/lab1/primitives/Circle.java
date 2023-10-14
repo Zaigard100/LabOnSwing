@@ -1,13 +1,15 @@
 package labs.lab1.primitives;
 
+import labs.lab1.Lab1;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class Circle extends JComponent {
+public class Circle {
 
-    int x,y;
-    int diameter;
-    Color color;
+    private int x,y;
+    private int diameter;
+    private Color color;
 
     public Circle(int x, int y, int diameter,Color color) {
         super();
@@ -17,9 +19,21 @@ public class Circle extends JComponent {
         this.color = color;
     }
 
-    public void move(int x,int y){
-        this.x+=x;
-        this.y+=y;
+    public void move(int dx,int dy){
+        this.x+=dx;
+        this.y+=dy;
+        if(this.x>Lab1.getWindows_w()-diameter){
+            this.x=Lab1.getWindows_w()-diameter;
+        }
+        if(this.y>Lab1.getWindows_h()){
+            this.y=Lab1.getWindows_h()-diameter;
+        }
+        if(this.x<0){
+            this.x=0;
+        }
+        if(this.y<0){
+            this.y=0;
+        }
     }
     public int getX() {
         return x;

@@ -19,7 +19,7 @@ public class Line extends JComponent {
         x+=dx;
         y+=dy;
         x1+=dx;
-        y1+=dx;
+        y1+=dy;
     }
 
     public int getX() {
