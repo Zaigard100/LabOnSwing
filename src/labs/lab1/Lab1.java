@@ -14,13 +14,15 @@ public class Lab1 {
     static int windows_w = 1500;
     static int windows_h = 800;
     static int screen_w,screen_h;
-    static JFrame jFrame;
+    public static JFrame jFrame;
     static Utils utils;
     static JPanel jPanel;
     static JMenuBar jMenuBar;
     static JMenu file,edit,create;
     static JMenuItem load,del,exit,cir,lin,tri,a_cir,a_lin,a_tri;
 
+    public static Toolkit toolkit;
+    public static Dimension dimension;
     static Picture picture;
 
     public void start() {
@@ -47,17 +49,16 @@ public class Lab1 {
     static JFrame getFrame(){
         //создание окна
         JFrame jFrame = new JFrame() {};
-        jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(windows_w, windows_h+60);
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension dimension = toolkit.getScreenSize();
+        toolkit = Toolkit.getDefaultToolkit();
+        dimension = toolkit.getScreenSize();
         screen_w = dimension.width;
         screen_h = dimension.height;
         jFrame.setLocation(screen_w/2- windows_w /2,screen_h/2- windows_h /2);
-        //jFrame.setResizable(false);
         jFrame.setTitle("labs");
-        System.out.println(jFrame.getSize().getWidth()+" "+jFrame.getSize().getHeight());
+        jFrame.setResizable(false);
+        jFrame.setVisible(true);
         return jFrame;
     }
 
@@ -738,26 +739,17 @@ public class Lab1 {
                             if (item.equals("move")){
                                 utils.getCircles().get(i).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
                             } else if (item.equals("x")) {
-                                int x = parseInt(field1.getText(), utils.getCircles().get(i).getX());
-                                if(x<windows_w && x>0) {
-                                    utils.getCircles().get(i).setX(x);
-                                }
+                                utils.getCircles().get(i).setX(parseInt(field1.getText(), utils.getCircles().get(i).getX()));
                             } else if (item.equals("y")) {
-                                int y = parseInt(field1.getText(), utils.getCircles().get(i).getY());
-                                if(y<windows_h && y>0) {
-                                    utils.getCircles().get(i).setY(y);
-                                }
+                                utils.getCircles().get(i).setY(parseInt(field1.getText(), utils.getCircles().get(i).getY()));
                             } else if (item.equals("diameter")) {
-                                int di = parseInt(field1.getText(), utils.getCircles().get(i).getDiameter());
-                                if(di>0) {
-                                    utils.getCircles().get(i).setDiameter(di);
-                                }
+                                utils.getCircles().get(i).setDiameter(parseInt(field1.getText(), utils.getCircles().get(i).getDiameter()));
                             } else if (item.equals("color")) {
-                                utils.getCircles().get(i).setColor(new Color(
+                                utils.getCircles().get(i).setColor(
                                         parseInt(field1.getText(), utils.getCircles().get(i).getColor().getRed()),
                                         parseInt(field2.getText(), utils.getCircles().get(i).getColor().getGreen()),
                                         parseInt(field3.getText(), utils.getCircles().get(i).getColor().getBlue())
-                                ));
+                                );
                             }
                         }
                     }else {
@@ -773,11 +765,11 @@ public class Lab1 {
                                 utils.getCircles().get((int) circle_list.getSelectedIndex()).setDiameter(di);
                             }
                         } else if (item.equals("color")) {
-                            utils.getCircles().get((int) circle_list.getSelectedIndex()).setColor(new Color(
+                            utils.getCircles().get((int) circle_list.getSelectedIndex()).setColor(
                                     parseInt(field1.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getColor().getRed()),
                                     parseInt(field2.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getColor().getGreen()),
                                     parseInt(field3.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getColor().getBlue())
-                            ));
+                            );
                         }
                     }
                     field1.setText("");
@@ -916,11 +908,11 @@ public class Lab1 {
                             } else if (item.equals("y1")) {
                                 utils.getLines().get(i).setY1(parseInt(field1.getText(), utils.getLines().get(i).getY1()));
                             } else if (item.equals("color")) {
-                                utils.getLines().get(i).setColor(new Color(
+                                utils.getLines().get(i).setColor(
                                         parseInt(field1.getText(), utils.getLines().get(i).getColor().getRed()),
                                         parseInt(field2.getText(), utils.getLines().get(i).getColor().getGreen()),
                                         parseInt(field3.getText(), utils.getLines().get(i).getColor().getBlue())
-                                ));
+                                );
                             }
                         }
                     }else{
@@ -936,11 +928,11 @@ public class Lab1 {
                         } else if (item.equals("y1")) {
                             utils.getLines().get((int) line_list.getSelectedIndex()).setY1(parseInt(field1.getText(), utils.getLines().get(((int) line_list.getSelectedIndex())).getY1()));
                         } else if (item.equals("color")) {
-                            utils.getLines().get((int) line_list.getSelectedIndex()).setColor(new Color(
+                            utils.getLines().get((int) line_list.getSelectedIndex()).setColor(
                                     parseInt(field1.getText(), utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getRed()),
                                     parseInt(field2.getText(), utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getGreen()),
                                     parseInt(field3.getText(), utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getBlue())
-                            ));
+                            );
                         }
                     }
                     field1.setText("");
@@ -1088,11 +1080,11 @@ public class Lab1 {
                             } else if (item.equals("y3")) {
                                 utils.getTriangles().get(i).setY3(parseInt(field1.getText(), utils.getTriangles().get(i).getY3()));
                             } else if (item.equals("color")) {
-                                utils.getTriangles().get(i).setColor(new Color(
+                                utils.getTriangles().get(i).setColor(
                                         parseInt(field1.getText(), utils.getTriangles().get(i).getColor().getRed()),
                                         parseInt(field2.getText(), utils.getTriangles().get(i).getColor().getGreen()),
                                         parseInt(field3.getText(), utils.getTriangles().get(i).getColor().getBlue())
-                                ));
+                                );
                             }
                         }
                     }else {
@@ -1110,11 +1102,11 @@ public class Lab1 {
                         } else if (item.equals("y3")) {
                             utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY3(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY3()));
                         } else if (item.equals("color")) {
-                            utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setColor(new Color(
+                            utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setColor(
                                     parseInt(field1.getText(), utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getRed()),
                                     parseInt(field2.getText(), utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getGreen()),
                                     parseInt(field3.getText(), utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getBlue())
-                            ));
+                            );
                         }
 
                         field1.setText("");

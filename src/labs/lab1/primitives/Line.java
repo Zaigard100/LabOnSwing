@@ -1,7 +1,10 @@
 package labs.lab1.primitives;
 
+import labs.lab1.Lab1;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class Line extends JComponent {
     private Color color;
@@ -16,6 +19,23 @@ public class Line extends JComponent {
     }
 
     public void move(int dx, int dy){
+        int max_x,max_y,min_x,min_y;
+        max_x = Math.max(x,x1);
+        max_y = Math.max(y,y1);
+        min_x = Math.min(x,x1);
+        min_y = Math.min(y,y1);
+        if(max_x+dx> Lab1.getWindows_w()){
+            dx = Lab1.getWindows_w()-max_x;
+        }
+        if(max_y+dy>Lab1.getWindows_h()){
+            dy = Lab1.getWindows_h()-max_y;
+        }
+        if(min_x+dx<0){
+            dx = -min_x;
+        }
+        if(min_y+dy<0){
+            dy = -min_y;
+        }
         x+=dx;
         y+=dy;
         x1+=dx;
@@ -39,26 +59,36 @@ public class Line extends JComponent {
     }
 
     public void setX(int x) {
-        this.x = x;
+        if (x > 0 && x < Lab1.getWindows_w()){
+            this.x = x;
+        }
     }
 
     public void setY(int y) {
-        this.y = y;
+        if (y > 0 && y < Lab1.getWindows_h()){
+            this.y = y;
+        }
     }
 
     public void setX1(int x1) {
-        this.x1 = x1;
+        if (x1 > 0 && x1 < Lab1.getWindows_w()) {
+            this.x1 = x1;
+        }
     }
 
     public void setY1(int y1) {
-        this.y1 = y1;
+        if (y1 > 0 && y1 < Lab1.getWindows_h()) {
+            this.y1 = y1;
+        }
     }
 
     public Color getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColor(int r,int g,int b) {
+        if(r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255) {
+            this.color = new Color(r,g,b);
+        }
     }
 }

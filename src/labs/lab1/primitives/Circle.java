@@ -12,7 +12,6 @@ public class Circle {
     private Color color;
 
     public Circle(int x, int y, int diameter,Color color) {
-        super();
         this.x = x;
         this.y = y;
         this.diameter = diameter;
@@ -38,9 +37,10 @@ public class Circle {
     public int getX() {
         return x;
     }
-
     public void setX(int x) {
-        this.x = x;
+        if(x>Lab1.getWindows_w()-diameter||x<0) {
+            this.x = x;
+        }
     }
 
     public int getY() {
@@ -48,7 +48,9 @@ public class Circle {
     }
 
     public void setY(int y) {
-        this.y = y;
+        if(this.y>Lab1.getWindows_h()||y<0) {
+            this.y = y;
+        }
     }
 
     public int getDiameter() {
@@ -56,14 +58,18 @@ public class Circle {
     }
 
     public void setDiameter(int diameter) {
-        this.diameter = diameter;
+        if(diameter>0) {
+            this.diameter = diameter;
+        }
     }
 
     public Color getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColor(int r,int g,int b) {
+        if(r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255) {
+            this.color = new Color(r,g,b);
+        }
     }
 }
