@@ -207,7 +207,7 @@ public class Lab1 {
     }
 
     public void setWindows_w(int windows_w) {
-        this.windows_w = windows_w;
+        Lab1.windows_w = windows_w;
     }
 
     public static int getWindows_h() {
@@ -215,7 +215,7 @@ public class Lab1 {
     }
 
     public void setWindows_h(int windows_h) {
-        this.windows_h = windows_h;
+        Lab1.windows_h = windows_h;
     }
 
     public JFrame getjFrame() {
@@ -229,10 +229,11 @@ public class Lab1 {
     public static class CreateCircle extends JDialog {
 
         JTextField xField,yField,diameterField,rField,gField,bField;
-        JPanel mainPanel,xPanel,yPanel,diameterPanel,colorPanel;
+        JPanel mainPanel,xPanel,yPanel,diameterPanel,colorPanel,fillPanel;
         JButton cancel,create;
+        JCheckBox fillCheck;
         int width = 325;
-        int height = 150;
+        int height = 175;
 
         public CreateCircle(){
             super(jFrame,"Create Circle",true);
@@ -258,6 +259,8 @@ public class Lab1 {
             xPanel.add(new JLabel("X"));
             xPanel.add(xField);
 
+            fillCheck = new JCheckBox();
+
             yPanel = new JPanel();
             yPanel.add(new JLabel("Y"));
             yPanel.add(yField);
@@ -266,8 +269,11 @@ public class Lab1 {
             diameterPanel.add(new JLabel("Diameter"));
             diameterPanel.add(diameterField);
 
-            colorPanel = new JPanel();
+            fillPanel = new JPanel();
+            fillPanel.add(new JLabel("Filled: "));
+            fillPanel.add(fillCheck);
 
+            colorPanel = new JPanel();
             colorPanel.add(new JLabel("Color:"));
             colorPanel.add(new JLabel(" R "));
             colorPanel.add(rField);
@@ -279,7 +285,7 @@ public class Lab1 {
             mainPanel.add(xPanel);
             mainPanel.add(yPanel);
             mainPanel.add(diameterPanel);
-
+            mainPanel.add(fillPanel);
             mainPanel.add(colorPanel);
 
             mainPanel.add(cancel);
@@ -309,13 +315,13 @@ public class Lab1 {
 
                         int x = Integer.parseInt(xField.getText());
                         int y = Integer.parseInt(yField.getText());
-                        int radius = Integer.parseInt(diameterField.getText());
-
+                        int diameter = Integer.parseInt(diameterField.getText());
+                        boolean fill = fillCheck.getModel().isSelected();
                         int r = Integer.parseInt(rField.getText());
                         int g = Integer.parseInt(gField.getText());
                         int b = Integer.parseInt(bField.getText());
 
-                        utils.getCircles().add(new Circle(x, y, radius, new Color(r, g, b)));
+                        utils.getCircles().add(new Circle(x, y, diameter,fill, new Color(r, g, b)));
 
                         xField.setText("");
                         yField.setText("");
@@ -480,13 +486,14 @@ public class Lab1 {
     public static class CreateTriangle extends JDialog {
 
         JTextField x1Field,y1Field,x2Field,y2Field,x3Field,y3Field,rField,gField,bField;
-        JPanel mainPanel,x1Panel,y1Panel,x2Panel,y2Panel,x3Panel,y3Panel,colorPanel;
+        JPanel mainPanel,x1Panel,y1Panel,x2Panel,y2Panel,x3Panel,y3Panel,colorPanel,fillPanel;
         JButton cancel,create;
+        JCheckBox fillCheck;
         int width = 325;
-        int height = 200;
+        int height = 225;
 
         public CreateTriangle(){
-            super(jFrame,"Create Line",true);
+            super(jFrame,"Create Triangle",true);
 
             mainPanel = new JPanel();
 
@@ -503,6 +510,8 @@ public class Lab1 {
             y2Field = new JTextField(5);
             x3Field = new JTextField(5);
             y3Field = new JTextField(5);
+
+            fillCheck = new JCheckBox();
 
             rField = new JTextField(3);
             gField = new JTextField(3);
@@ -535,6 +544,10 @@ public class Lab1 {
             y3Panel.add(new JLabel("Y3"));
             y3Panel.add(y3Field);
 
+            fillPanel = new JPanel();
+            fillPanel.add(new JLabel("Filled "));
+            fillPanel.add(fillCheck);
+
             colorPanel = new JPanel();
 
             colorPanel.add(new JLabel("    Color:    "));
@@ -551,6 +564,7 @@ public class Lab1 {
             mainPanel.add(y2Panel);
             mainPanel.add(x3Panel);
             mainPanel.add(y3Panel);
+            mainPanel.add(fillPanel);
 
             mainPanel.add(colorPanel);
 
@@ -590,12 +604,13 @@ public class Lab1 {
                         int y2 = Integer.parseInt(y2Field.getText());
                         int x3 = Integer.parseInt(x3Field.getText());
                         int y3 = Integer.parseInt(y3Field.getText());
+                        boolean fill = fillCheck.isSelected();
 
                         int r = Integer.parseInt(rField.getText());
                         int g = Integer.parseInt(gField.getText());
                         int b = Integer.parseInt(bField.getText());
 
-                        utils.getTriangles().add(new Triangle(x1, y1, x2, y2, x3, y3, new Color(r, g, b)));
+                        utils.getTriangles().add(new Triangle(x1, y1, x2, y2, x3, y3,fill, new Color(r, g, b)));
 
                         x1Field.setText("");
                         y1Field.setText("");
@@ -633,6 +648,7 @@ public class Lab1 {
     public static class TransformCircle extends JDialog{
         JComboBox jcb,circle_list;
         TextField field1,field2,field3;
+        JCheckBox checkBox;
         JButton cancel,edit;
         JPanel jPanel1,jPanel2,jPanel3;
         protected String[] c_list;
@@ -643,7 +659,7 @@ public class Lab1 {
             }
             c_list[utils.getCircles().size()]="all";
             circle_list = new JComboBox(c_list);
-            jcb = new JComboBox(new String[]{"move", "x", "y", "diameter", "color"});
+            jcb = new JComboBox(new String[]{"move", "x", "y", "diameter","fill", "color"});
             cancel = new JButton("Cancel");
             edit = new JButton("Edit");
 
@@ -657,6 +673,8 @@ public class Lab1 {
             field1 = new TextField(5);
             field2 = new TextField(5);
             field3 = new TextField(5);
+
+            checkBox = new JCheckBox();
 
             jPanel1.add(new JLabel("Circle № "));
             jPanel1.add(circle_list);
@@ -703,6 +721,9 @@ public class Lab1 {
                     }else if(item.equals("diameter")){
                         jPanel2.add(new JLabel(" Diameter "));
                         jPanel2.add(field1);
+                    }else if(item.equals("fill")){
+                        jPanel2.add(new JLabel(" Filed  "));
+                        jPanel2.add(checkBox);
                     }else if(item.equals("color")){
                         jPanel2.add(new JLabel(" R "));
                         jPanel2.add(field1);
@@ -744,6 +765,8 @@ public class Lab1 {
                                 utils.getCircles().get(i).setY(parseInt(field1.getText(), utils.getCircles().get(i).getY()));
                             } else if (item.equals("diameter")) {
                                 utils.getCircles().get(i).setDiameter(parseInt(field1.getText(), utils.getCircles().get(i).getDiameter()));
+                            } else if (item.equals("fill")) {
+                                utils.getCircles().get(i).setFill(checkBox.isSelected());
                             } else if (item.equals("color")) {
                                 utils.getCircles().get(i).setColor(
                                         parseInt(field1.getText(), utils.getCircles().get(i).getColor().getRed()),
@@ -759,7 +782,9 @@ public class Lab1 {
                             utils.getCircles().get((int) circle_list.getSelectedIndex()).setX(parseInt(field1.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getX()));
                         } else if (item.equals("y")) {
                             utils.getCircles().get((int) circle_list.getSelectedIndex()).setY(parseInt(field1.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getY()));
-                        } else if (item.equals("diameter")) {
+                        }  else if (item.equals("fill")) {
+                            utils.getCircles().get((int) circle_list.getSelectedIndex()).setFill(checkBox.isSelected());
+                        }else if (item.equals("diameter")) {
                             int di = parseInt(field1.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getDiameter());
                             if(di>0) {
                                 utils.getCircles().get((int) circle_list.getSelectedIndex()).setDiameter(di);
@@ -956,6 +981,7 @@ public class Lab1 {
         JComboBox jcb,triangle_list;
         TextField field1,field2,field3;
         JButton cancel,edit;
+        JCheckBox checkBox;
         JPanel jPanel1,jPanel2,jPanel3;
         protected String[] t_list;
         public TransformTriangle(){
@@ -965,7 +991,7 @@ public class Lab1 {
             }
             t_list[utils.getTriangles().size()]="all";
             triangle_list = new JComboBox(t_list);
-            jcb = new JComboBox(new String[]{"move","x1","y1","x2","y2","x3","y3","color"});
+            jcb = new JComboBox(new String[]{"move","x1","y1","x2","y2","x3","y3","fill","color"});
             cancel = new JButton("Cancel");
             edit = new JButton("Edit");
 
@@ -979,6 +1005,8 @@ public class Lab1 {
             field1 = new TextField(5);
             field2 = new TextField(5);
             field3 = new TextField(5);
+
+            checkBox = new JCheckBox();
 
             jPanel1.add(new JLabel("Triangle № "));
             jPanel1.add(triangle_list);
@@ -1034,6 +1062,9 @@ public class Lab1 {
                     }else if(item.equals("y3")){
                         jPanel2.add(new JLabel(" Y3 "));
                         jPanel2.add(field1);
+                    }else if(item.equals("fill")){
+                        jPanel2.add(new JLabel(" Filed  "));
+                        jPanel2.add(checkBox);
                     }else if(item.equals("color")){
                         jPanel2.add(new JLabel(" R "));
                         jPanel2.add(field1);
@@ -1079,6 +1110,8 @@ public class Lab1 {
                                 utils.getTriangles().get(i).setX3(parseInt(field1.getText(), utils.getTriangles().get(i).getX3()));
                             } else if (item.equals("y3")) {
                                 utils.getTriangles().get(i).setY3(parseInt(field1.getText(), utils.getTriangles().get(i).getY3()));
+                            } else if (item.equals("fill")) {
+                                utils.getTriangles().get(i).setFill(checkBox.isSelected());
                             } else if (item.equals("color")) {
                                 utils.getTriangles().get(i).setColor(
                                         parseInt(field1.getText(), utils.getTriangles().get(i).getColor().getRed()),
@@ -1101,6 +1134,8 @@ public class Lab1 {
                             utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX3(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX3()));
                         } else if (item.equals("y3")) {
                             utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY3(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY3()));
+                        } else if (item.equals("fill")) {
+                            utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setFill(checkBox.isSelected());
                         } else if (item.equals("color")) {
                             utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setColor(
                                     parseInt(field1.getText(), utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getRed()),

@@ -55,6 +55,7 @@ public class Utils {
                     Integer.parseInt(words[4]),
                     Integer.parseInt(words[5]),
                     Integer.parseInt(words[6]),
+                    Boolean.parseBoolean(words[10]),
                     new Color(Integer.parseInt(words[7]),Integer.parseInt(words[8]),Integer.parseInt(words[9]))
             ));
         }else if(words[0].equals("l")){
@@ -70,6 +71,7 @@ public class Utils {
                     Integer.parseInt(words[1]),
                     Integer.parseInt(words[2]),
                     Integer.parseInt(words[3]),
+                    Boolean.valueOf(words[7]),
                     new Color(Integer.parseInt(words[4]),Integer.parseInt(words[5]),Integer.parseInt(words[6]))
             ));
         }

@@ -10,11 +10,13 @@ public class Circle {
     private int x,y;
     private int diameter;
     private Color color;
+    private boolean fill;
 
-    public Circle(int x, int y, int diameter,Color color) {
+    public Circle(int x, int y, int diameter,boolean fill,Color color) {
         this.x = x;
         this.y = y;
         this.diameter = diameter;
+        this.fill = fill;
         this.color = color;
     }
 
@@ -63,11 +65,19 @@ public class Circle {
         }
     }
 
+    public boolean isFill() {
+        return fill;
+    }
+
+    public void setFill(boolean fill) {
+        this.fill = fill;
+    }
+
     public Color getColor() {
         return color;
     }
 
-    public void setColor(int r,int g,int b) {
+    public void setColor(int r, int g, int b) {
         if(r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255) {
             this.color = new Color(r,g,b);
         }

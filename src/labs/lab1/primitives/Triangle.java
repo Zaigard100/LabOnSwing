@@ -10,12 +10,14 @@ public class Triangle extends JComponent {
 
     int[] x_point, y_point;
     int dx1,dx2,dy1,dy2;
+    private boolean fill;
 
     Color color;
 
-    public Triangle(int x1, int y1,int x2, int y2,int x3, int y3, Color color) {
+    public Triangle(int x1, int y1,int x2, int y2,int x3, int y3, boolean fill,Color color) {
         this.x_point = new int[]{x1, x2, x3};
         this.y_point = new int[]{y1, y2, y3};
+        this.fill = fill;
         dx1 = x2-x1;
         dx2 = x3-x1;
         dy1 = y2-y1;
@@ -115,7 +117,15 @@ public class Triangle extends JComponent {
         return color;
     }
 
-    public void setColor(int r,int g,int b) {
+    public boolean isFill() {
+        return fill;
+    }
+
+    public void setFill(boolean fill) {
+        this.fill = fill;
+    }
+
+    public void setColor(int r, int g, int b) {
         if(r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255) {
             this.color = new Color(r,g,b);
         }
