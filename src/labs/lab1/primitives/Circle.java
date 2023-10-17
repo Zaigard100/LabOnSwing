@@ -50,7 +50,7 @@ public class Circle {
     }
 
     public void setY(int y) {
-        if(this.y>Lab1.getWindows_h()||y<0) {
+        if(this.y>Lab1.getWindows_h()-diameter||y<0) {
             this.y = y;
         }
     }

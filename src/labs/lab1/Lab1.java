@@ -320,9 +320,9 @@ public class Lab1 {
                         int r = Integer.parseInt(rField.getText());
                         int g = Integer.parseInt(gField.getText());
                         int b = Integer.parseInt(bField.getText());
-
-                        utils.getCircles().add(new Circle(x, y, diameter,fill, new Color(r, g, b)));
-
+                        if((x>0) && (x<windows_w-diameter) && (y>0) && (y<windows_h-diameter) && (diameter>0) && (diameter<Math.min(windows_w-x,windows_h-y))) {
+                            utils.getCircles().add(new Circle(x, y, diameter, fill, new Color(r, g, b)));
+                        }
                         xField.setText("");
                         yField.setText("");
                         diameterField.setText("");
@@ -449,8 +449,9 @@ public class Lab1 {
                         int r = Integer.parseInt(rField.getText());
                         int g = Integer.parseInt(gField.getText());
                         int b = Integer.parseInt(bField.getText());
-
-                        utils.getLines().add(new Line(x, y, x1, y1, new Color(r, g, b)));
+                        if((x>0) && (x<windows_w) && (y>0) && (y<windows_h) && (x1>0) && (x1<windows_w) && (y1>0) && (y1<windows_h) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
+                            utils.getLines().add(new Line(x, y, x1, y1, new Color(r, g, b)));
+                        }
 
                         xField.setText("");
                         yField.setText("");
@@ -609,9 +610,9 @@ public class Lab1 {
                         int r = Integer.parseInt(rField.getText());
                         int g = Integer.parseInt(gField.getText());
                         int b = Integer.parseInt(bField.getText());
-
-                        utils.getTriangles().add(new Triangle(x1, y1, x2, y2, x3, y3,fill, new Color(r, g, b)));
-
+                        if((x1>0) && (x1<windows_w) && (y1>0) && (y1<windows_h) && (x2>0) && (x2<windows_w) && (y2>0) && (y2<windows_h) && (x3>0) && (x3<windows_w) && (y3>0) && (y3<windows_h) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
+                            utils.getTriangles().add(new Triangle(x1, y1, x2, y2, x3, y3, fill, new Color(r, g, b)));
+                        }
                         x1Field.setText("");
                         y1Field.setText("");
                         x2Field.setText("");
@@ -1107,6 +1108,7 @@ public class Lab1 {
                                 utils.getTriangles().get(i).setX2(parseInt(field1.getText(), utils.getTriangles().get(i).getX2()));
                             } else if (item.equals("y2")) {
                                 utils.getTriangles().get(i).setY2(parseInt(field1.getText(), utils.getTriangles().get(i).getY2()));
+                            } else if (item.equals("x3")){
                                 utils.getTriangles().get(i).setX3(parseInt(field1.getText(), utils.getTriangles().get(i).getX3()));
                             } else if (item.equals("y3")) {
                                 utils.getTriangles().get(i).setY3(parseInt(field1.getText(), utils.getTriangles().get(i).getY3()));
@@ -1131,6 +1133,7 @@ public class Lab1 {
                             utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX2(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX2()));
                         } else if (item.equals("y2")) {
                             utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY2(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY2()));
+                        } else if (item.equals("x3")){
                             utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX3(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX3()));
                         } else if (item.equals("y3")) {
                             utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY3(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY3()));
