@@ -24,7 +24,14 @@ public class Triangle extends JComponent {
         dy2 = y3-y1;
         this.color = color;
     }
-
+    public void show(Graphics g){
+        g.setColor(color);
+        if(fill){
+            g.fillPolygon(getX_point(),getY_point(),3);
+        }else {
+            g.drawPolygon(getX_point(),getY_point(), 3);
+        }
+    }
 
     public void move(int dx, int dy){
         int max_x,max_y,min_x,min_y;

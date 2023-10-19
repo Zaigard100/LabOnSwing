@@ -6,51 +6,59 @@ import java.awt.*;
 
 public class Circle {
 
-    private int x,y;
+    private Point p;
     private int diameter;
     private Color color;
     private boolean fill;
 
-    public Circle(int x, int y, int diameter,boolean fill,Color color) {
-        this.x = x;
-        this.y = y;
+    public Circle(Point p, int diameter,boolean fill,Color color) {
+        System.out.println("Circle was created");
+        this.p = p;
         this.diameter = diameter;
         this.fill = fill;
         this.color = color;
     }
 
+    public void show(Graphics g){
+        g.setColor(color);
+        if(fill){
+            g.fillOval(p.getX(), p.getY(),diameter,diameter);
+        }else {
+            g.drawOval(p.getX(), p.getY(),diameter,diameter);
+        }
+    }
+
     public void move(int dx,int dy){
-        this.x+=dx;
-        this.y+=dy;
-        if(this.x> Lab2.getWindows_w()-diameter){
-            this.x= Lab2.getWindows_w()-diameter;
+        p.move(dx,dy);
+        if(p.getX()> Lab2.getWindows_w()-diameter){
+            p.setX(Lab2.getWindows_w()-diameter);
         }
-        if(this.y> Lab2.getWindows_h()){
-            this.y= Lab2.getWindows_h()-diameter;
+        if(p.getY()> Lab2.getWindows_h()){
+            p.setY(Lab2.getWindows_h()-diameter);
         }
-        if(this.x<0){
-            this.x=0;
+        if(p.getX()<0){
+            p.setX(0);
         }
-        if(this.y<0){
-            this.y=0;
+        if(p.getY()<0){
+            p.setY(0);
         }
     }
     public int getX() {
-        return x;
+        return p.getX();
     }
     public void setX(int x) {
         if(x> Lab2.getWindows_w()-diameter||x<0) {
-            this.x = x;
+            p.setX(x);
         }
     }
 
     public int getY() {
-        return y;
+        return p.getY();
     }
 
     public void setY(int y) {
-        if(this.y> Lab2.getWindows_h()-diameter||y<0) {
-            this.y = y;
+        if(y> Lab2.getWindows_h()-diameter||y<0) {
+            p.setY(y);
         }
     }
 

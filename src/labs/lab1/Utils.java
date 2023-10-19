@@ -13,7 +13,6 @@ public class Utils {
     static private ArrayList<Triangle> triangles;
     static private ArrayList<Line> lines;
     static private ArrayList<Circle> circles;
-    private String line ="";
 
 
     public Utils(){
@@ -23,7 +22,7 @@ public class Utils {
     }
 
     public  void load(String file){
-        line = "";
+        String line = "";
         try(FileReader reader = new FileReader(file))
         {
 

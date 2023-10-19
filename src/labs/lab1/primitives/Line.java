@@ -4,9 +4,8 @@ import labs.lab1.Lab1;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
-public class Line extends JComponent {
+public class Line {
     private Color color;
     int x,y,x1,y1;
 
@@ -18,6 +17,11 @@ public class Line extends JComponent {
         this.y1 = y1;
     }
 
+    public void show(Graphics g){
+        g.setColor(color);
+        g.drawLine(x,y,x1,y1);
+    }
+
     public void move(int dx, int dy){
         int max_x,max_y,min_x,min_y;
         max_x = Math.max(x,x1);
@@ -27,7 +31,7 @@ public class Line extends JComponent {
         if(max_x+dx> Lab1.getWindows_w()){
             dx = Lab1.getWindows_w()-max_x;
         }
-        if(max_y+dy>Lab1.getWindows_h()){
+        if(max_y+dy> Lab1.getWindows_h()){
             dy = Lab1.getWindows_h()-max_y;
         }
         if(min_x+dx<0){
@@ -92,3 +96,4 @@ public class Line extends JComponent {
         }
     }
 }
+

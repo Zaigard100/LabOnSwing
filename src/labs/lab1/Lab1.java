@@ -48,7 +48,7 @@ public class Lab1 {
 
     static JFrame getFrame(){
         //создание окна
-        JFrame jFrame = new JFrame() {};
+        JFrame jFrame = new JFrame(){};
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(windows_w, windows_h+60);
         toolkit = Toolkit.getDefaultToolkit();

@@ -20,6 +20,15 @@ public class Circle {
         this.color = color;
     }
 
+    public void show(Graphics g){
+        g.setColor(color);
+        if(fill){
+            g.fillOval(x,y,diameter,diameter);
+        }else {
+            g.drawOval(x,y,diameter,diameter);
+        }
+    }
+
     public void move(int dx,int dy){
         this.x+=dx;
         this.y+=dy;
@@ -36,9 +45,11 @@ public class Circle {
             this.y=0;
         }
     }
+
     public int getX() {
         return x;
     }
+
     public void setX(int x) {
         if(x>Lab1.getWindows_w()-diameter||x<0) {
             this.x = x;
