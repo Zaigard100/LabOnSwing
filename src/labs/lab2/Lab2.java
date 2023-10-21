@@ -99,7 +99,7 @@ public class Lab2 {
         load.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser jFileChooser = new JFileChooser();
+                JFileChooser jFileChooser = new JFileChooser("/home/zaigard/Projects/LabOnSwing/src/labs");
                 jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 int result = jFileChooser.showOpenDialog(jPanel);
                 if(result == JFileChooser.APPROVE_OPTION){
@@ -161,9 +161,9 @@ public class Lab2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TransformCircle transformCircle = new TransformCircle();
-                transformCircle.c_list = new String[utils.getCircles().size()];
+                TransformCircle.c_list = new String[utils.getCircles().size()];
                 for(int i = 0;i<utils.getCircles().size();i++){
-                    transformCircle.c_list[i] = i+"";
+                    TransformCircle.c_list[i] = i+"";
                 }
                 transformCircle.setVisible(true);
             }
@@ -173,9 +173,9 @@ public class Lab2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TransformLine transformLine = new TransformLine();
-                transformLine.l_list = new String[utils.getLines().size()];
+                TransformLine.l_list = new String[utils.getLines().size()];
                 for(int i = 0;i<utils.getLines().size();i++){
-                    transformLine.l_list[i] = i+"";
+                    TransformLine.l_list[i] = i+"";
                 }
                 transformLine.setVisible(true);
             }
@@ -185,9 +185,9 @@ public class Lab2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TransformTriangle transformTriangle = new TransformTriangle();
-                transformTriangle.t_list = new String[utils.getTriangles().size()];
+                TransformTriangle.t_list = new String[utils.getTriangles().size()];
                 for(int i = 0;i<utils.getTriangles().size();i++){
-                    transformTriangle.t_list[i] = i+"";
+                    TransformTriangle.t_list[i] = i+"";
                     transformTriangle.setVisible(true);
                 }
             }
@@ -197,9 +197,9 @@ public class Lab2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TransformRing transformRing = new TransformRing();
-                transformRing.r_list = new String[utils.getRing().size()];
+                TransformRing.r_list = new String[utils.getRing().size()];
                 for(int i = 0;i<utils.getRing().size();i++){
-                    transformRing.r_list[i] = i+"";
+                    TransformRing.r_list[i] = i+"";
                     transformRing.setVisible(true);
                 }
             }
@@ -797,7 +797,7 @@ public class Lab2 {
         JCheckBox checkBox;
         JButton cancel,edit;
         JPanel jPanel1,jPanel2,jPanel3;
-        protected String[] c_list;
+        protected static String[] c_list;
         public TransformCircle(){
             c_list = new String[utils.getCircles().size()+1];
             for(int i = 0;i<utils.getCircles().size();i++){
@@ -965,7 +965,7 @@ public class Lab2 {
         TextField field1,field2,field3;
         JButton cancel,edit;
         JPanel jPanel1,jPanel2,jPanel3;
-        protected String[] l_list;
+        protected static String[] l_list;
         public TransformLine(){
             l_list = new String[utils.getLines().size()+1];
             for(int i = 0;i<utils.getLines().size();i++){
@@ -1129,7 +1129,7 @@ public class Lab2 {
         JButton cancel,edit;
         JCheckBox checkBox;
         JPanel jPanel1,jPanel2,jPanel3;
-        protected String[] t_list;
+        protected static String[] t_list;
         public TransformTriangle(){
             t_list = new String[utils.getTriangles().size()+1];
             for(int i = 0;i<utils.getTriangles().size();i++){
@@ -1311,13 +1311,13 @@ public class Lab2 {
         TextField field1,field2,field3;
         JButton cancel,edit;
         JPanel jPanel1,jPanel2,jPanel3;
-        protected String[] r_list;
+        static protected String[] r_list;
         public TransformRing(){
-            r_list = new String[utils.getCircles().size()+1];
-            for(int i = 0;i<utils.getCircles().size();i++){
+            r_list = new String[utils.getRing().size()+1];
+            for(int i = 0;i<utils.getRing().size();i++){
                 r_list[i] = i+"";
             }
-            r_list[utils.getCircles().size()]="all";
+            r_list[utils.getRing().size()]="all";
             circle_list = new JComboBox(r_list);
             jcb = new JComboBox(new String[]{"move", "x", "y", "diameter1", "diameter2", "color"});
             cancel = new JButton("Cancel");

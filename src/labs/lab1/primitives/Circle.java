@@ -51,7 +51,7 @@ public class Circle {
     }
 
     public void setX(int x) {
-        if(x>Lab1.getWindows_w()-diameter||x<0) {
+        if(x<Lab1.getWindows_w()-diameter&&x>0) {
             this.x = x;
         }
     }
@@ -61,7 +61,7 @@ public class Circle {
     }
 
     public void setY(int y) {
-        if(this.y>Lab1.getWindows_h()-diameter||y<0) {
+        if(y<Lab1.getWindows_h()-diameter&&y>0) {
             this.y = y;
         }
     }
@@ -73,6 +73,7 @@ public class Circle {
     public void setDiameter(int diameter) {
         if(diameter>0) {
             this.diameter = diameter;
+            move(0,0);
         }
     }
 

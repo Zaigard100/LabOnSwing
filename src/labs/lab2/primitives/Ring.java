@@ -30,7 +30,8 @@ public class Ring {
     public void move(int dx,int dy){
 
         c1.move(dx, dy);
-        c2.move(dx, dy);
+        c2.setX(c1.getX()+(diameter1-diameter2)/2);
+        c2.setY(c1.getY()+(diameter1-diameter2)/2);
 
     }
 
@@ -43,25 +44,28 @@ public class Ring {
     }
 
     public void setX(int x){
-        if(x> Lab2.getWindows_w()-Math.max(diameter1,diameter2)||x<0) {
+        if(x< Lab2.getWindows_w()-Math.max(diameter1,diameter2)&&x>0) {
             c1.setX(x);
-            c2.setX(x);
+            c2.setX(x+(diameter1-diameter2)/2);
         }
     }
 
     public void setY(int y){
-        if(y> Lab2.getWindows_h()-Math.max(diameter1,diameter2)||y<0) {
+        if(y< Lab2.getWindows_h()-Math.max(diameter1,diameter2)&&y>0) {
             c1.setY(y);
-            c2.setY(y);
+            c2.setY(y+(diameter1-diameter2)/2);
         }
     }
 
-    private void diametorNormalize(){
+    private void diameterNormalize(){
         int max = Math.max(diameter1,diameter2);
         int min = Math.min(diameter1,diameter2);
         diameter1 = max;
         diameter2 = min;
-        move(0,0);
+        c1.setDiameter(max);
+        c2.setDiameter(min);
+        move(1,1);
+        move(-1,-1);
     }
 
     public int getDiameter1() {
@@ -71,7 +75,7 @@ public class Ring {
     public void setDiameter1(int diameter1) {
         if(diameter1>0) {
             this.diameter1 = diameter1;
-            diametorNormalize();
+            diameterNormalize();
         }
     }
 
@@ -82,7 +86,7 @@ public class Ring {
     public void setDiameter2(int diameter2) {
         if(diameter2>0) {
             this.diameter2 = diameter2;
-            diametorNormalize();
+            diameterNormalize();
         }
     }
 

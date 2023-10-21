@@ -55,12 +55,9 @@ public class Triangle {
         if(min_y+dy<0){
             dy = -min_y;
         }
-        x_point[0]+=dx;
-        x_point[1]=x_point[0]+dx1;
-        x_point[2]=x_point[0]+dx2;
-        y_point[0]+=dy;
-        y_point[1]=y_point[0]+dy1;
-        y_point[2]=y_point[0]+dy2;
+        p1.move(dx,dy);
+        p2.move(dx,dy);
+        p3.move(dx,dy);
 
     }
 

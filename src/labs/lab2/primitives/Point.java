@@ -12,9 +12,11 @@ public class Point {
     }
 
     public void move(int dx,int dy){
+        x += dx;
+        y += dy;
 
         if(x+dx < 0){
-            x = 1;
+            x = 0;
         }
 
         if(x+dx > Lab2.getWindows_w()){
@@ -22,15 +24,14 @@ public class Point {
         }
 
         if(y+dy < 0){
-            y = 1;
+            y = 0;
         }
 
         if(y+dy > Lab2.getWindows_h()){
             y = Lab2.getWindows_h();
         }
 
-        x += dx;
-        y += dy;
+
 
     }
 
@@ -49,4 +50,6 @@ public class Point {
     public void setY(int y) {
         this.y = y;
     }
+
+
 }
