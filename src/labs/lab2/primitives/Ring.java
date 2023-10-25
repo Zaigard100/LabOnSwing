@@ -15,7 +15,7 @@ public class Ring {
         this.diameter1 = Math.max(diameter1,diameter2);
         this.diameter2 = Math.min(diameter1,diameter2);
         c1 = new Circle(p,diameter1,false,color);
-        c2 = new Circle(new Point(p.getX()+(diameter1-diameter2)/2, p.getY()+(diameter1-diameter2)/2),diameter2,false,color);
+        c2 = new Circle(p,diameter2,false,color);
         this.color = color;
 
     }
@@ -30,8 +30,7 @@ public class Ring {
     public void move(int dx,int dy){
 
         c1.move(dx, dy);
-        c2.setX(c1.getX()+(diameter1-diameter2)/2);
-        c2.setY(c1.getY()+(diameter1-diameter2)/2);
+        c2.setP(c1.getP());
 
     }
 
@@ -46,14 +45,14 @@ public class Ring {
     public void setX(int x){
         if(x< Lab2.getWindows_w()-Math.max(diameter1,diameter2)&&x>0) {
             c1.setX(x);
-            c2.setX(x+(diameter1-diameter2)/2);
+            c2.setX(x);
         }
     }
 
     public void setY(int y){
         if(y< Lab2.getWindows_h()-Math.max(diameter1,diameter2)&&y>0) {
             c1.setY(y);
-            c2.setY(y+(diameter1-diameter2)/2);
+            c2.setY(y);
         }
     }
 

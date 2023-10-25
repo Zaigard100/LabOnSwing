@@ -99,7 +99,7 @@ public class Lab2 {
         load.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser jFileChooser = new JFileChooser("/home/zaigard/Projects/LabOnSwing/src/labs");
+                JFileChooser jFileChooser = new JFileChooser("/home/zaigard/IdeaProjects/LabOnSwing/src/labs/primitives.txt");
                 jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 int result = jFileChooser.showOpenDialog(jPanel);
                 if(result == JFileChooser.APPROVE_OPTION){

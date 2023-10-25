@@ -23,7 +23,7 @@ public class Circle {
     public void show(Graphics g){
         g.setColor(color);
         if(fill){
-            g.fillOval(x,y,diameter,diameter);
+            g.fillOval(x-diameter/2,y-diameter/2,diameter,diameter);
         }else {
             g.drawOval(x,y,diameter,diameter);
         }

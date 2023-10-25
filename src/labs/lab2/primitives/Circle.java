@@ -22,26 +22,26 @@ public class Circle {
     public void show(Graphics g){
         g.setColor(color);
         if(fill){
-            g.fillOval(p.getX(), p.getY(),diameter,diameter);
+            g.fillOval(p.getX()-diameter/2, p.getY()- diameter/2,diameter,diameter);
         }else {
-            g.drawOval(p.getX(), p.getY(),diameter,diameter);
+            g.drawOval(p.getX()-diameter/2, p.getY()-diameter/2,diameter,diameter);
         }
     }
 
     public void move(int dx,int dy){
         Point p = new Point(this.p.getX(),this.p.getY());
         p.move(dx,dy);
-        if(p.getX()> Lab2.getWindows_w()-diameter){
-            p.setX(Lab2.getWindows_w()-diameter);
+        if(p.getX()> Lab2.getWindows_w()-diameter/2){
+            p.setX(Lab2.getWindows_w()-diameter/2);
         }
-        if(p.getY()> Lab2.getWindows_h()-diameter){
-            p.setY(Lab2.getWindows_h()-diameter);
+        if(p.getY()> Lab2.getWindows_h()-diameter/2){
+            p.setY(Lab2.getWindows_h()-diameter/2);
         }
-        if(p.getX()<0){
-            p.setX(0);
+        if(p.getX()<diameter/2){
+            p.setX(diameter/2);
         }
-        if(p.getY()<0){
-            p.setY(0);
+        if(p.getY()<diameter/2){
+            p.setY(diameter/2);
         }
         this.p = p;
     }
@@ -49,7 +49,7 @@ public class Circle {
         return p.getX();
     }
     public void setX(int x) {
-        if(x< Lab2.getWindows_w()-diameter||x>0) {
+        if(x< Lab2.getWindows_w()-diameter/2||x>diameter/2) {
             p.setX(x);
         }else {
             System.out.println("Overstepping boundaries");
@@ -61,7 +61,7 @@ public class Circle {
     }
 
     public void setY(int y) {
-        if(y<Lab2.getWindows_h()-diameter||y>0) {
+        if(y<Lab2.getWindows_h()-diameter/2||y>diameter/2) {
             p.setY(y);
         }else {
             System.out.println("Overstepping boundaries");
@@ -79,6 +79,14 @@ public class Circle {
         }else {
             System.out.println("Overstepping boundaries");
         }
+    }
+
+    public Point getP() {
+        return p;
+    }
+
+    public void setP(Point p) {
+        this.p = p;
     }
 
     public boolean isFill() {
