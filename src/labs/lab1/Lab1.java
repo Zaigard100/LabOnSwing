@@ -56,7 +56,7 @@ public class Lab1 {
         screen_w = dimension.width;
         screen_h = dimension.height;
         jFrame.setLocation(screen_w/2- windows_w /2,screen_h/2- windows_h /2);
-        jFrame.setTitle("labs");
+        jFrame.setTitle("labs1");
         jFrame.setResizable(false);
         jFrame.setVisible(true);
         return jFrame;

@@ -1,7 +1,7 @@
-package labs.lab2;
+package labs.lab3;
 
-import labs.lab2.primitives.*;
-import labs.lab2.primitives.Point;
+import labs.lab3.primitives.Point;
+import labs.lab3.primitives.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class Lab2 {
+public class Lab3 {
     static int windows_w = 1500;
     static int windows_h = 800;
     static int screen_w,screen_h;
@@ -18,7 +18,7 @@ public class Lab2 {
     static JPanel jPanel;
     static JMenuBar jMenuBar;
     static JMenu file,edit,create;
-    static JMenuItem load,del,exit,cir,lin,rin,tri,a_cir,a_lin,a_tri,a_rin;
+    static JMenuItem load,del,exit,cir,lin,rin,ovl,tri,a_cir,a_lin,a_tri,a_rin,a_ovl;
 
     public static Toolkit toolkit;
     public static Dimension dimension;
@@ -55,7 +55,7 @@ public class Lab2 {
         screen_w = dimension.width;
         screen_h = dimension.height;
         jFrame.setLocation(screen_w/2- windows_w /2,screen_h/2- windows_h /2);
-        jFrame.setTitle("labs2");
+        jFrame.setTitle("labs3");
         jFrame.setResizable(false);
         jFrame.setVisible(true);
         return jFrame;
@@ -81,11 +81,13 @@ public class Lab2 {
         a_lin = create.add(new JMenuItem("Line"));
         a_tri = create.add(new JMenuItem("Triangle"));
         a_rin = create.add(new JMenuItem("Ring"));
+        a_ovl = create.add(new JMenuItem("Oval"));
         edit.addSeparator();
         cir = edit.add(new JMenuItem("Circle"));
         lin = edit.add(new JMenuItem("Line"));
         tri = edit.add(new JMenuItem("Triangle"));
         rin = edit.add(new JMenuItem("Ring"));
+        ovl = edit.add(new JMenuItem("Oval"));
 
     }
     static void menuBarFunctions(){
@@ -157,6 +159,14 @@ public class Lab2 {
             }
         });
 
+        a_ovl.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                CreateOval createOval = new CreateOval();
+                createOval.setVisible(true);
+            }
+        });
+
         cir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -205,6 +215,18 @@ public class Lab2 {
             }
         });
 
+        ovl.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                TransformOval transformOval = new TransformOval();
+                TransformOval.o_list = new String[utils.getOvals().size()];
+                for(int i = 0;i<utils.getOvals().size();i++){
+                    TransformOval.o_list[i] = i+"";
+                }
+                transformOval.setVisible(true);
+            }
+        });
+
     }
 
     protected static int parseInt(String string, int def){
@@ -227,7 +249,7 @@ public class Lab2 {
     }
 
     public void setWindows_w(int windows_w) {
-        Lab2.windows_w = windows_w;
+        Lab3.windows_w = windows_w;
     }
 
     public static int getWindows_h() {
@@ -235,7 +257,7 @@ public class Lab2 {
     }
 
     public void setWindows_h(int windows_h) {
-        Lab2.windows_h = windows_h;
+        Lab3.windows_h = windows_h;
     }
 
     public JFrame getjFrame() {
@@ -351,6 +373,8 @@ public class Lab2 {
                         gField.setText("");
                         bField.setText("");
 
+                        picture.repaint();
+                        picture.revalidate();
                         jPanel.repaint();
                         jPanel.revalidate();
                         jFrame.repaint();
@@ -482,6 +506,8 @@ public class Lab2 {
                         gField.setText("");
                         bField.setText("");
 
+                        picture.repaint();
+                        picture.revalidate();
                         jPanel.repaint();
                         jPanel.revalidate();
                         jFrame.repaint();
@@ -644,6 +670,8 @@ public class Lab2 {
                         gField.setText("");
                         bField.setText("");
 
+                        picture.repaint();
+                        picture.revalidate();
                         jPanel.repaint();
                         jPanel.revalidate();
                         jFrame.repaint();
@@ -772,6 +800,139 @@ public class Lab2 {
                         gField.setText("");
                         bField.setText("");
 
+                        picture.repaint();
+                        picture.revalidate();
+                        jPanel.repaint();
+                        jPanel.revalidate();
+                        jFrame.repaint();
+                        jFrame.revalidate();
+
+                        setVisible(false);
+                    }catch (NumberFormatException err){
+                        JOptionPane.showMessageDialog(null, "Неверно введены данные: NumberFormatException", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                        err.printStackTrace();
+                    }
+
+                }
+            });
+
+            setBounds((screen_w-width)/2, (screen_h-height)/2,width,height);
+        }
+
+    }
+
+    public static class CreateOval extends JDialog {
+
+        JTextField xField,yField,diameter1Field,diameter2Field,rField,gField,bField;
+        JPanel mainPanel,xPanel,yPanel,diameter1Panel,diameter2Panel,fillPanel,colorPanel;
+        JCheckBox fillCheck;
+        JButton cancel,create;
+        int width = 325;
+        int height = 175;
+
+        public CreateOval(){
+            super(jFrame,"Create Oval",true);
+
+            mainPanel = new JPanel();
+
+            xField = new JTextField(5);
+            yField = new JTextField(5);
+            diameter1Field = new JTextField(5);
+            diameter2Field = new JTextField(5);
+
+            rField = new JTextField(3);
+            gField = new JTextField(3);
+            bField = new JTextField(3);
+
+            fillCheck = new JCheckBox();
+
+            cancel = new JButton("Cancel");
+            create = new JButton("Create");
+
+            xPanel = new JPanel();
+            xPanel.add(new JLabel("X"));
+            xPanel.add(xField);
+
+            yPanel = new JPanel();
+            yPanel.add(new JLabel("Y"));
+            yPanel.add(yField);
+
+            diameter1Panel = new JPanel();
+            diameter1Panel.add(new JLabel("DiameterX"));
+            diameter1Panel.add(diameter1Field);
+
+            diameter2Panel = new JPanel();
+            diameter2Panel.add(new JLabel("DiameterY"));
+            diameter2Panel.add(diameter2Field);
+
+            fillPanel = new JPanel();
+            fillPanel.add(new JLabel("Fill "));
+            fillPanel.add(fillCheck);
+
+            colorPanel = new JPanel();
+            colorPanel.add(new JLabel("Color:"));
+            colorPanel.add(new JLabel(" R "));
+            colorPanel.add(rField);
+            colorPanel.add(new JLabel(" G "));
+            colorPanel.add(gField);
+            colorPanel.add(new JLabel(" B "));
+            colorPanel.add(bField);
+
+            mainPanel.add(xPanel);
+            mainPanel.add(yPanel);
+            mainPanel.add(diameter1Panel);
+            mainPanel.add(diameter2Panel);
+            mainPanel.add(fillPanel);
+            mainPanel.add(colorPanel);
+
+            mainPanel.add(cancel);
+            mainPanel.add(create);
+            add(mainPanel);
+            repaint();
+            revalidate();
+
+            cancel.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    xField.setText("");
+                    yField.setText("");
+                    diameter1Field.setText("");
+                    diameter2Field.setText("");
+
+                    rField.setText("");
+                    gField.setText("");
+                    bField.setText("");
+                    setVisible(false);
+                }
+            });
+
+            create.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+
+                        int x = Integer.parseInt(xField.getText());
+                        int y = Integer.parseInt(yField.getText());
+                        int diameter1 = Integer.parseInt(diameter1Field.getText());
+                        int diameter2 = Integer.parseInt(diameter2Field.getText());
+                        boolean fill = fillCheck.isSelected();
+                        int r = Integer.parseInt(rField.getText());
+                        int g = Integer.parseInt(gField.getText());
+                        int b = Integer.parseInt(bField.getText());
+                        if((x>0) && (x<windows_w - diameter1) && (y>0) && (y<windows_h-diameter2) && (diameter1>0)&& (diameter2>0) && (diameter1<windows_w-x) && (diameter2<windows_h-y)) {
+                            utils.getOvals().add(new Oval(new Point(x,y), diameter1,diameter2, fill, new Color(r, g, b)));
+                        }
+                        xField.setText("");
+                        yField.setText("");
+                        diameter1Field.setText("");
+                        diameter2Field.setText("");
+
+                        rField.setText("");
+                        gField.setText("");
+                        bField.setText("");
+
+                        picture.repaint();
+                        picture.revalidate();
                         jPanel.repaint();
                         jPanel.revalidate();
                         jFrame.repaint();
@@ -947,6 +1108,8 @@ public class Lab2 {
                     field2.setText("");
                     field3.setText("");
 
+                    picture.repaint();
+                    picture.revalidate();
                     jPanel2.repaint();
                     jPanel2.revalidate();
                     jPanel.repaint();
@@ -1110,6 +1273,8 @@ public class Lab2 {
                     field2.setText("");
                     field3.setText("");
 
+                    picture.repaint();
+                    picture.revalidate();
                     jPanel2.repaint();
                     jPanel2.revalidate();
                     jPanel.repaint();
@@ -1292,6 +1457,8 @@ public class Lab2 {
                         field2.setText("");
                         field3.setText("");
 
+                        picture.repaint();
+                        picture.revalidate();
                         jPanel2.repaint();
                         jPanel2.revalidate();
                         jPanel.repaint();
@@ -1456,6 +1623,199 @@ public class Lab2 {
                     field2.setText("");
                     field3.setText("");
 
+                    picture.repaint();
+                    picture.revalidate();
+                    jPanel2.repaint();
+                    jPanel2.revalidate();
+                    jPanel.repaint();
+                    jPanel.revalidate();
+                    jFrame.repaint();
+                    jFrame.revalidate();
+                }
+            });
+
+        }
+
+    }
+
+    public static class TransformOval extends JDialog{
+        JComboBox jcb, oval_list;
+        TextField field1,field2,field3;
+        JCheckBox checkBox;
+        JButton cancel,edit,rotate;
+        JPanel jPanel1,jPanel2,jPanel3;
+        protected static String[] o_list;
+        public TransformOval(){
+            o_list = new String[utils.getCircles().size()+1];
+            for(int i = 0;i<utils.getCircles().size();i++){
+                o_list[i] = i+"";
+            }
+            o_list[utils.getCircles().size()]="all";
+            oval_list = new JComboBox(o_list);
+            jcb = new JComboBox(new String[]{"move", "x", "y", "diameter","rotate90","fill", "color"});
+            cancel = new JButton("Cancel");
+            edit = new JButton("Edit");
+            rotate = new JButton("Rotate");
+
+            int width = 300;
+            int hight = 150;
+
+            jPanel1 = new JPanel();
+            jPanel2 = new JPanel();
+            jPanel3 = new JPanel();
+
+            field1 = new TextField(5);
+            field2 = new TextField(5);
+            field3 = new TextField(5);
+
+            checkBox = new JCheckBox();
+
+            jPanel1.add(new JLabel("Oval № "));
+            jPanel1.add(oval_list);
+            jPanel1.add(jcb);
+            jPanel1.setBounds(0,0,325,75);
+
+            jPanel2.add(new JLabel(" DX "));
+            jPanel2.add(field1);
+            jPanel2.add(new JLabel(" DY "));
+            jPanel2.add(field2);
+            jPanel2.setBounds(0,75,325,75);
+
+            jPanel3.add(cancel);
+            jPanel3.add(edit);
+            jPanel3.setBounds(0,150,325,75);
+
+            add(jPanel1,BorderLayout.NORTH);
+            add(jPanel2,BorderLayout.CENTER);
+            add(jPanel3,BorderLayout.SOUTH);
+
+            setBounds((screen_w-width)/2,(screen_h-hight)/2,width,hight);
+            jcb.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    jPanel2.removeAll();
+
+                    String item = (String)jcb.getSelectedItem();
+
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+
+                    if(item.equals("move")){
+                        jPanel2.add(new JLabel(" DX "));
+                        jPanel2.add(field1);
+                        jPanel2.add(new JLabel(" DY "));
+                        jPanel2.add(field2);
+                    }else if(item.equals("x")){
+                        jPanel2.add(new JLabel(" X "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("y")){
+                        jPanel2.add(new JLabel(" Y "));
+                        jPanel2.add(field1);
+                    }else if(item.equals("diameter")){
+                        jPanel2.add(new JLabel(" DiameterX "));
+                        jPanel2.add(field1);
+                        jPanel2.add(new JLabel(" DiameterY "));
+                        jPanel2.add(field2);
+                    }else if(item.equals("fill")){
+                        jPanel2.add(new JLabel(" Filed  "));
+                        jPanel2.add(checkBox);
+                    }else if(item.equals("color")){
+                        jPanel2.add(new JLabel(" R "));
+                        jPanel2.add(field1);
+                        jPanel2.add(new JLabel(" G "));
+                        jPanel2.add(field2);
+                        jPanel2.add(new JLabel(" B "));
+                        jPanel2.add(field3);
+                    } else if (item.equals("rotate90")) {
+                        jPanel2.add(rotate);
+                    }
+
+                    jPanel2.repaint();
+                    jPanel2.revalidate();
+
+                }
+            });
+
+            cancel.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+                    setVisible(false);
+                }
+            });
+
+            rotate.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    if(Objects.equals(oval_list.getSelectedItem(), "all")) {
+                        for (int i = 0; i < utils.getOvals().size(); i++) {
+                            utils.getOvals().get(i).rotate90();
+                        }
+                    }else {
+                        utils.getOvals().get((int) oval_list.getSelectedIndex()).rotate90();
+                    }
+                    picture.repaint();
+                    picture.revalidate();
+                }
+
+            });
+
+            edit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    String item = (String)jcb.getSelectedItem();
+
+                    if(Objects.equals(oval_list.getSelectedItem(), "all")) {
+                        for (int i = 0; i < utils.getOvals().size(); i++) {
+                            if (item.equals("move")){
+                                utils.getOvals().get(i).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
+                            } else if (item.equals("x")) {
+                                utils.getOvals().get(i).setX(parseInt(field1.getText(), utils.getOvals().get(i).getX()));
+                            } else if (item.equals("y")) {
+                                utils.getOvals().get(i).setY(parseInt(field1.getText(), utils.getOvals().get(i).getY()));
+                            } else if (item.equals("diameter")) {
+                                utils.getOvals().get(i).setDiameter(parseInt(field1.getText(), utils.getOvals().get(i).getDiameter()));
+                                utils.getOvals().get(i).setDiameter2(parseInt(field2.getText(), utils.getOvals().get(i).getDiameter2()));
+                            } else if (item.equals("fill")) {
+                                utils.getOvals().get(i).setFill(checkBox.isSelected());
+                            } else if (item.equals("color")) {
+                                utils.getOvals().get(i).setColor(
+                                        parseInt(field1.getText(), utils.getOvals().get(i).getColor().getRed()),
+                                        parseInt(field2.getText(), utils.getOvals().get(i).getColor().getGreen()),
+                                        parseInt(field3.getText(), utils.getOvals().get(i).getColor().getBlue())
+                                );
+                            }
+                        }
+                    }else {
+                        if (item.equals("move")) {
+                            utils.getOvals().get((int) oval_list.getSelectedIndex()).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
+                        } else if (item.equals("x")) {
+                            utils.getOvals().get((int) oval_list.getSelectedIndex()).setX(parseInt(field1.getText(), utils.getOvals().get(((int) oval_list.getSelectedIndex())).getX()));
+                        } else if (item.equals("y")) {
+                            utils.getOvals().get((int) oval_list.getSelectedIndex()).setY(parseInt(field1.getText(), utils.getOvals().get(((int) oval_list.getSelectedIndex())).getY()));
+                        }  else if (item.equals("fill")) {
+                            utils.getOvals().get((int) oval_list.getSelectedIndex()).setFill(checkBox.isSelected());
+                        }else if (item.equals("diameter")) {
+                            utils.getOvals().get((int) oval_list.getSelectedIndex()).setDiameter(parseInt(field1.getText(), utils.getOvals().get(((int) oval_list.getSelectedIndex())).getDiameter()));
+                            utils.getOvals().get((int) oval_list.getSelectedIndex()).setDiameter2(parseInt(field2.getText(), utils.getOvals().get(((int) oval_list.getSelectedIndex())).getDiameter2()));
+                        } else if (item.equals("color")) {
+                            utils.getOvals().get((int) oval_list.getSelectedIndex()).setColor(
+                                    parseInt(field1.getText(), utils.getOvals().get(((int) oval_list.getSelectedIndex())).getColor().getRed()),
+                                    parseInt(field2.getText(), utils.getOvals().get(((int) oval_list.getSelectedIndex())).getColor().getGreen()),
+                                    parseInt(field3.getText(), utils.getOvals().get(((int) oval_list.getSelectedIndex())).getColor().getBlue())
+                            );
+                        }
+                    }
+                    field1.setText("");
+                    field2.setText("");
+                    field3.setText("");
+
+                    picture.repaint();
+                    picture.revalidate();
                     jPanel2.repaint();
                     jPanel2.revalidate();
                     jPanel.repaint();
