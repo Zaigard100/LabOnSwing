@@ -1,5 +1,7 @@
 package labs.lab3.primitives;
 
+import labs.lab3.Lab3;
+
 import java.awt.*;
 
 public class Quadro extends Figure{
@@ -22,6 +24,30 @@ public class Quadro extends Figure{
     @Override
     public void move(int dx, int dy) {
 
+    }
+
+    public int getX(){
+        return p.getX();
+    }
+
+    public int getY(){
+        return p.getY();
+    }
+
+    public void setX(int x) {
+        if(x< Lab3.getWindows_w()-width/2||x>width/2) {
+            p.setX(x);
+        }else {
+            System.out.println("Overstepping boundaries");
+        }
+    }
+
+    public void setY(int y) {
+        if(y<Lab3.getWindows_h()-height/2||y>height/2) {
+            p.setY(y);
+        }else {
+            System.out.println("Overstepping boundaries");
+        }
     }
 
     public boolean isFill() {
