@@ -23,8 +23,21 @@ public class Oval extends Circle{
 
     @Override
     public void move(int dx, int dy) {
-
-
+        Point p = new Point(this.p.getX(),this.p.getY());
+        p.move(dx,dy);
+        if(p.getX()> Lab3.getWindows_w()-diameter/2){
+            p.setX(Lab3.getWindows_w()-diameter/2);
+        }
+        if(p.getY()> Lab3.getWindows_h()-diameter2/2){
+            p.setY(Lab3.getWindows_h()-diameter2/2);
+        }
+        if(p.getX()<diameter/2){
+            p.setX(diameter/2);
+        }
+        if(p.getY()<diameter2/2){
+            p.setY(diameter2/2);
+        }
+        this.p = p;
     }
 
     public void rotate90(){

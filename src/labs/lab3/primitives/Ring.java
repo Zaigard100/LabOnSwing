@@ -6,9 +6,8 @@ import java.awt.*;
 
 public class Ring extends Circle{
 
-    private Circle c2;
+    private final Circle c2;
     private int diameter1,diameter2;
-    private Color color;
 
     public Ring(Point p, int diameter1, int diameter2, Color color){
 

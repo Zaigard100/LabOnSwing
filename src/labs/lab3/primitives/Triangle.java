@@ -4,6 +4,7 @@ import labs.lab3.Lab3;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.OptionalInt;
 
 public class Triangle extends Figure{
 
@@ -30,27 +31,36 @@ public class Triangle extends Figure{
     }
 
     public void move(int dx, int dy){
-        int max_x,max_y,min_x,min_y;
-        max_x = Arrays.stream(getX_point()).max().getAsInt();
-        max_y = Arrays.stream(getY_point()).max().getAsInt();
-        min_x = Arrays.stream(getX_point()).min().getAsInt();
-        min_y = Arrays.stream(getY_point()).min().getAsInt();
-        if(max_x+dx> Lab3.getWindows_w()){
-            dx = Lab3.getWindows_w()-max_x;
-        }
-        if(max_y+dy> Lab3.getWindows_h()){
-            dy = Lab3.getWindows_h()-max_y;
-        }
-        if(min_x+dx<0){
-            dx = -min_x;
-        }
-        if(min_y+dy<0){
-            dy = -min_y;
-        }
-        p.move(dx,dy);
-        p2.move(dx,dy);
-        p3.move(dx,dy);
+        OptionalInt omax_x;
+        OptionalInt omax_y;
+        OptionalInt omin_x;
+        OptionalInt omin_y;
+        omax_x = Arrays.stream(getX_point()).max();
+        omax_y = Arrays.stream(getY_point()).max();
+        omin_x = Arrays.stream(getX_point()).min();
+        omin_y = Arrays.stream(getY_point()).min();
 
+        if(omax_x.isPresent() && omax_y.isPresent() && omin_x.isPresent() && omin_y.isPresent()) {
+            int max_x = omax_x.getAsInt();
+            int max_y = omax_y.getAsInt();
+            int min_x = omin_x.getAsInt();
+            int min_y = omin_y.getAsInt();
+            if (max_x + dx > Lab3.getWindows_w()) {
+                dx = Lab3.getWindows_w() - max_x;
+            }
+            if (max_y + dy > Lab3.getWindows_h()) {
+                dy = Lab3.getWindows_h() - max_y;
+            }
+            if (min_x + dx < 0) {
+                dx = -min_x;
+            }
+            if (min_y + dy < 0) {
+                dy = -min_y;
+            }
+            p.move(dx, dy);
+            p2.move(dx, dy);
+            p3.move(dx, dy);
+        }
     }
 
     public int getX1(){
@@ -81,7 +91,7 @@ public class Triangle extends Figure{
     }
     public void setY1(int y1){
         if(y1>0&&y1< Lab3.getWindows_h()) {
-            p.setX(y1);
+            p.setY(y1);
         }
     }
     public void setX2(int x2){

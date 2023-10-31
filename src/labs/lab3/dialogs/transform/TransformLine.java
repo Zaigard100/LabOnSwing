@@ -5,8 +5,6 @@ import labs.lab3.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class TransformLine extends JDialog {
@@ -14,20 +12,15 @@ public class TransformLine extends JDialog {
     TextField field1,field2,field3;
     JButton cancel,edit;
     JPanel jPanel1,jPanel2,jPanel3;
-    public String[] l_list;
     public TransformLine(){
-        l_list = new String[Utils.getLines().size()+1];
-        for(int i = 0;i<Utils.getLines().size();i++){
-            l_list[i] = i+"";
-        }
-        l_list[Utils.getLines().size()]="all";
-        line_list = new JComboBox(l_list);
+        line_list = new JComboBox<>();
+        reload();
         jcb = new JComboBox(new String[]{"move", "x", "y", "x1","y1","color"});
         cancel = new JButton("Cancel");
         edit = new JButton("Edit");
 
         int width = 300;
-        int hight = 150;
+        int height = 150;
 
         jPanel1 = new JPanel();
         jPanel2 = new JPanel();
@@ -56,120 +49,140 @@ public class TransformLine extends JDialog {
         add(jPanel2,BorderLayout.CENTER);
         add(jPanel3,BorderLayout.SOUTH);
 
-        setBounds((Lab3.getWindows_w() -width)/2,(Lab3.getWindows_h()-hight)/2,width,hight);
-        jcb.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jPanel2.removeAll();
+        setBounds((Lab3.getWindows_w() -width)/2,(Lab3.getWindows_h()-height)/2,width,height);
+        jcb.addActionListener(e -> {
+            jPanel2.removeAll();
 
-                String item = (String)jcb.getSelectedItem();
+            String item = (String)jcb.getSelectedItem();
 
-                field1.setText("");
-                field2.setText("");
-                field3.setText("");
+            field1.setText("");
+            field2.setText("");
+            field3.setText("");
 
-                if(item.equals("move")){
+            switch (Objects.requireNonNull(item)) {
+                case "move":
                     jPanel2.add(new JLabel(" DX "));
                     jPanel2.add(field1);
                     jPanel2.add(new JLabel(" DY "));
                     jPanel2.add(field2);
-                }else if(item.equals("x")){
+                    break;
+                case "x":
                     jPanel2.add(new JLabel(" X "));
                     jPanel2.add(field1);
-                }else if(item.equals("y")){
+                    break;
+                case "y":
                     jPanel2.add(new JLabel(" Y "));
                     jPanel2.add(field1);
-                }else if(item.equals("x1")){
+                    break;
+                case "x1":
                     jPanel2.add(new JLabel(" X1 "));
                     jPanel2.add(field1);
-                }else if(item.equals("y1")){
+                    break;
+                case "y1":
                     jPanel2.add(new JLabel(" Y1 "));
                     jPanel2.add(field1);
-                }else if(item.equals("color")){
+                    break;
+                case "color":
                     jPanel2.add(new JLabel(" R "));
                     jPanel2.add(field1);
                     jPanel2.add(new JLabel(" G "));
                     jPanel2.add(field2);
                     jPanel2.add(new JLabel(" B "));
                     jPanel2.add(field3);
-                }
-
-                jPanel2.repaint();
-                jPanel2.revalidate();
-
+                    break;
             }
+
+            jPanel2.repaint();
+            jPanel2.revalidate();
+
         });
 
-        cancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                field1.setText("");
-                field2.setText("");
-                field3.setText("");
-                setVisible(false);
-            }
+        cancel.addActionListener(e -> {
+            field1.setText("");
+            field2.setText("");
+            field3.setText("");
+            setVisible(false);
         });
 
-        edit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        edit.addActionListener(e -> {
 
-                String item = (String)jcb.getSelectedItem();
-                if(Objects.equals(line_list.getSelectedItem(), "all")) {
-                    for(int i = 0;i<Utils.getLines().size();i++) {
-                        if (item.equals("move")) {
+            String item = (String)jcb.getSelectedItem();
+            if(Objects.equals(line_list.getSelectedItem(), "all")) {
+                for(int i = 0;i<Utils.getLines().size();i++) {
+                    switch (Objects.requireNonNull(item)) {
+                        case "move":
                             Utils.getLines().get(i).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
-                        } else if (item.equals("x")) {
+                            break;
+                        case "x":
                             Utils.getLines().get(i).setX(Lab3.parseInt(field1.getText(), Utils.getLines().get(i).getX()));
-                        } else if (item.equals("y")) {
+                            break;
+                        case "y":
                             Utils.getLines().get(i).setY(Lab3.parseInt(field1.getText(), Utils.getLines().get(i).getY()));
-                        } else if (item.equals("x1")) {
+                            break;
+                        case "x1":
                             Utils.getLines().get(i).setX1(Lab3.parseInt(field1.getText(), Utils.getLines().get(i).getX1()));
-                        } else if (item.equals("y1")) {
+                            break;
+                        case "y1":
                             Utils.getLines().get(i).setY1(Lab3.parseInt(field1.getText(), Utils.getLines().get(i).getY1()));
-                        } else if (item.equals("color")) {
+                            break;
+                        case "color":
                             Utils.getLines().get(i).setColor(
                                     Lab3.parseInt(field1.getText(), Utils.getLines().get(i).getColor().getRed()),
                                     Lab3.parseInt(field2.getText(), Utils.getLines().get(i).getColor().getGreen()),
                                     Lab3.parseInt(field3.getText(), Utils.getLines().get(i).getColor().getBlue())
                             );
-                        }
-                    }
-                }else{
-                    if (item.equals("move")) {
-
-                        Utils.getLines().get((int) line_list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
-                    } else if (item.equals("x")) {
-                        Utils.getLines().get((int) line_list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getX()));
-                    } else if (item.equals("y")) {
-                        Utils.getLines().get((int) line_list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getY()));
-                    } else if (item.equals("x1")) {
-                        Utils.getLines().get((int) line_list.getSelectedIndex()).setX1(Lab3.parseInt(field1.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getX1()));
-                    } else if (item.equals("y1")) {
-                        Utils.getLines().get((int) line_list.getSelectedIndex()).setY1(Lab3.parseInt(field1.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getY1()));
-                    } else if (item.equals("color")) {
-                        Utils.getLines().get((int) line_list.getSelectedIndex()).setColor(
-                                Lab3.parseInt(field1.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getRed()),
-                                Lab3.parseInt(field2.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getGreen()),
-                                Lab3.parseInt(field3.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getBlue())
-                        );
+                            break;
                     }
                 }
-                field1.setText("");
-                field2.setText("");
-                field3.setText("");
+            }else{
+                switch (Objects.requireNonNull(item)) {
+                    case "move":
 
-                Lab3.getPicture().repaint();
-                Lab3.getPicture().revalidate();
-                jPanel2.repaint();
-                jPanel2.revalidate();
-                //Lab3.getjPanel().repaint();
-                //Lab3.getjPanel().revalidate();
-                //Lab3.getjFrame().repaint();
-                //Lab3.getjFrame().revalidate();
+                        Utils.getLines().get(line_list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
+                        break;
+                    case "x":
+                        Utils.getLines().get(line_list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getX()));
+                        break;
+                    case "y":
+                        Utils.getLines().get(line_list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getY()));
+                        break;
+                    case "x1":
+                        Utils.getLines().get(line_list.getSelectedIndex()).setX1(Lab3.parseInt(field1.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getX1()));
+                        break;
+                    case "y1":
+                        Utils.getLines().get(line_list.getSelectedIndex()).setY1(Lab3.parseInt(field1.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getY1()));
+                        break;
+                    case "color":
+                        Utils.getLines().get(line_list.getSelectedIndex()).setColor(
+                                Lab3.parseInt(field1.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getColor().getRed()),
+                                Lab3.parseInt(field2.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getColor().getGreen()),
+                                Lab3.parseInt(field3.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getColor().getBlue())
+                        );
+                        break;
+                }
             }
+            field1.setText("");
+            field2.setText("");
+            field3.setText("");
+
+            Lab3.getPicture().repaint();
+            Lab3.getPicture().revalidate();
+            jPanel2.repaint();
+            jPanel2.revalidate();
+            //Lab3.getjPanel().repaint();
+            //Lab3.getjPanel().revalidate();
+            //Lab3.getjFrame().repaint();
+            //Lab3.getjFrame().revalidate();
         });
 
+    }
+
+    public void reload() {
+        line_list.removeAllItems();
+        for(int i = 0;i<Utils.getLines().size();i++){
+            line_list.addItem(i+"");
+        }
+        line_list.addItem("all");
     }
 
 }

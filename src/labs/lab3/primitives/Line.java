@@ -82,12 +82,4 @@ public class Line extends Figure{
         }
     }
 
-    public Point getP2() {
-        return p2;
-    }
-
-    public void setP2(Point p2) {
-        this.p2 = p2;
-    }
-
 }

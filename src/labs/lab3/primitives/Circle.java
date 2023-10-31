@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class Circle extends Figure{
 
-    private int diameter;
+    protected int diameter;
     private boolean fill;
 
     public Circle(Point p, int diameter, boolean fill, Color color) {
@@ -75,14 +75,6 @@ public class Circle extends Figure{
         }else {
             System.out.println("Overstepping boundaries");
         }
-    }
-
-    public Point getP() {
-        return p;
-    }
-
-    public void setP(Point p) {
-        this.p = p;
     }
 
     public boolean isFill() {

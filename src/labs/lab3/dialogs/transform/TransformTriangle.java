@@ -5,8 +5,6 @@ import labs.lab3.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class TransformTriangle extends JDialog {
@@ -15,20 +13,15 @@ public class TransformTriangle extends JDialog {
     JButton cancel,edit;
     JCheckBox checkBox;
     JPanel jPanel1,jPanel2,jPanel3;
-    public String[] t_list;
     public TransformTriangle(){
-        t_list = new String[Utils.getTriangles().size()+1];
-        for(int i = 0;i<Utils.getTriangles().size();i++){
-            t_list[i] = i+"";
-        }
-        t_list[Utils.getTriangles().size()]="all";
-        triangle_list = new JComboBox(t_list);
+        triangle_list = new JComboBox<>();
+        reload();
         jcb = new JComboBox(new String[]{"move","x1","y1","x2","y2","x3","y3","fill","color"});
         cancel = new JButton("Cancel");
         edit = new JButton("Edit");
 
         int width = 300;
-        int hight = 150;
+        int height = 150;
 
         jPanel1 = new JPanel();
         jPanel2 = new JPanel();
@@ -59,137 +52,164 @@ public class TransformTriangle extends JDialog {
         add(jPanel2,BorderLayout.CENTER);
         add(jPanel3,BorderLayout.SOUTH);
 
-        setBounds((Lab3.getWindows_w() -width)/2,(Lab3.getWindows_h()-hight)/2,width,hight);
-        jcb.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jPanel2.removeAll();
+        setBounds((Lab3.getWindows_w() -width)/2,(Lab3.getWindows_h()-height)/2,width,height);
+        jcb.addActionListener(e -> {
+            jPanel2.removeAll();
 
-                String item = (String)jcb.getSelectedItem();
+            String item = (String)jcb.getSelectedItem();
 
-                field1.setText("");
-                field2.setText("");
-                field3.setText("");
+            field1.setText("");
+            field2.setText("");
+            field3.setText("");
 
-                if(item.equals("move")){
+            switch (Objects.requireNonNull(item)) {
+                case "move":
                     jPanel2.add(new JLabel(" DX "));
                     jPanel2.add(field1);
                     jPanel2.add(new JLabel(" DY "));
                     jPanel2.add(field2);
-                }else if(item.equals("x1")){
+                    break;
+                case "x1":
                     jPanel2.add(new JLabel(" X1 "));
                     jPanel2.add(field1);
-                }else if(item.equals("y1")){
+                    break;
+                case "y1":
                     jPanel2.add(new JLabel(" Y1 "));
                     jPanel2.add(field1);
-                }else if(item.equals("x2")){
+                    break;
+                case "x2":
                     jPanel2.add(new JLabel(" X2 "));
                     jPanel2.add(field1);
-                }else if(item.equals("y2")){
+                    break;
+                case "y2":
                     jPanel2.add(new JLabel(" Y2 "));
                     jPanel2.add(field1);
-                }else if(item.equals("x3")){
+                    break;
+                case "x3":
                     jPanel2.add(new JLabel(" X3 "));
                     jPanel2.add(field1);
-                }else if(item.equals("y3")){
+                    break;
+                case "y3":
                     jPanel2.add(new JLabel(" Y3 "));
                     jPanel2.add(field1);
-                }else if(item.equals("fill")){
+                    break;
+                case "fill":
                     jPanel2.add(new JLabel(" Filed  "));
                     jPanel2.add(checkBox);
-                }else if(item.equals("color")){
+                    break;
+                case "color":
                     jPanel2.add(new JLabel(" R "));
                     jPanel2.add(field1);
                     jPanel2.add(new JLabel(" G "));
                     jPanel2.add(field2);
                     jPanel2.add(new JLabel(" B "));
                     jPanel2.add(field3);
-                }
-
-                jPanel2.repaint();
-                jPanel2.revalidate();
-
+                    break;
             }
+
+            jPanel2.repaint();
+            jPanel2.revalidate();
+
         });
 
-        cancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                field1.setText("");
-                field2.setText("");
-                field3.setText("");
-                setVisible(false);
-            }
+        cancel.addActionListener(e -> {
+            field1.setText("");
+            field2.setText("");
+            field3.setText("");
+            setVisible(false);
         });
 
-        edit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        edit.addActionListener(e -> {
 
-                String item = (String)jcb.getSelectedItem();
-                if(Objects.equals(triangle_list.getSelectedItem(), "all")) {
-                    for (int i = 0; i < Utils.getTriangles().size(); i++) {
-                        if (item.equals("move")) {
+            String item = (String)jcb.getSelectedItem();
+            if(Objects.equals(triangle_list.getSelectedItem(), "all")) {
+                for (int i = 0; i < Utils.getTriangles().size(); i++) {
+                    switch (Objects.requireNonNull(item)) {
+                        case "move":
                             Utils.getTriangles().get(i).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
-                        } else if (item.equals("x1")) {
+                            break;
+                        case "x1":
                             Utils.getTriangles().get(i).setX1(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(i).getX1()));
-                        } else if (item.equals("y1")) {
+                            break;
+                        case "y1":
                             Utils.getTriangles().get(i).setY1(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(i).getY1()));
-                        } else if (item.equals("x2")) {
+                            break;
+                        case "x2":
                             Utils.getTriangles().get(i).setX2(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(i).getX2()));
-                        } else if (item.equals("y2")) {
+                            break;
+                        case "y2":
                             Utils.getTriangles().get(i).setY2(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(i).getY2()));
-                        } else if (item.equals("x3")){
+                            break;
+                        case "x3":
                             Utils.getTriangles().get(i).setX3(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(i).getX3()));
-                        } else if (item.equals("y3")) {
+                            break;
+                        case "y3":
                             Utils.getTriangles().get(i).setY3(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(i).getY3()));
-                        } else if (item.equals("color")) {
+                            break;
+                        case "color":
                             Utils.getTriangles().get(i).setColor(
                                     Lab3.parseInt(field1.getText(), Utils.getTriangles().get(i).getColor().getRed()),
                                     Lab3.parseInt(field2.getText(), Utils.getTriangles().get(i).getColor().getGreen()),
                                     Lab3.parseInt(field3.getText(), Utils.getTriangles().get(i).getColor().getBlue())
                             );
-                        }
+                            break;
                     }
-                }else {
-                    if (item.equals("move")) {
-                        Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
-                    } else if (item.equals("x1")) {
-                        Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX1(Lab3.parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX1()));
-                    } else if (item.equals("y1")) {
-                        Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY1(Lab3.parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY1()));
-                    } else if (item.equals("x2")) {
-                        Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX2(Lab3.parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX2()));
-                    } else if (item.equals("y2")) {
-                        Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY2(Lab3.parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY2()));
-                    } else if (item.equals("x3")){
-                        Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX3(Lab3.parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX3()));
-                    } else if (item.equals("y3")) {
-                        Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY3(Lab3.parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY3()));
-                    } else if (item.equals("color")) {
-                        Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setColor(
-                                Lab3.parseInt(field1.getText(), Utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getRed()),
-                                Lab3.parseInt(field2.getText(), Utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getGreen()),
-                                Lab3.parseInt(field3.getText(), Utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getBlue())
-                        );
-                    }
-
-                    field1.setText("");
-                    field2.setText("");
-                    field3.setText("");
-
-                    Lab3.getPicture().repaint();
-                    Lab3.getPicture().revalidate();
-                    jPanel2.repaint();
-                    jPanel2.revalidate();
-                    Lab3.getjPanel().repaint();
-                    Lab3.getjPanel().revalidate();
-                    Lab3.getjFrame().repaint();
-                    Lab3.getjFrame().revalidate();
                 }
+            }else {
+                switch (Objects.requireNonNull(item)) {
+                    case "move":
+                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
+                        break;
+                    case "x1":
+                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setX1(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getX1()));
+                        break;
+                    case "y1":
+                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setY1(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getY1()));
+                        break;
+                    case "x2":
+                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setX2(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getX2()));
+                        break;
+                    case "y2":
+                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setY2(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getY2()));
+                        break;
+                    case "x3":
+                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setX3(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getX3()));
+                        break;
+                    case "y3":
+                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setY3(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getY3()));
+                        break;
+                    case "color":
+                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setColor(
+                                Lab3.parseInt(field1.getText(), Utils.getTriangles().get((triangle_list.getSelectedIndex())).getColor().getRed()),
+                                Lab3.parseInt(field2.getText(), Utils.getTriangles().get((triangle_list.getSelectedIndex())).getColor().getGreen()),
+                                Lab3.parseInt(field3.getText(), Utils.getTriangles().get((triangle_list.getSelectedIndex())).getColor().getBlue())
+                        );
+                        break;
+                }
+
+                field1.setText("");
+                field2.setText("");
+                field3.setText("");
+
+                Lab3.getPicture().repaint();
+                Lab3.getPicture().revalidate();
+                jPanel2.repaint();
+                jPanel2.revalidate();
+                //Lab3.getjPanel().repaint();
+                //Lab3.getjPanel().revalidate();
+                //Lab3.getjFrame().repaint();
+                //Lab3.getjFrame().revalidate();
             }
         });
 
+    }
+
+    public void reload() {
+        triangle_list.removeAllItems();
+        for(int i = 0;i<Utils.getTriangles().size();i++){
+            triangle_list.addItem(i+"");
+        }
+        triangle_list.addItem("all");
     }
 
 }
