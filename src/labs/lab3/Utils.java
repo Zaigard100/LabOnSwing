@@ -19,7 +19,7 @@ public class Utils {
     static private  ArrayList<Rect> rects;
 
 
-    public Utils(){
+    static {
         triangles = new ArrayList<>();
         lines = new ArrayList<>();
         circles = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Utils {
         rects = new ArrayList<>();
     }
 
-    public  void load(String file){
+    public static void load(String file){
         String line = "";
         try(FileReader reader = new FileReader(file))
         {
@@ -53,7 +53,7 @@ public class Utils {
 
     }
 
-    private void parse_line(String line){
+    private static void parse_line(String line){
         String[] words = line.split(",");
         if(words[0].equals("t")){
             triangles.add(new Triangle(
@@ -117,7 +117,7 @@ public class Utils {
         }
     }
 
-    public void dispose(){
+    public static void dispose(){
         triangles.clear();
         lines.clear();
         circles.clear();
@@ -127,33 +127,33 @@ public class Utils {
     }
 
 
-    public ArrayList<Triangle> getTriangles() {
+    public static ArrayList<Triangle> getTriangles() {
         return triangles;
     }
 
-    public ArrayList<Line> getLines() {
+    public static ArrayList<Line> getLines() {
         return lines;
     }
 
-    public ArrayList<Circle> getCircles() {
+    public static ArrayList<Circle> getCircles() {
         return circles;
     }
 
-    public ArrayList<Ring> getRing() {
+    public static ArrayList<Ring> getRing() {
         return ring;
     }
 
-    public ArrayList<Oval> getOvals() {
+    public static ArrayList<Oval> getOvals() {
         return ovals;
     }
-    public ArrayList<Romb> getRombs(){
+    public static ArrayList<Romb> getRombs(){
         return  rombs;
     }
-    public ArrayList<Trapezoids> getTrapezoids() {
+    public static ArrayList<Trapezoids> getTrapezoids() {
         return trapezoids;
     }
 
-    public ArrayList<Rect> getRects() {
+    public static ArrayList<Rect> getRects() {
         return rects;
     }
 }

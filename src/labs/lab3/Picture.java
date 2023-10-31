@@ -7,35 +7,34 @@ import java.awt.*;
 
 public class Picture extends JComponent {
 
-    Utils utils;
-    public Picture(Utils utils){
-        this.utils = utils;
+
+    public Picture(){
     }
 
     @Override
     protected void paintComponent(Graphics g){
-        for(Circle c:utils.getCircles()){
+        for(Circle c:Utils.getCircles()){
             c.show(g);
         }
-        for(Line l:utils.getLines()){
+        for(Line l:Utils.getLines()){
             l.show(g);
         }
-        for(Triangle t:utils.getTriangles()){
+        for(Triangle t:Utils.getTriangles()){
             t.show(g);
         }
-        for (Ring r:utils.getRing()){
+        for (Ring r:Utils.getRing()){
             r.show(g);
         }
-        for(Oval o:utils.getOvals()){
+        for(Oval o:Utils.getOvals()){
             o.show(g);
         }
-        for(Romb r: utils.getRombs()){
+        for(Romb r: Utils.getRombs()){
             r.show(g);
         }
-        for(Trapezoids t:utils.getTrapezoids()){
+        for(Trapezoids t:Utils.getTrapezoids()){
             t.show(g);
         }
-        for (Rect r: utils.getRects()){
+        for (Rect r: Utils.getRects()){
             r.show(g);
         }
     }

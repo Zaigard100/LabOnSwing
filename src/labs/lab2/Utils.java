@@ -14,15 +14,15 @@ public class Utils {
     static private ArrayList<Circle> circles;
     static private ArrayList<Ring> ring;
 
-
-    public Utils(){
+    static {
         triangles = new ArrayList<>();
         lines = new ArrayList<>();
         circles = new ArrayList<>();
         ring = new ArrayList<>();
     }
 
-    public  void load(String file){
+
+    static public void load(String file){
         String line = "";
         try(FileReader reader = new FileReader(file))
         {
@@ -45,7 +45,7 @@ public class Utils {
 
     }
 
-    private void parse_line(String line){
+    private static void parse_line(String line){
         String[] words = line.split(",");
         if(words[0].equals("t")){
             triangles.add(new Triangle(
@@ -79,26 +79,26 @@ public class Utils {
         }
     }
 
-    public void dispose(){
+    static public void dispose(){
         triangles.clear();
         lines.clear();
         circles.clear();
     }
 
 
-    public ArrayList<Triangle> getTriangles() {
+    public static ArrayList<Triangle> getTriangles() {
         return triangles;
     }
 
-    public ArrayList<Line> getLines() {
+    public static ArrayList<Line> getLines() {
         return lines;
     }
 
-    public ArrayList<Circle> getCircles() {
+    public static ArrayList<Circle> getCircles() {
         return circles;
     }
 
-    public ArrayList<Ring> getRing() {
+    public static ArrayList<Ring> getRing() {
         return ring;
     }
 }

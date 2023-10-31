@@ -14,7 +14,6 @@ public class Lab2 {
     static int windows_h = 800;
     static int screen_w,screen_h;
     public static JFrame jFrame;
-    static Utils utils;
     static JPanel jPanel;
     static JMenuBar jMenuBar;
     static JMenu file,edit,create;
@@ -26,9 +25,7 @@ public class Lab2 {
 
     public void start() {
 
-        utils = new Utils();
-
-        picture = new Picture(utils);
+        picture = new Picture();
         jFrame = getFrame();
         jMenuBar = new JMenuBar();
         jPanel = new JPanel();
@@ -104,7 +101,7 @@ public class Lab2 {
                 int result = jFileChooser.showOpenDialog(jPanel);
                 if(result == JFileChooser.APPROVE_OPTION){
                     System.out.println(jFileChooser.getSelectedFile().getAbsolutePath());
-                    utils.load(jFileChooser.getSelectedFile().getAbsolutePath());
+                    Utils.load(jFileChooser.getSelectedFile().getAbsolutePath());
                 }
                 jPanel.repaint();
                 jPanel.revalidate();
@@ -117,7 +114,7 @@ public class Lab2 {
         del.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                utils.dispose();
+                Utils.dispose();
                 jPanel.repaint();
                 jPanel.revalidate();
                 jFrame.repaint();
@@ -161,8 +158,8 @@ public class Lab2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TransformCircle transformCircle = new TransformCircle();
-                TransformCircle.c_list = new String[utils.getCircles().size()];
-                for(int i = 0;i<utils.getCircles().size();i++){
+                TransformCircle.c_list = new String[Utils.getCircles().size()];
+                for(int i = 0;i<Utils.getCircles().size();i++){
                     TransformCircle.c_list[i] = i+"";
                 }
                 transformCircle.setVisible(true);
@@ -173,8 +170,8 @@ public class Lab2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TransformLine transformLine = new TransformLine();
-                TransformLine.l_list = new String[utils.getLines().size()];
-                for(int i = 0;i<utils.getLines().size();i++){
+                TransformLine.l_list = new String[Utils.getLines().size()];
+                for(int i = 0;i<Utils.getLines().size();i++){
                     TransformLine.l_list[i] = i+"";
                 }
                 transformLine.setVisible(true);
@@ -185,8 +182,8 @@ public class Lab2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TransformTriangle transformTriangle = new TransformTriangle();
-                TransformTriangle.t_list = new String[utils.getTriangles().size()];
-                for(int i = 0;i<utils.getTriangles().size();i++){
+                TransformTriangle.t_list = new String[Utils.getTriangles().size()];
+                for(int i = 0;i<Utils.getTriangles().size();i++){
                     TransformTriangle.t_list[i] = i+"";
                     transformTriangle.setVisible(true);
                 }
@@ -197,8 +194,8 @@ public class Lab2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TransformRing transformRing = new TransformRing();
-                TransformRing.r_list = new String[utils.getRing().size()];
-                for(int i = 0;i<utils.getRing().size();i++){
+                TransformRing.r_list = new String[Utils.getRing().size()];
+                for(int i = 0;i<Utils.getRing().size();i++){
                     TransformRing.r_list[i] = i+"";
                     transformRing.setVisible(true);
                 }
@@ -240,10 +237,6 @@ public class Lab2 {
 
     public JFrame getjFrame() {
         return jFrame;
-    }
-
-    public static Utils getUtils() {
-        return utils;
     }
 
     public static class CreateCircle extends JDialog {
@@ -341,7 +334,7 @@ public class Lab2 {
                         int g = Integer.parseInt(gField.getText());
                         int b = Integer.parseInt(bField.getText());
                         if((x>0) && (x<windows_w-diameter) && (y>0) && (y<windows_h-diameter) && (diameter>0) && (diameter<Math.min(windows_w-x,windows_h-y))) {
-                            utils.getCircles().add(new Circle(new Point(x,y), diameter, fill, new Color(r, g, b)));
+                            Utils.getCircles().add(new Circle(new Point(x,y), diameter, fill, new Color(r, g, b)));
                         }
                         xField.setText("");
                         yField.setText("");
@@ -470,7 +463,7 @@ public class Lab2 {
                         int g = Integer.parseInt(gField.getText());
                         int b = Integer.parseInt(bField.getText());
                         if((x>0) && (x<windows_w) && (y>0) && (y<windows_h) && (x1>0) && (x1<windows_w) && (y1>0) && (y1<windows_h) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
-                            utils.getLines().add(new Line(new Point(x, y),new Point(x1, y1), new Color(r, g, b)));
+                            Utils.getLines().add(new Line(new Point(x, y),new Point(x1, y1), new Color(r, g, b)));
                         }
 
                         xField.setText("");
@@ -631,7 +624,7 @@ public class Lab2 {
                         int g = Integer.parseInt(gField.getText());
                         int b = Integer.parseInt(bField.getText());
                         if((x1>0) && (x1<windows_w) && (y1>0) && (y1<windows_h) && (x2>0) && (x2<windows_w) && (y2>0) && (y2<windows_h) && (x3>0) && (x3<windows_w) && (y3>0) && (y3<windows_h) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
-                            utils.getTriangles().add(new Triangle(new Point(x1, y1), new Point(x2, y2), new Point(x3, y3), fill, new Color(r, g, b)));
+                            Utils.getTriangles().add(new Triangle(new Point(x1, y1), new Point(x2, y2), new Point(x3, y3), fill, new Color(r, g, b)));
                         }
                         x1Field.setText("");
                         y1Field.setText("");
@@ -761,7 +754,7 @@ public class Lab2 {
                         int g = Integer.parseInt(gField.getText());
                         int b = Integer.parseInt(bField.getText());
                         if((x>0) && (x<windows_w-Math.max(diameter1,diameter2)) && (y>0) && (y<windows_h-Math.max(diameter1,diameter2)) && (diameter1>0)&& (diameter2>0) && (Math.max(diameter1,diameter2)<Math.min(windows_w-x,windows_h-y))) {
-                            utils.getRing().add(new Ring(new Point(x,y), diameter1,diameter2, new Color(r, g, b)));
+                            Utils.getRing().add(new Ring(new Point(x,y), diameter1,diameter2, new Color(r, g, b)));
                         }
                         xField.setText("");
                         yField.setText("");
@@ -799,11 +792,11 @@ public class Lab2 {
         JPanel jPanel1,jPanel2,jPanel3;
         protected static String[] c_list;
         public TransformCircle(){
-            c_list = new String[utils.getCircles().size()+1];
-            for(int i = 0;i<utils.getCircles().size();i++){
+            c_list = new String[Utils.getCircles().size()+1];
+            for(int i = 0;i<Utils.getCircles().size();i++){
                 c_list[i] = i+"";
             }
-            c_list[utils.getCircles().size()]="all";
+            c_list[Utils.getCircles().size()]="all";
             circle_list = new JComboBox(c_list);
             jcb = new JComboBox(new String[]{"move", "x", "y", "diameter","fill", "color"});
             cancel = new JButton("Cancel");
@@ -902,44 +895,44 @@ public class Lab2 {
                     String item = (String)jcb.getSelectedItem();
 
                     if(Objects.equals(circle_list.getSelectedItem(), "all")) {
-                        for (int i = 0; i < utils.getCircles().size(); i++) {
+                        for (int i = 0; i < Utils.getCircles().size(); i++) {
                             if (item.equals("move")){
-                                utils.getCircles().get(i).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
+                                Utils.getCircles().get(i).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
                             } else if (item.equals("x")) {
-                                utils.getCircles().get(i).setX(parseInt(field1.getText(), utils.getCircles().get(i).getX()));
+                                Utils.getCircles().get(i).setX(parseInt(field1.getText(), Utils.getCircles().get(i).getX()));
                             } else if (item.equals("y")) {
-                                utils.getCircles().get(i).setY(parseInt(field1.getText(), utils.getCircles().get(i).getY()));
+                                Utils.getCircles().get(i).setY(parseInt(field1.getText(), Utils.getCircles().get(i).getY()));
                             } else if (item.equals("diameter")) {
-                                utils.getCircles().get(i).setDiameter(parseInt(field1.getText(), utils.getCircles().get(i).getDiameter()));
+                                Utils.getCircles().get(i).setDiameter(parseInt(field1.getText(), Utils.getCircles().get(i).getDiameter()));
                             } else if (item.equals("fill")) {
-                                utils.getCircles().get(i).setFill(checkBox.isSelected());
+                                Utils.getCircles().get(i).setFill(checkBox.isSelected());
                             } else if (item.equals("color")) {
-                                utils.getCircles().get(i).setColor(
-                                        parseInt(field1.getText(), utils.getCircles().get(i).getColor().getRed()),
-                                        parseInt(field2.getText(), utils.getCircles().get(i).getColor().getGreen()),
-                                        parseInt(field3.getText(), utils.getCircles().get(i).getColor().getBlue())
+                                Utils.getCircles().get(i).setColor(
+                                        parseInt(field1.getText(), Utils.getCircles().get(i).getColor().getRed()),
+                                        parseInt(field2.getText(), Utils.getCircles().get(i).getColor().getGreen()),
+                                        parseInt(field3.getText(), Utils.getCircles().get(i).getColor().getBlue())
                                 );
                             }
                         }
                     }else {
                         if (item.equals("move")) {
-                            utils.getCircles().get((int) circle_list.getSelectedIndex()).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
+                            Utils.getCircles().get((int) circle_list.getSelectedIndex()).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
                         } else if (item.equals("x")) {
-                            utils.getCircles().get((int) circle_list.getSelectedIndex()).setX(parseInt(field1.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getX()));
+                            Utils.getCircles().get((int) circle_list.getSelectedIndex()).setX(parseInt(field1.getText(), Utils.getCircles().get(((int) circle_list.getSelectedIndex())).getX()));
                         } else if (item.equals("y")) {
-                            utils.getCircles().get((int) circle_list.getSelectedIndex()).setY(parseInt(field1.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getY()));
+                            Utils.getCircles().get((int) circle_list.getSelectedIndex()).setY(parseInt(field1.getText(), Utils.getCircles().get(((int) circle_list.getSelectedIndex())).getY()));
                         }  else if (item.equals("fill")) {
-                            utils.getCircles().get((int) circle_list.getSelectedIndex()).setFill(checkBox.isSelected());
+                            Utils.getCircles().get((int) circle_list.getSelectedIndex()).setFill(checkBox.isSelected());
                         }else if (item.equals("diameter")) {
-                            int di = parseInt(field1.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getDiameter());
+                            int di = parseInt(field1.getText(), Utils.getCircles().get(((int) circle_list.getSelectedIndex())).getDiameter());
                             if(di>0) {
-                                utils.getCircles().get((int) circle_list.getSelectedIndex()).setDiameter(di);
+                                Utils.getCircles().get((int) circle_list.getSelectedIndex()).setDiameter(di);
                             }
                         } else if (item.equals("color")) {
-                            utils.getCircles().get((int) circle_list.getSelectedIndex()).setColor(
-                                    parseInt(field1.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getColor().getRed()),
-                                    parseInt(field2.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getColor().getGreen()),
-                                    parseInt(field3.getText(), utils.getCircles().get(((int) circle_list.getSelectedIndex())).getColor().getBlue())
+                            Utils.getCircles().get((int) circle_list.getSelectedIndex()).setColor(
+                                    parseInt(field1.getText(), Utils.getCircles().get(((int) circle_list.getSelectedIndex())).getColor().getRed()),
+                                    parseInt(field2.getText(), Utils.getCircles().get(((int) circle_list.getSelectedIndex())).getColor().getGreen()),
+                                    parseInt(field3.getText(), Utils.getCircles().get(((int) circle_list.getSelectedIndex())).getColor().getBlue())
                             );
                         }
                     }
@@ -967,11 +960,11 @@ public class Lab2 {
         JPanel jPanel1,jPanel2,jPanel3;
         protected static String[] l_list;
         public TransformLine(){
-            l_list = new String[utils.getLines().size()+1];
-            for(int i = 0;i<utils.getLines().size();i++){
+            l_list = new String[Utils.getLines().size()+1];
+            for(int i = 0;i<Utils.getLines().size();i++){
                 l_list[i] = i+"";
             }
-            l_list[utils.getLines().size()]="all";
+            l_list[Utils.getLines().size()]="all";
             line_list = new JComboBox(l_list);
             jcb = new JComboBox(new String[]{"move", "x", "y", "x1","y1","color"});
             cancel = new JButton("Cancel");
@@ -1067,42 +1060,42 @@ public class Lab2 {
 
                     String item = (String)jcb.getSelectedItem();
                     if(Objects.equals(line_list.getSelectedItem(), "all")) {
-                        for(int i = 0;i<utils.getLines().size();i++) {
+                        for(int i = 0;i<Utils.getLines().size();i++) {
                             if (item.equals("move")) {
-                                utils.getLines().get(i).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
+                                Utils.getLines().get(i).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
                             } else if (item.equals("x")) {
-                                utils.getLines().get(i).setX(parseInt(field1.getText(), utils.getLines().get(i).getX()));
+                                Utils.getLines().get(i).setX(parseInt(field1.getText(), Utils.getLines().get(i).getX()));
                             } else if (item.equals("y")) {
-                                utils.getLines().get(i).setY(parseInt(field1.getText(), utils.getLines().get(i).getY()));
+                                Utils.getLines().get(i).setY(parseInt(field1.getText(), Utils.getLines().get(i).getY()));
                             } else if (item.equals("x1")) {
-                                utils.getLines().get(i).setX1(parseInt(field1.getText(), utils.getLines().get(i).getX1()));
+                                Utils.getLines().get(i).setX1(parseInt(field1.getText(), Utils.getLines().get(i).getX1()));
                             } else if (item.equals("y1")) {
-                                utils.getLines().get(i).setY1(parseInt(field1.getText(), utils.getLines().get(i).getY1()));
+                                Utils.getLines().get(i).setY1(parseInt(field1.getText(), Utils.getLines().get(i).getY1()));
                             } else if (item.equals("color")) {
-                                utils.getLines().get(i).setColor(
-                                        parseInt(field1.getText(), utils.getLines().get(i).getColor().getRed()),
-                                        parseInt(field2.getText(), utils.getLines().get(i).getColor().getGreen()),
-                                        parseInt(field3.getText(), utils.getLines().get(i).getColor().getBlue())
+                                Utils.getLines().get(i).setColor(
+                                        parseInt(field1.getText(), Utils.getLines().get(i).getColor().getRed()),
+                                        parseInt(field2.getText(), Utils.getLines().get(i).getColor().getGreen()),
+                                        parseInt(field3.getText(), Utils.getLines().get(i).getColor().getBlue())
                                 );
                             }
                         }
                     }else{
                         if (item.equals("move")) {
 
-                            utils.getLines().get((int) line_list.getSelectedIndex()).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
+                            Utils.getLines().get((int) line_list.getSelectedIndex()).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
                         } else if (item.equals("x")) {
-                            utils.getLines().get((int) line_list.getSelectedIndex()).setX(parseInt(field1.getText(), utils.getLines().get(((int) line_list.getSelectedIndex())).getX()));
+                            Utils.getLines().get((int) line_list.getSelectedIndex()).setX(parseInt(field1.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getX()));
                         } else if (item.equals("y")) {
-                            utils.getLines().get((int) line_list.getSelectedIndex()).setY(parseInt(field1.getText(), utils.getLines().get(((int) line_list.getSelectedIndex())).getY()));
+                            Utils.getLines().get((int) line_list.getSelectedIndex()).setY(parseInt(field1.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getY()));
                         } else if (item.equals("x1")) {
-                            utils.getLines().get((int) line_list.getSelectedIndex()).setX1(parseInt(field1.getText(), utils.getLines().get(((int) line_list.getSelectedIndex())).getX1()));
+                            Utils.getLines().get((int) line_list.getSelectedIndex()).setX1(parseInt(field1.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getX1()));
                         } else if (item.equals("y1")) {
-                            utils.getLines().get((int) line_list.getSelectedIndex()).setY1(parseInt(field1.getText(), utils.getLines().get(((int) line_list.getSelectedIndex())).getY1()));
+                            Utils.getLines().get((int) line_list.getSelectedIndex()).setY1(parseInt(field1.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getY1()));
                         } else if (item.equals("color")) {
-                            utils.getLines().get((int) line_list.getSelectedIndex()).setColor(
-                                    parseInt(field1.getText(), utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getRed()),
-                                    parseInt(field2.getText(), utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getGreen()),
-                                    parseInt(field3.getText(), utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getBlue())
+                            Utils.getLines().get((int) line_list.getSelectedIndex()).setColor(
+                                    parseInt(field1.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getRed()),
+                                    parseInt(field2.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getGreen()),
+                                    parseInt(field3.getText(), Utils.getLines().get(((int) line_list.getSelectedIndex())).getColor().getBlue())
                             );
                         }
                     }
@@ -1131,11 +1124,11 @@ public class Lab2 {
         JPanel jPanel1,jPanel2,jPanel3;
         protected static String[] t_list;
         public TransformTriangle(){
-            t_list = new String[utils.getTriangles().size()+1];
-            for(int i = 0;i<utils.getTriangles().size();i++){
+            t_list = new String[Utils.getTriangles().size()+1];
+            for(int i = 0;i<Utils.getTriangles().size();i++){
                 t_list[i] = i+"";
             }
-            t_list[utils.getTriangles().size()]="all";
+            t_list[Utils.getTriangles().size()]="all";
             triangle_list = new JComboBox(t_list);
             jcb = new JComboBox(new String[]{"move","x1","y1","x2","y2","x3","y3","fill","color"});
             cancel = new JButton("Cancel");
@@ -1242,49 +1235,49 @@ public class Lab2 {
 
                     String item = (String)jcb.getSelectedItem();
                     if(Objects.equals(triangle_list.getSelectedItem(), "all")) {
-                        for (int i = 0; i < utils.getTriangles().size(); i++) {
+                        for (int i = 0; i < Utils.getTriangles().size(); i++) {
                             if (item.equals("move")) {
-                                utils.getTriangles().get(i).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
+                                Utils.getTriangles().get(i).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
                             } else if (item.equals("x1")) {
-                                utils.getTriangles().get(i).setX1(parseInt(field1.getText(), utils.getTriangles().get(i).getX1()));
+                                Utils.getTriangles().get(i).setX1(parseInt(field1.getText(), Utils.getTriangles().get(i).getX1()));
                             } else if (item.equals("y1")) {
-                                utils.getTriangles().get(i).setY1(parseInt(field1.getText(), utils.getTriangles().get(i).getY1()));
+                                Utils.getTriangles().get(i).setY1(parseInt(field1.getText(), Utils.getTriangles().get(i).getY1()));
                             } else if (item.equals("x2")) {
-                                utils.getTriangles().get(i).setX2(parseInt(field1.getText(), utils.getTriangles().get(i).getX2()));
+                                Utils.getTriangles().get(i).setX2(parseInt(field1.getText(), Utils.getTriangles().get(i).getX2()));
                             } else if (item.equals("y2")) {
-                                utils.getTriangles().get(i).setY2(parseInt(field1.getText(), utils.getTriangles().get(i).getY2()));
+                                Utils.getTriangles().get(i).setY2(parseInt(field1.getText(), Utils.getTriangles().get(i).getY2()));
                             } else if (item.equals("x3")){
-                                utils.getTriangles().get(i).setX3(parseInt(field1.getText(), utils.getTriangles().get(i).getX3()));
+                                Utils.getTriangles().get(i).setX3(parseInt(field1.getText(), Utils.getTriangles().get(i).getX3()));
                             } else if (item.equals("y3")) {
-                                utils.getTriangles().get(i).setY3(parseInt(field1.getText(), utils.getTriangles().get(i).getY3()));
+                                Utils.getTriangles().get(i).setY3(parseInt(field1.getText(), Utils.getTriangles().get(i).getY3()));
                             } else if (item.equals("color")) {
-                                utils.getTriangles().get(i).setColor(
-                                        parseInt(field1.getText(), utils.getTriangles().get(i).getColor().getRed()),
-                                        parseInt(field2.getText(), utils.getTriangles().get(i).getColor().getGreen()),
-                                        parseInt(field3.getText(), utils.getTriangles().get(i).getColor().getBlue())
+                                Utils.getTriangles().get(i).setColor(
+                                        parseInt(field1.getText(), Utils.getTriangles().get(i).getColor().getRed()),
+                                        parseInt(field2.getText(), Utils.getTriangles().get(i).getColor().getGreen()),
+                                        parseInt(field3.getText(), Utils.getTriangles().get(i).getColor().getBlue())
                                 );
                             }
                         }
                     }else {
                         if (item.equals("move")) {
-                            utils.getTriangles().get((int) triangle_list.getSelectedIndex()).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
+                            Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
                         } else if (item.equals("x1")) {
-                            utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX1(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX1()));
+                            Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX1(parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX1()));
                         } else if (item.equals("y1")) {
-                            utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY1(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY1()));
+                            Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY1(parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY1()));
                         } else if (item.equals("x2")) {
-                            utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX2(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX2()));
+                            Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX2(parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX2()));
                         } else if (item.equals("y2")) {
-                            utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY2(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY2()));
+                            Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY2(parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY2()));
                         } else if (item.equals("x3")){
-                            utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX3(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX3()));
+                            Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setX3(parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getX3()));
                         } else if (item.equals("y3")) {
-                            utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY3(parseInt(field1.getText(), utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY3()));
+                            Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setY3(parseInt(field1.getText(), Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).getY3()));
                         } else if (item.equals("color")) {
-                            utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setColor(
-                                    parseInt(field1.getText(), utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getRed()),
-                                    parseInt(field2.getText(), utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getGreen()),
-                                    parseInt(field3.getText(), utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getBlue())
+                            Utils.getTriangles().get((int) triangle_list.getSelectedIndex()).setColor(
+                                    parseInt(field1.getText(), Utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getRed()),
+                                    parseInt(field2.getText(), Utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getGreen()),
+                                    parseInt(field3.getText(), Utils.getTriangles().get(((int) triangle_list.getSelectedIndex())).getColor().getBlue())
                             );
                         }
 
@@ -1313,11 +1306,11 @@ public class Lab2 {
         JPanel jPanel1,jPanel2,jPanel3;
         static protected String[] r_list;
         public TransformRing(){
-            r_list = new String[utils.getRing().size()+1];
-            for(int i = 0;i<utils.getRing().size();i++){
+            r_list = new String[Utils.getRing().size()+1];
+            for(int i = 0;i<Utils.getRing().size();i++){
                 r_list[i] = i+"";
             }
-            r_list[utils.getRing().size()]="all";
+            r_list[Utils.getRing().size()]="all";
             circle_list = new JComboBox(r_list);
             jcb = new JComboBox(new String[]{"move", "x", "y", "diameter1", "diameter2", "color"});
             cancel = new JButton("Cancel");
@@ -1414,41 +1407,41 @@ public class Lab2 {
                     String item = (String)jcb.getSelectedItem();
 
                     if(Objects.equals(circle_list.getSelectedItem(), "all")) {
-                        for (int i = 0; i < utils.getCircles().size(); i++) {
+                        for (int i = 0; i < Utils.getCircles().size(); i++) {
                             if (item.equals("move")){
-                                utils.getRing().get(i).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
+                                Utils.getRing().get(i).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
                             } else if (item.equals("x")) {
-                                utils.getRing().get(i).setX(parseInt(field1.getText(), utils.getRing().get(i).getX()));
+                                Utils.getRing().get(i).setX(parseInt(field1.getText(), Utils.getRing().get(i).getX()));
                             } else if (item.equals("y")) {
-                                utils.getRing().get(i).setY(parseInt(field1.getText(), utils.getRing().get(i).getY()));
+                                Utils.getRing().get(i).setY(parseInt(field1.getText(), Utils.getRing().get(i).getY()));
                             } else if (item.equals("diameter1")) {
-                                utils.getRing().get(i).setDiameter1(parseInt(field1.getText(), utils.getRing().get(i).getDiameter1()));
+                                Utils.getRing().get(i).setDiameter1(parseInt(field1.getText(), Utils.getRing().get(i).getDiameter1()));
                             } else if (item.equals("diameter2")) {
-                                utils.getRing().get(i).setDiameter2(parseInt(field1.getText(), utils.getRing().get(i).getDiameter2()));
+                                Utils.getRing().get(i).setDiameter2(parseInt(field1.getText(), Utils.getRing().get(i).getDiameter2()));
                             } else if (item.equals("color")) {
-                                utils.getRing().get(i).setColor(
-                                        parseInt(field1.getText(), utils.getRing().get(i).getColor().getRed()),
-                                        parseInt(field2.getText(), utils.getRing().get(i).getColor().getGreen()),
-                                        parseInt(field3.getText(), utils.getRing().get(i).getColor().getBlue())
+                                Utils.getRing().get(i).setColor(
+                                        parseInt(field1.getText(), Utils.getRing().get(i).getColor().getRed()),
+                                        parseInt(field2.getText(), Utils.getRing().get(i).getColor().getGreen()),
+                                        parseInt(field3.getText(), Utils.getRing().get(i).getColor().getBlue())
                                 );
                             }
                         }
                     }else {
                         if (item.equals("move")) {
-                            utils.getRing().get((int) circle_list.getSelectedIndex()).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
+                            Utils.getRing().get((int) circle_list.getSelectedIndex()).move(parseInt(field1.getText(), 0), parseInt(field2.getText(), 0));
                         } else if (item.equals("x")) {
-                            utils.getRing().get((int) circle_list.getSelectedIndex()).setX(parseInt(field1.getText(), utils.getRing().get(((int) circle_list.getSelectedIndex())).getX()));
+                            Utils.getRing().get((int) circle_list.getSelectedIndex()).setX(parseInt(field1.getText(), Utils.getRing().get(((int) circle_list.getSelectedIndex())).getX()));
                         } else if (item.equals("y")) {
-                            utils.getRing().get((int) circle_list.getSelectedIndex()).setY(parseInt(field1.getText(), utils.getRing().get(((int) circle_list.getSelectedIndex())).getY()));
+                            Utils.getRing().get((int) circle_list.getSelectedIndex()).setY(parseInt(field1.getText(), Utils.getRing().get(((int) circle_list.getSelectedIndex())).getY()));
                         }else if (item.equals("diameter1")) {
-                            utils.getRing().get((int) circle_list.getSelectedIndex()).setDiameter1(parseInt(field1.getText(), utils.getRing().get(((int) circle_list.getSelectedIndex())).getDiameter1()));
+                            Utils.getRing().get((int) circle_list.getSelectedIndex()).setDiameter1(parseInt(field1.getText(), Utils.getRing().get(((int) circle_list.getSelectedIndex())).getDiameter1()));
                         } else if (item.equals("diameter2")) {
-                            utils.getRing().get((int) circle_list.getSelectedIndex()).setDiameter2(parseInt(field1.getText(), utils.getRing().get(((int) circle_list.getSelectedIndex())).getDiameter2()));
+                            Utils.getRing().get((int) circle_list.getSelectedIndex()).setDiameter2(parseInt(field1.getText(), Utils.getRing().get(((int) circle_list.getSelectedIndex())).getDiameter2()));
                         } else if (item.equals("color")) {
-                            utils.getRing().get((int) circle_list.getSelectedIndex()).setColor(
-                                    parseInt(field1.getText(), utils.getRing().get(((int) circle_list.getSelectedIndex())).getColor().getRed()),
-                                    parseInt(field2.getText(), utils.getRing().get(((int) circle_list.getSelectedIndex())).getColor().getGreen()),
-                                    parseInt(field3.getText(), utils.getRing().get(((int) circle_list.getSelectedIndex())).getColor().getBlue())
+                            Utils.getRing().get((int) circle_list.getSelectedIndex()).setColor(
+                                    parseInt(field1.getText(), Utils.getRing().get(((int) circle_list.getSelectedIndex())).getColor().getRed()),
+                                    parseInt(field2.getText(), Utils.getRing().get(((int) circle_list.getSelectedIndex())).getColor().getGreen()),
+                                    parseInt(field3.getText(), Utils.getRing().get(((int) circle_list.getSelectedIndex())).getColor().getBlue())
                             );
                         }
                     }
