@@ -8,12 +8,12 @@ import java.awt.*;
 import java.util.Objects;
 
 public class TransformRing extends JDialog {
-    JComboBox jcb, ring_list;
+    JComboBox jcb, list;
     TextField field1,field2,field3;
     JButton cancel,edit;
     JPanel jPanel1,jPanel2,jPanel3;
     public TransformRing(){
-        ring_list = new JComboBox<>();
+        list = new JComboBox<>();
        reload();
        jcb = new JComboBox(new String[]{"move", "x", "y", "diameter1", "diameter2", "color"});
        cancel = new JButton("Cancel");
@@ -31,7 +31,7 @@ public class TransformRing extends JDialog {
        field3 = new TextField(5);
 
        jPanel1.add(new JLabel("Ring № "));
-       jPanel1.add(ring_list);
+       jPanel1.add(list);
        jPanel1.add(jcb);
        jPanel1.setBounds(0,0,325,75);
 
@@ -108,7 +108,7 @@ public class TransformRing extends JDialog {
 
             String item = (String)jcb.getSelectedItem();
 
-            if(Objects.equals(ring_list.getSelectedItem(), "all")) {
+            if(Objects.equals(list.getSelectedItem(), "all")) {
                 for (int i = 0; i < Utils.getCircles().size(); i++) {
                     switch (Objects.requireNonNull(item)) {
                         case "move":
@@ -138,25 +138,25 @@ public class TransformRing extends JDialog {
             }else {
                 switch (Objects.requireNonNull(item)) {
                     case "move":
-                        Utils.getRing().get(ring_list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
+                        Utils.getRing().get(list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
                         break;
                     case "x":
-                        Utils.getRing().get(ring_list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getRing().get((ring_list.getSelectedIndex())).getX()));
+                        Utils.getRing().get(list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getRing().get((list.getSelectedIndex())).getX()));
                         break;
                     case "y":
-                        Utils.getRing().get(ring_list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getRing().get((ring_list.getSelectedIndex())).getY()));
+                        Utils.getRing().get(list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getRing().get((list.getSelectedIndex())).getY()));
                         break;
                     case "diameter1":
-                        Utils.getRing().get(ring_list.getSelectedIndex()).setDiameter1(Lab3.parseInt(field1.getText(), Utils.getRing().get((ring_list.getSelectedIndex())).getDiameter1()));
+                        Utils.getRing().get(list.getSelectedIndex()).setDiameter1(Lab3.parseInt(field1.getText(), Utils.getRing().get((list.getSelectedIndex())).getDiameter1()));
                         break;
                     case "diameter2":
-                        Utils.getRing().get(ring_list.getSelectedIndex()).setDiameter2(Lab3.parseInt(field1.getText(), Utils.getRing().get((ring_list.getSelectedIndex())).getDiameter2()));
+                        Utils.getRing().get(list.getSelectedIndex()).setDiameter2(Lab3.parseInt(field1.getText(), Utils.getRing().get((list.getSelectedIndex())).getDiameter2()));
                         break;
                     case "color":
-                        Utils.getRing().get(ring_list.getSelectedIndex()).setColor(
-                                Lab3.parseInt(field1.getText(), Utils.getRing().get((ring_list.getSelectedIndex())).getColor().getRed()),
-                                Lab3.parseInt(field2.getText(), Utils.getRing().get((ring_list.getSelectedIndex())).getColor().getGreen()),
-                                Lab3.parseInt(field3.getText(), Utils.getRing().get((ring_list.getSelectedIndex())).getColor().getBlue())
+                        Utils.getRing().get(list.getSelectedIndex()).setColor(
+                                Lab3.parseInt(field1.getText(), Utils.getRing().get((list.getSelectedIndex())).getColor().getRed()),
+                                Lab3.parseInt(field2.getText(), Utils.getRing().get((list.getSelectedIndex())).getColor().getGreen()),
+                                Lab3.parseInt(field3.getText(), Utils.getRing().get((list.getSelectedIndex())).getColor().getBlue())
                         );
                         break;
                 }
@@ -169,20 +169,16 @@ public class TransformRing extends JDialog {
             Lab3.getPicture().revalidate();
             jPanel2.repaint();
             jPanel2.revalidate();
-            //Lab3.getjPanel().repaint();
-            //Lab3.getjPanel().revalidate();
-            //Lab3.getjFrame().repaint();
-            //Lab3.getjFrame().revalidate();
         });
 
     }
 
     public void reload() {
-        ring_list.removeAllItems();
+        list.removeAllItems();
         for(int i = 0;i<Utils.getRing().size();i++){
-            ring_list.addItem(i+"");
+            list.addItem(i+"");
         }
-        ring_list.addItem("all");
+        list.addItem("all");
     }
 
 }

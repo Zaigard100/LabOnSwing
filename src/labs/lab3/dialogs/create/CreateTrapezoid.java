@@ -2,29 +2,30 @@ package labs.lab3.dialogs.create;
 
 import labs.lab3.Lab3;
 import labs.lab3.Utils;
-import labs.lab3.primitives.Oval;
 import labs.lab3.primitives.Point;
+import labs.lab3.primitives.Trapezoid;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class CreateOval extends JDialog {
-    JTextField xField,yField,diameter1Field,diameter2Field,rField,gField,bField;
-    JPanel mainPanel,xPanel,yPanel,diameter1Panel,diameter2Panel,fillPanel,colorPanel;
+public class CreateTrapezoid extends JDialog {
+    JTextField xField,yField, base1Field, base2Field,heightField,rField,gField,bField;
+    JPanel mainPanel,xPanel,yPanel, base1Panel, base2Panel,heightPanel,fillPanel,colorPanel;
     JCheckBox fillCheck;
     JButton cancel,create;
     int width = 325;
     int height = 175;
 
-    public CreateOval(){
-        super(Lab3.getjFrame(),"Create Oval",true);
+    public CreateTrapezoid(){
+        super(Lab3.getjFrame(),"Create Trapezoid",true);
 
         mainPanel = new JPanel();
 
         xField = new JTextField(5);
         yField = new JTextField(5);
-        diameter1Field = new JTextField(5);
-        diameter2Field = new JTextField(5);
+        base1Field = new JTextField(5);
+        base2Field = new JTextField(5);
+        heightField = new JTextField(5);
 
         rField = new JTextField(3);
         gField = new JTextField(3);
@@ -43,13 +44,17 @@ public class CreateOval extends JDialog {
         yPanel.add(new JLabel("Y"));
         yPanel.add(yField);
 
-        diameter1Panel = new JPanel();
-        diameter1Panel.add(new JLabel("DiameterX"));
-        diameter1Panel.add(diameter1Field);
+        base1Panel = new JPanel();
+        base1Panel.add(new JLabel("Base1"));
+        base1Panel.add(base1Field);
 
-        diameter2Panel = new JPanel();
-        diameter2Panel.add(new JLabel("DiameterY"));
-        diameter2Panel.add(diameter2Field);
+        base2Panel = new JPanel();
+        base2Panel.add(new JLabel("Base2"));
+        base2Panel.add(base2Field);
+
+        heightPanel = new JPanel();
+        heightPanel.add(new JLabel("Height"));
+        heightPanel.add(heightField);
 
         fillPanel = new JPanel();
         fillPanel.add(new JLabel("Fill "));
@@ -66,8 +71,9 @@ public class CreateOval extends JDialog {
 
         mainPanel.add(xPanel);
         mainPanel.add(yPanel);
-        mainPanel.add(diameter1Panel);
-        mainPanel.add(diameter2Panel);
+        mainPanel.add(base1Panel);
+        mainPanel.add(base2Panel);
+        mainPanel.add(heightPanel);
         mainPanel.add(fillPanel);
         mainPanel.add(colorPanel);
 
@@ -80,8 +86,8 @@ public class CreateOval extends JDialog {
         cancel.addActionListener(e -> {
             xField.setText("");
             yField.setText("");
-            diameter1Field.setText("");
-            diameter2Field.setText("");
+            base1Field.setText("");
+            base2Field.setText("");
 
             rField.setText("");
             gField.setText("");
@@ -93,19 +99,21 @@ public class CreateOval extends JDialog {
             try {
                 int x = Integer.parseInt(xField.getText());
                 int y = Integer.parseInt(yField.getText());
-                int diameter1 = Integer.parseInt(diameter1Field.getText());
-                int diameter2 = Integer.parseInt(diameter2Field.getText());
+                int width = Integer.parseInt(base1Field.getText());
+                int width2 = Integer.parseInt(base2Field.getText());
+                int height = Integer.parseInt(heightField.getText());
                 boolean fill = fillCheck.isSelected();
                 int r = Integer.parseInt(rField.getText());
                 int g = Integer.parseInt(gField.getText());
                 int b = Integer.parseInt(bField.getText());
-                if((x>0) && (x<Lab3.getWindows_w() - diameter1) && (y>0) && (y<Lab3.getWindows_h()-diameter2) && (diameter1>0)&& (diameter2>0) && (diameter1<Lab3.getWindows_w()-x) && (diameter2<Lab3.getWindows_h()-y)) {
-                    Utils.getOvals().add(new Oval(new Point(x,y), diameter1,diameter2, fill, new Color(r, g, b)));
+                if((x>0) && (x<Lab3.getWindows_w() - width) && (y>0) && (y<Lab3.getWindows_h()-width2) && (width>0)&& (width2>0) && (width<Lab3.getWindows_w()-x) && (width2<Lab3.getWindows_h()-y)) {
+                    Utils.getTrapezoids().add(new Trapezoid(new Point(x,y), width,width2,height,fill, new Color(r, g, b)));
                 }
                 xField.setText("");
                 yField.setText("");
-                diameter1Field.setText("");
-                diameter2Field.setText("");
+                base1Field.setText("");
+                base2Field.setText("");
+                heightField.setText("");
 
                 rField.setText("");
                 gField.setText("");
@@ -121,7 +129,7 @@ public class CreateOval extends JDialog {
 
         });
 
-        setBounds((Lab3.getWindows_w() -width)/2, (Lab3.getWindows_h()-height)/2,width,height);
+        setBounds((Lab3.getWindows_w()-width)/2, (Lab3.getWindows_h()-height)/2,width,height);
     }
 
 }

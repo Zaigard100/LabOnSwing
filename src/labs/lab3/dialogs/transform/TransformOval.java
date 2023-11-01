@@ -8,13 +8,13 @@ import java.awt.*;
 import java.util.Objects;
 
 public class TransformOval extends JDialog {
-    JComboBox jcb, oval_list;
+    JComboBox jcb, list;
     TextField field1,field2,field3;
     JCheckBox checkBox;
     JButton cancel,edit,rotate;
     JPanel jPanel1,jPanel2,jPanel3;
     public TransformOval(){
-        oval_list = new JComboBox<>();
+        list = new JComboBox<>();
         reload();
         jcb = new JComboBox(new String[]{"move", "x", "y", "diameter","rotate90","fill", "color"});
         cancel = new JButton("Cancel");
@@ -35,7 +35,7 @@ public class TransformOval extends JDialog {
         checkBox = new JCheckBox();
 
         jPanel1.add(new JLabel("Oval № "));
-        jPanel1.add(oval_list);
+        jPanel1.add(list);
         jPanel1.add(jcb);
         jPanel1.setBounds(0,0,325,75);
 
@@ -114,12 +114,12 @@ public class TransformOval extends JDialog {
         });
 
         rotate.addActionListener(actionEvent -> {
-            if(Objects.equals(oval_list.getSelectedItem(), "all")) {
+            if(Objects.equals(list.getSelectedItem(), "all")) {
                 for (int i = 0; i < Utils.getOvals().size(); i++) {
                     Utils.getOvals().get(i).rotate90();
                 }
             }else {
-                Utils.getOvals().get( oval_list.getSelectedIndex()).rotate90();
+                Utils.getOvals().get( list.getSelectedIndex()).rotate90();
             }
             Lab3.getPicture().repaint();
             Lab3.getPicture().revalidate();
@@ -129,7 +129,7 @@ public class TransformOval extends JDialog {
 
             String item = (String)jcb.getSelectedItem();
 
-            if(Objects.equals(oval_list.getSelectedItem(), "all")) {
+            if(Objects.equals(list.getSelectedItem(), "all")) {
                 for (int i = 0; i < Utils.getOvals().size(); i++) {
                     switch (Objects.requireNonNull(item)) {
                         case "move":
@@ -160,26 +160,26 @@ public class TransformOval extends JDialog {
             }else {
                 switch (Objects.requireNonNull(item)) {
                     case "move":
-                        Utils.getOvals().get(oval_list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
+                        Utils.getOvals().get(list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
                         break;
                     case "x":
-                        Utils.getOvals().get(oval_list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getOvals().get((oval_list.getSelectedIndex())).getX()));
+                        Utils.getOvals().get(list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getOvals().get((list.getSelectedIndex())).getX()));
                         break;
                     case "y":
-                        Utils.getOvals().get(oval_list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getOvals().get((oval_list.getSelectedIndex())).getY()));
+                        Utils.getOvals().get(list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getOvals().get((list.getSelectedIndex())).getY()));
                         break;
                     case "fill":
-                        Utils.getOvals().get(oval_list.getSelectedIndex()).setFill(checkBox.isSelected());
+                        Utils.getOvals().get(list.getSelectedIndex()).setFill(checkBox.isSelected());
                         break;
                     case "diameter":
-                        Utils.getOvals().get(oval_list.getSelectedIndex()).setDiameter(Lab3.parseInt(field1.getText(), Utils.getOvals().get((oval_list.getSelectedIndex())).getDiameter()));
-                        Utils.getOvals().get(oval_list.getSelectedIndex()).setDiameter2(Lab3.parseInt(field2.getText(), Utils.getOvals().get((oval_list.getSelectedIndex())).getDiameter2()));
+                        Utils.getOvals().get(list.getSelectedIndex()).setDiameter(Lab3.parseInt(field1.getText(), Utils.getOvals().get((list.getSelectedIndex())).getDiameter()));
+                        Utils.getOvals().get(list.getSelectedIndex()).setDiameter2(Lab3.parseInt(field2.getText(), Utils.getOvals().get((list.getSelectedIndex())).getDiameter2()));
                         break;
                     case "color":
-                        Utils.getOvals().get( oval_list.getSelectedIndex()).setColor(
-                                Lab3.parseInt(field1.getText(), Utils.getOvals().get((oval_list.getSelectedIndex())).getColor().getRed()),
-                                Lab3.parseInt(field2.getText(), Utils.getOvals().get((oval_list.getSelectedIndex())).getColor().getGreen()),
-                                Lab3.parseInt(field3.getText(), Utils.getOvals().get((oval_list.getSelectedIndex())).getColor().getBlue())
+                        Utils.getOvals().get( list.getSelectedIndex()).setColor(
+                                Lab3.parseInt(field1.getText(), Utils.getOvals().get((list.getSelectedIndex())).getColor().getRed()),
+                                Lab3.parseInt(field2.getText(), Utils.getOvals().get((list.getSelectedIndex())).getColor().getGreen()),
+                                Lab3.parseInt(field3.getText(), Utils.getOvals().get((list.getSelectedIndex())).getColor().getBlue())
                         );
                         break;
                 }
@@ -192,20 +192,16 @@ public class TransformOval extends JDialog {
             Lab3.getPicture().revalidate();
             jPanel2.repaint();
             jPanel2.revalidate();
-            //Lab3.getjPanel().repaint();
-            //Lab3.getjPanel().revalidate();
-            //Lab3.getjFrame().repaint();
-            //Lab3.getjFrame().revalidate();
         });
 
     }
 
     public void reload() {
-        oval_list.removeAllItems();
-        for(int i = 0;i<Utils.getCircles().size();i++){
-            oval_list.addItem(i+"");
+        list.removeAllItems();
+        for(int i = 0;i<Utils.getOvals().size();i++){
+            list.addItem(i+"");
         }
-        oval_list.addItem("all");
+        list.addItem("all");
     }
 
 }

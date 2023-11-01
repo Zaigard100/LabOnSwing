@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CreateLine extends JDialog {
-
     JTextField xField,yField,x1Field,y1Field,rField,gField,bField;
     JPanel mainPanel,xPanel,yPanel,x1Panel,y1Panel,colorPanel;
     JButton cancel,create;
@@ -93,7 +92,6 @@ public class CreateLine extends JDialog {
 
         create.addActionListener(e -> {
             try {
-
                 int x = Integer.parseInt(xField.getText());
                 int y = Integer.parseInt(yField.getText());
                 int x1 = Integer.parseInt(x1Field.getText());

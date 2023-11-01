@@ -7,14 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class TransformRomb extends JDialog {
-     JComboBox jcb, list;
-     TextField field1, field2, field3;
-     JCheckBox checkBox;
-     JButton cancel, edit;
-     JPanel jPanel1, jPanel2, jPanel3;
+public class TransformTrapezoid extends JDialog {
+    JComboBox jcb, list;
+    TextField field1, field2, field3;
+    JCheckBox checkBox;
+    JButton cancel, edit;
+    JPanel jPanel1, jPanel2, jPanel3;
 
-    public TransformRomb() {
+    public TransformTrapezoid() {
         list = new JComboBox<>();
         reload();
         jcb = new JComboBox(new String[]{"move", "x", "y", "size", "fill", "color"});
@@ -34,14 +34,14 @@ public class TransformRomb extends JDialog {
 
         checkBox = new JCheckBox();
 
-        jPanel1.add(new JLabel("Romb № "));
+        jPanel1.add(new JLabel("Trapezoid № "));
         jPanel1.add(list);
         jPanel1.add(jcb);
         jPanel1.setBounds(0, 0, 325, 75);
 
-        jPanel2.add(new JLabel(" Width "));
+        jPanel2.add(new JLabel(" DX "));
         jPanel2.add(field1);
-        jPanel2.add(new JLabel(" Height "));
+        jPanel2.add(new JLabel(" DY "));
         jPanel2.add(field2);
         jPanel2.setBounds(0, 75, 325, 75);
 
@@ -79,10 +79,11 @@ public class TransformRomb extends JDialog {
                     jPanel2.add(field1);
                     break;
                 case "size":
-                    jPanel2.add(new JLabel(" Widht "));
+                    jPanel2.add(new JLabel(" Bases "));
                     jPanel2.add(field1);
-                    jPanel2.add(new JLabel(" Height "));
                     jPanel2.add(field2);
+                    jPanel2.add(new JLabel(" Height "));
+                    jPanel2.add(field3);
                     break;
                 case "fill":
                     jPanel2.add(new JLabel(" Filed  "));
@@ -118,26 +119,27 @@ public class TransformRomb extends JDialog {
                 for (int i = 0; i < Utils.getOvals().size(); i++) {
                     switch (Objects.requireNonNull(item)) {
                         case "move":
-                            Utils.getRombs().get(i).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
+                            Utils.getTrapezoids().get(i).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
                             break;
                         case "x":
-                            Utils.getRombs().get(i).setX(Lab3.parseInt(field1.getText(), Utils.getRombs().get(i).getX()));
+                            Utils.getTrapezoids().get(i).setX(Lab3.parseInt(field1.getText(), Utils.getTrapezoids().get(i).getX()));
                             break;
                         case "y":
-                            Utils.getRombs().get(i).setY(Lab3.parseInt(field1.getText(), Utils.getRombs().get(i).getY()));
+                            Utils.getTrapezoids().get(i).setY(Lab3.parseInt(field1.getText(), Utils.getTrapezoids().get(i).getY()));
                             break;
                         case "size":
-                            Utils.getRombs().get(i).setWidth(Lab3.parseInt(field1.getText(), Utils.getRombs().get(i).getWidth()));
-                            Utils.getRombs().get(i).setHeight(Lab3.parseInt(field2.getText(), Utils.getRombs().get(i).getHeight()));
+                            Utils.getTrapezoids().get(i).setWidth(Lab3.parseInt(field1.getText(), Utils.getTrapezoids().get(i).getWidth()));
+                            Utils.getTrapezoids().get(i).setWidth2(Lab3.parseInt(field2.getText(), Utils.getTrapezoids().get(i).getWidth2()));
+                            Utils.getTrapezoids().get(i).setHeight(Lab3.parseInt(field3.getText(), Utils.getTrapezoids().get(i).getHeight()));
                             break;
                         case "fill":
-                            Utils.getRombs().get(i).setFill(checkBox.isSelected());
+                            Utils.getTrapezoids().get(i).setFill(checkBox.isSelected());
                             break;
                         case "color":
-                            Utils.getRombs().get(i).setColor(
-                                    Lab3.parseInt(field1.getText(), Utils.getRombs().get(i).getColor().getRed()),
-                                    Lab3.parseInt(field2.getText(), Utils.getRombs().get(i).getColor().getGreen()),
-                                    Lab3.parseInt(field3.getText(), Utils.getRombs().get(i).getColor().getBlue())
+                            Utils.getTrapezoids().get(i).setColor(
+                                    Lab3.parseInt(field1.getText(), Utils.getTrapezoids().get(i).getColor().getRed()),
+                                    Lab3.parseInt(field2.getText(), Utils.getTrapezoids().get(i).getColor().getGreen()),
+                                    Lab3.parseInt(field3.getText(), Utils.getTrapezoids().get(i).getColor().getBlue())
                             );
                             break;
                     }
@@ -145,26 +147,27 @@ public class TransformRomb extends JDialog {
             } else {
                 switch (Objects.requireNonNull(item)) {
                     case "move":
-                        Utils.getRombs().get(list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
+                        Utils.getTrapezoids().get(list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
                         break;
                     case "x":
-                        Utils.getRombs().get(list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getRombs().get((list.getSelectedIndex())).getX()));
+                        Utils.getTrapezoids().get(list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getTrapezoids().get((list.getSelectedIndex())).getX()));
                         break;
                     case "y":
-                        Utils.getRombs().get(list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getRombs().get((list.getSelectedIndex())).getY()));
+                        Utils.getTrapezoids().get(list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getTrapezoids().get((list.getSelectedIndex())).getY()));
                         break;
                     case "fill":
-                        Utils.getRombs().get(list.getSelectedIndex()).setFill(checkBox.isSelected());
+                        Utils.getTrapezoids().get(list.getSelectedIndex()).setFill(checkBox.isSelected());
                         break;
                     case "size":
-                        Utils.getRombs().get(list.getSelectedIndex()).setWidth(Lab3.parseInt(field1.getText(), Utils.getRombs().get((list.getSelectedIndex())).getWidth()));
-                        Utils.getRombs().get(list.getSelectedIndex()).setHeight(Lab3.parseInt(field2.getText(), Utils.getRombs().get((list.getSelectedIndex())).getHeight()));
+                        Utils.getTrapezoids().get(list.getSelectedIndex()).setWidth(Lab3.parseInt(field1.getText(), Utils.getTrapezoids().get((list.getSelectedIndex())).getWidth()));
+                        Utils.getTrapezoids().get(list.getSelectedIndex()).setWidth2(Lab3.parseInt(field2.getText(), Utils.getTrapezoids().get((list.getSelectedIndex())).getWidth2()));
+                        Utils.getTrapezoids().get(list.getSelectedIndex()).setHeight(Lab3.parseInt(field3.getText(), Utils.getTrapezoids().get((list.getSelectedIndex())).getHeight()));
                         break;
                     case "color":
-                        Utils.getRombs().get(list.getSelectedIndex()).setColor(
-                                Lab3.parseInt(field1.getText(), Utils.getRombs().get((list.getSelectedIndex())).getColor().getRed()),
-                                Lab3.parseInt(field2.getText(), Utils.getRombs().get((list.getSelectedIndex())).getColor().getGreen()),
-                                Lab3.parseInt(field3.getText(), Utils.getRombs().get((list.getSelectedIndex())).getColor().getBlue())
+                        Utils.getTrapezoids().get(list.getSelectedIndex()).setColor(
+                                Lab3.parseInt(field1.getText(), Utils.getTrapezoids().get((list.getSelectedIndex())).getColor().getRed()),
+                                Lab3.parseInt(field2.getText(), Utils.getTrapezoids().get((list.getSelectedIndex())).getColor().getGreen()),
+                                Lab3.parseInt(field3.getText(), Utils.getTrapezoids().get((list.getSelectedIndex())).getColor().getBlue())
                         );
                         break;
                 }
@@ -183,10 +186,9 @@ public class TransformRomb extends JDialog {
 
     public void reload() {
         list.removeAllItems();
-        for (int i = 0; i < Utils.getRombs().size(); i++) {
-            list.addItem(i+"");
+        for (int i = 0; i < Utils.getTrapezoids().size(); i++) {
+            list.addItem(i + "");
         }
         list.addItem("all");
     }
-
 }

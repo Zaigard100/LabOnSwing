@@ -9,9 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CreateRomb extends JDialog {
-
-    JTextField xField,yField,diameter1Field,diameter2Field,rField,gField,bField;
-    JPanel mainPanel,xPanel,yPanel,diameter1Panel,diameter2Panel,fillPanel,colorPanel;
+    JTextField xField,yField, widthField, heightField,rField,gField,bField;
+    JPanel mainPanel,xPanel,yPanel, widthPanel, heightPanel,fillPanel,colorPanel;
     JCheckBox fillCheck;
     JButton cancel,create;
     int width = 325;
@@ -24,8 +23,8 @@ public class CreateRomb extends JDialog {
 
         xField = new JTextField(5);
         yField = new JTextField(5);
-        diameter1Field = new JTextField(5);
-        diameter2Field = new JTextField(5);
+        widthField = new JTextField(5);
+        heightField = new JTextField(5);
 
         rField = new JTextField(3);
         gField = new JTextField(3);
@@ -44,13 +43,13 @@ public class CreateRomb extends JDialog {
         yPanel.add(new JLabel("Y"));
         yPanel.add(yField);
 
-        diameter1Panel = new JPanel();
-        diameter1Panel.add(new JLabel("DiameterX"));
-        diameter1Panel.add(diameter1Field);
+        widthPanel = new JPanel();
+        widthPanel.add(new JLabel("DiameterX"));
+        widthPanel.add(widthField);
 
-        diameter2Panel = new JPanel();
-        diameter2Panel.add(new JLabel("DiameterY"));
-        diameter2Panel.add(diameter2Field);
+        heightPanel = new JPanel();
+        heightPanel.add(new JLabel("DiameterY"));
+        heightPanel.add(heightField);
 
         fillPanel = new JPanel();
         fillPanel.add(new JLabel("Fill "));
@@ -67,8 +66,8 @@ public class CreateRomb extends JDialog {
 
         mainPanel.add(xPanel);
         mainPanel.add(yPanel);
-        mainPanel.add(diameter1Panel);
-        mainPanel.add(diameter2Panel);
+        mainPanel.add(widthPanel);
+        mainPanel.add(heightPanel);
         mainPanel.add(fillPanel);
         mainPanel.add(colorPanel);
 
@@ -81,8 +80,8 @@ public class CreateRomb extends JDialog {
         cancel.addActionListener(e -> {
             xField.setText("");
             yField.setText("");
-            diameter1Field.setText("");
-            diameter2Field.setText("");
+            widthField.setText("");
+            heightField.setText("");
 
             rField.setText("");
             gField.setText("");
@@ -92,11 +91,10 @@ public class CreateRomb extends JDialog {
 
         create.addActionListener(e -> {
             try {
-
                 int x = Integer.parseInt(xField.getText());
                 int y = Integer.parseInt(yField.getText());
-                int diameter1 = Integer.parseInt(diameter1Field.getText());
-                int diameter2 = Integer.parseInt(diameter2Field.getText());
+                int diameter1 = Integer.parseInt(widthField.getText());
+                int diameter2 = Integer.parseInt(heightField.getText());
                 boolean fill = fillCheck.isSelected();
                 int r = Integer.parseInt(rField.getText());
                 int g = Integer.parseInt(gField.getText());
@@ -106,8 +104,8 @@ public class CreateRomb extends JDialog {
                 }
                 xField.setText("");
                 yField.setText("");
-                diameter1Field.setText("");
-                diameter2Field.setText("");
+                widthField.setText("");
+                heightField.setText("");
 
                 rField.setText("");
                 gField.setText("");

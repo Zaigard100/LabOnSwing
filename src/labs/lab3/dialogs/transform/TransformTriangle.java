@@ -8,13 +8,13 @@ import java.awt.*;
 import java.util.Objects;
 
 public class TransformTriangle extends JDialog {
-    JComboBox jcb,triangle_list;
+    JComboBox jcb, list;
     TextField field1,field2,field3;
     JButton cancel,edit;
     JCheckBox checkBox;
     JPanel jPanel1,jPanel2,jPanel3;
     public TransformTriangle(){
-        triangle_list = new JComboBox<>();
+        list = new JComboBox<>();
         reload();
         jcb = new JComboBox(new String[]{"move","x1","y1","x2","y2","x3","y3","fill","color"});
         cancel = new JButton("Cancel");
@@ -34,7 +34,7 @@ public class TransformTriangle extends JDialog {
         checkBox = new JCheckBox();
 
         jPanel1.add(new JLabel("Triangle № "));
-        jPanel1.add(triangle_list);
+        jPanel1.add(list);
         jPanel1.add(jcb);
         jPanel1.setBounds(0,0,325,75);
 
@@ -122,7 +122,7 @@ public class TransformTriangle extends JDialog {
         edit.addActionListener(e -> {
 
             String item = (String)jcb.getSelectedItem();
-            if(Objects.equals(triangle_list.getSelectedItem(), "all")) {
+            if(Objects.equals(list.getSelectedItem(), "all")) {
                 for (int i = 0; i < Utils.getTriangles().size(); i++) {
                     switch (Objects.requireNonNull(item)) {
                         case "move":
@@ -158,31 +158,31 @@ public class TransformTriangle extends JDialog {
             }else {
                 switch (Objects.requireNonNull(item)) {
                     case "move":
-                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
+                        Utils.getTriangles().get(list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
                         break;
                     case "x1":
-                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setX1(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getX1()));
+                        Utils.getTriangles().get(list.getSelectedIndex()).setX1(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(list.getSelectedIndex()).getX1()));
                         break;
                     case "y1":
-                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setY1(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getY1()));
+                        Utils.getTriangles().get(list.getSelectedIndex()).setY1(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(list.getSelectedIndex()).getY1()));
                         break;
                     case "x2":
-                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setX2(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getX2()));
+                        Utils.getTriangles().get(list.getSelectedIndex()).setX2(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(list.getSelectedIndex()).getX2()));
                         break;
                     case "y2":
-                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setY2(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getY2()));
+                        Utils.getTriangles().get(list.getSelectedIndex()).setY2(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(list.getSelectedIndex()).getY2()));
                         break;
                     case "x3":
-                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setX3(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getX3()));
+                        Utils.getTriangles().get(list.getSelectedIndex()).setX3(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(list.getSelectedIndex()).getX3()));
                         break;
                     case "y3":
-                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setY3(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(triangle_list.getSelectedIndex()).getY3()));
+                        Utils.getTriangles().get(list.getSelectedIndex()).setY3(Lab3.parseInt(field1.getText(), Utils.getTriangles().get(list.getSelectedIndex()).getY3()));
                         break;
                     case "color":
-                        Utils.getTriangles().get(triangle_list.getSelectedIndex()).setColor(
-                                Lab3.parseInt(field1.getText(), Utils.getTriangles().get((triangle_list.getSelectedIndex())).getColor().getRed()),
-                                Lab3.parseInt(field2.getText(), Utils.getTriangles().get((triangle_list.getSelectedIndex())).getColor().getGreen()),
-                                Lab3.parseInt(field3.getText(), Utils.getTriangles().get((triangle_list.getSelectedIndex())).getColor().getBlue())
+                        Utils.getTriangles().get(list.getSelectedIndex()).setColor(
+                                Lab3.parseInt(field1.getText(), Utils.getTriangles().get((list.getSelectedIndex())).getColor().getRed()),
+                                Lab3.parseInt(field2.getText(), Utils.getTriangles().get((list.getSelectedIndex())).getColor().getGreen()),
+                                Lab3.parseInt(field3.getText(), Utils.getTriangles().get((list.getSelectedIndex())).getColor().getBlue())
                         );
                         break;
                 }
@@ -195,21 +195,17 @@ public class TransformTriangle extends JDialog {
                 Lab3.getPicture().revalidate();
                 jPanel2.repaint();
                 jPanel2.revalidate();
-                //Lab3.getjPanel().repaint();
-                //Lab3.getjPanel().revalidate();
-                //Lab3.getjFrame().repaint();
-                //Lab3.getjFrame().revalidate();
             }
         });
 
     }
 
     public void reload() {
-        triangle_list.removeAllItems();
+        list.removeAllItems();
         for(int i = 0;i<Utils.getTriangles().size();i++){
-            triangle_list.addItem(i+"");
+            list.addItem(i+"");
         }
-        triangle_list.addItem("all");
+        list.addItem("all");
     }
 
 }

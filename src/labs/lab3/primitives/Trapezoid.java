@@ -4,11 +4,11 @@ import labs.lab3.Lab3;
 
 import java.awt.*;
 
-public class Trapezoids extends Quadro{
+public class Trapezoid extends Quadro{
 
     int width2;
 
-    public Trapezoids(Point p, int width,int width2, int height, boolean fill, Color color) {
+    public Trapezoid(Point p, int width, int width2, int height, boolean fill, Color color) {
 
         super(p, Math.min(width,width2), height, fill, color);
         this.width2 = Math.max(width,width2);
@@ -44,5 +44,13 @@ public class Trapezoids extends Quadro{
             p.setY(getHeight()/2);
         }
         this.p = p;
+    }
+
+    public int getWidth2() {
+        return width2;
+    }
+
+    public void setWidth2(int width2) {
+        this.width2 = width2;
     }
 }

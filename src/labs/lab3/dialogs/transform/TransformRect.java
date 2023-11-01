@@ -7,14 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class TransformRomb extends JDialog {
-     JComboBox jcb, list;
-     TextField field1, field2, field3;
-     JCheckBox checkBox;
-     JButton cancel, edit;
-     JPanel jPanel1, jPanel2, jPanel3;
+public class TransformRect extends JDialog {
+    JComboBox jcb, list;
+    TextField field1, field2, field3;
+    JCheckBox checkBox;
+    JButton cancel, edit;
+    JPanel jPanel1, jPanel2, jPanel3;
 
-    public TransformRomb() {
+    public TransformRect() {
         list = new JComboBox<>();
         reload();
         jcb = new JComboBox(new String[]{"move", "x", "y", "size", "fill", "color"});
@@ -34,7 +34,7 @@ public class TransformRomb extends JDialog {
 
         checkBox = new JCheckBox();
 
-        jPanel1.add(new JLabel("Romb № "));
+        jPanel1.add(new JLabel("Rect № "));
         jPanel1.add(list);
         jPanel1.add(jcb);
         jPanel1.setBounds(0, 0, 325, 75);
@@ -79,7 +79,7 @@ public class TransformRomb extends JDialog {
                     jPanel2.add(field1);
                     break;
                 case "size":
-                    jPanel2.add(new JLabel(" Widht "));
+                    jPanel2.add(new JLabel(" Width "));
                     jPanel2.add(field1);
                     jPanel2.add(new JLabel(" Height "));
                     jPanel2.add(field2);
@@ -118,26 +118,26 @@ public class TransformRomb extends JDialog {
                 for (int i = 0; i < Utils.getOvals().size(); i++) {
                     switch (Objects.requireNonNull(item)) {
                         case "move":
-                            Utils.getRombs().get(i).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
+                            Utils.getRects().get(i).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
                             break;
                         case "x":
-                            Utils.getRombs().get(i).setX(Lab3.parseInt(field1.getText(), Utils.getRombs().get(i).getX()));
+                            Utils.getRects().get(i).setX(Lab3.parseInt(field1.getText(), Utils.getRects().get(i).getX()));
                             break;
                         case "y":
-                            Utils.getRombs().get(i).setY(Lab3.parseInt(field1.getText(), Utils.getRombs().get(i).getY()));
+                            Utils.getRects().get(i).setY(Lab3.parseInt(field1.getText(), Utils.getRects().get(i).getY()));
                             break;
                         case "size":
-                            Utils.getRombs().get(i).setWidth(Lab3.parseInt(field1.getText(), Utils.getRombs().get(i).getWidth()));
-                            Utils.getRombs().get(i).setHeight(Lab3.parseInt(field2.getText(), Utils.getRombs().get(i).getHeight()));
+                            Utils.getRects().get(i).setWidth(Lab3.parseInt(field1.getText(), Utils.getRects().get(i).getWidth()));
+                            Utils.getRects().get(i).setHeight(Lab3.parseInt(field2.getText(), Utils.getRects().get(i).getHeight()));
                             break;
                         case "fill":
-                            Utils.getRombs().get(i).setFill(checkBox.isSelected());
+                            Utils.getRects().get(i).setFill(checkBox.isSelected());
                             break;
                         case "color":
-                            Utils.getRombs().get(i).setColor(
-                                    Lab3.parseInt(field1.getText(), Utils.getRombs().get(i).getColor().getRed()),
-                                    Lab3.parseInt(field2.getText(), Utils.getRombs().get(i).getColor().getGreen()),
-                                    Lab3.parseInt(field3.getText(), Utils.getRombs().get(i).getColor().getBlue())
+                            Utils.getRects().get(i).setColor(
+                                    Lab3.parseInt(field1.getText(), Utils.getRects().get(i).getColor().getRed()),
+                                    Lab3.parseInt(field2.getText(), Utils.getRects().get(i).getColor().getGreen()),
+                                    Lab3.parseInt(field3.getText(), Utils.getRects().get(i).getColor().getBlue())
                             );
                             break;
                     }
@@ -145,26 +145,26 @@ public class TransformRomb extends JDialog {
             } else {
                 switch (Objects.requireNonNull(item)) {
                     case "move":
-                        Utils.getRombs().get(list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
+                        Utils.getRects().get(list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
                         break;
                     case "x":
-                        Utils.getRombs().get(list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getRombs().get((list.getSelectedIndex())).getX()));
+                        Utils.getRects().get(list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getRects().get((list.getSelectedIndex())).getX()));
                         break;
                     case "y":
-                        Utils.getRombs().get(list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getRombs().get((list.getSelectedIndex())).getY()));
+                        Utils.getRects().get(list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getRects().get((list.getSelectedIndex())).getY()));
                         break;
                     case "fill":
-                        Utils.getRombs().get(list.getSelectedIndex()).setFill(checkBox.isSelected());
+                        Utils.getRects().get(list.getSelectedIndex()).setFill(checkBox.isSelected());
                         break;
                     case "size":
-                        Utils.getRombs().get(list.getSelectedIndex()).setWidth(Lab3.parseInt(field1.getText(), Utils.getRombs().get((list.getSelectedIndex())).getWidth()));
-                        Utils.getRombs().get(list.getSelectedIndex()).setHeight(Lab3.parseInt(field2.getText(), Utils.getRombs().get((list.getSelectedIndex())).getHeight()));
+                        Utils.getRects().get(list.getSelectedIndex()).setWidth(Lab3.parseInt(field1.getText(), Utils.getRects().get((list.getSelectedIndex())).getWidth()));
+                        Utils.getRects().get(list.getSelectedIndex()).setHeight(Lab3.parseInt(field2.getText(), Utils.getRects().get((list.getSelectedIndex())).getHeight()));
                         break;
                     case "color":
-                        Utils.getRombs().get(list.getSelectedIndex()).setColor(
-                                Lab3.parseInt(field1.getText(), Utils.getRombs().get((list.getSelectedIndex())).getColor().getRed()),
-                                Lab3.parseInt(field2.getText(), Utils.getRombs().get((list.getSelectedIndex())).getColor().getGreen()),
-                                Lab3.parseInt(field3.getText(), Utils.getRombs().get((list.getSelectedIndex())).getColor().getBlue())
+                        Utils.getRects().get(list.getSelectedIndex()).setColor(
+                                Lab3.parseInt(field1.getText(), Utils.getRects().get((list.getSelectedIndex())).getColor().getRed()),
+                                Lab3.parseInt(field2.getText(), Utils.getRects().get((list.getSelectedIndex())).getColor().getGreen()),
+                                Lab3.parseInt(field3.getText(), Utils.getRects().get((list.getSelectedIndex())).getColor().getBlue())
                         );
                         break;
                 }
@@ -183,7 +183,7 @@ public class TransformRomb extends JDialog {
 
     public void reload() {
         list.removeAllItems();
-        for (int i = 0; i < Utils.getRombs().size(); i++) {
+        for (int i = 0; i < Utils.getRects().size(); i++) {
             list.addItem(i+"");
         }
         list.addItem("all");

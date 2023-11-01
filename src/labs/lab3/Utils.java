@@ -15,7 +15,7 @@ public class Utils {
     static private final ArrayList<Ring> ring;
     static private final ArrayList<Oval> ovals;
     static private final ArrayList<Romb> rombs;
-    static private final ArrayList<Trapezoids> trapezoids;
+    static private final ArrayList<Trapezoid> trapezoids;
     static private final ArrayList<Rect> rects;
 
 
@@ -108,7 +108,7 @@ public class Utils {
                 ));
                 break;
             case "tr":
-                trapezoids.add(new Trapezoids(
+                trapezoids.add(new Trapezoid(
                         new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                         Integer.parseInt(words[3]), Integer.parseInt(words[4]), Integer.parseInt(words[5]),
                         Boolean.parseBoolean(words[9]),
@@ -158,7 +158,7 @@ public class Utils {
     public static ArrayList<Romb> getRombs(){
         return  rombs;
     }
-    public static ArrayList<Trapezoids> getTrapezoids() {
+    public static ArrayList<Trapezoid> getTrapezoids() {
         return trapezoids;
     }
 

@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CreateTriangle extends JDialog {
-
     JTextField x1Field,y1Field,x2Field,y2Field,x3Field,y3Field,rField,gField,bField;
     JPanel mainPanel,x1Panel,y1Panel,x2Panel,y2Panel,x3Panel,y3Panel,colorPanel,fillPanel;
     JButton cancel,create;
@@ -117,7 +116,6 @@ public class CreateTriangle extends JDialog {
 
         create.addActionListener(e -> {
             try {
-
                 int x1 = Integer.parseInt(x1Field.getText());
                 int y1 = Integer.parseInt(y1Field.getText());
                 int x2 = Integer.parseInt(x2Field.getText());

@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CreateCircle extends JDialog {
-
     JTextField xField,yField,diameterField,rField,gField,bField;
     JPanel mainPanel,xPanel,yPanel,diameterPanel,colorPanel,fillPanel;
     JButton cancel,create;
@@ -89,7 +88,6 @@ public class CreateCircle extends JDialog {
 
         create.addActionListener(e -> {
             try {
-
                 int x = Integer.parseInt(xField.getText());
                 int y = Integer.parseInt(yField.getText());
                 int diameter = Integer.parseInt(diameterField.getText());

@@ -8,13 +8,13 @@ import java.awt.*;
 import java.util.Objects;
 
 public class TransformCircle extends JDialog {
-    JComboBox jcb,circle_list;
+    JComboBox jcb, list;
     TextField field1,field2,field3;
     JCheckBox checkBox;
     JButton cancel,edit;
     JPanel jPanel1,jPanel2,jPanel3;
     public TransformCircle(){
-        circle_list = new JComboBox<>();
+        list = new JComboBox<>();
         reload();
         jcb = new JComboBox(new String[]{"move", "x", "y", "diameter","fill", "color"});
         cancel = new JButton("Cancel");
@@ -34,7 +34,7 @@ public class TransformCircle extends JDialog {
         checkBox = new JCheckBox();
 
         jPanel1.add(new JLabel("Circle № "));
-        jPanel1.add(circle_list);
+        jPanel1.add(list);
         jPanel1.add(jcb);
         jPanel1.setBounds(0,0,325,75);
 
@@ -112,7 +112,7 @@ public class TransformCircle extends JDialog {
 
             String item = (String)jcb.getSelectedItem();
 
-            if(Objects.equals(circle_list.getSelectedItem(), "all")) {
+            if(Objects.equals(list.getSelectedItem(), "all")) {
                 for (int i = 0; i < Utils.getCircles().size(); i++) {
                     switch (Objects.requireNonNull(item)) {
                         case "move":
@@ -142,28 +142,28 @@ public class TransformCircle extends JDialog {
             }else {
                 switch (Objects.requireNonNull(item)) {
                     case "move":
-                        Utils.getCircles().get(circle_list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
+                        Utils.getCircles().get(list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
                         break;
                     case "x":
-                        Utils.getCircles().get(circle_list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getCircles().get((circle_list.getSelectedIndex())).getX()));
+                        Utils.getCircles().get(list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getCircles().get((list.getSelectedIndex())).getX()));
                         break;
                     case "y":
-                        Utils.getCircles().get(circle_list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getCircles().get((circle_list.getSelectedIndex())).getY()));
+                        Utils.getCircles().get(list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getCircles().get((list.getSelectedIndex())).getY()));
                         break;
                     case "fill":
-                        Utils.getCircles().get(circle_list.getSelectedIndex()).setFill(checkBox.isSelected());
+                        Utils.getCircles().get(list.getSelectedIndex()).setFill(checkBox.isSelected());
                         break;
                     case "diameter":
-                        int di = Lab3.parseInt(field1.getText(), Utils.getCircles().get((circle_list.getSelectedIndex())).getDiameter());
+                        int di = Lab3.parseInt(field1.getText(), Utils.getCircles().get((list.getSelectedIndex())).getDiameter());
                         if (di > 0) {
-                            Utils.getCircles().get(circle_list.getSelectedIndex()).setDiameter(di);
+                            Utils.getCircles().get(list.getSelectedIndex()).setDiameter(di);
                         }
                         break;
                     case "color":
-                        Utils.getCircles().get(circle_list.getSelectedIndex()).setColor(
-                                Lab3.parseInt(field1.getText(), Utils.getCircles().get((circle_list.getSelectedIndex())).getColor().getRed()),
-                                Lab3.parseInt(field2.getText(), Utils.getCircles().get((circle_list.getSelectedIndex())).getColor().getGreen()),
-                                Lab3.parseInt(field3.getText(), Utils.getCircles().get((circle_list.getSelectedIndex())).getColor().getBlue())
+                        Utils.getCircles().get(list.getSelectedIndex()).setColor(
+                                Lab3.parseInt(field1.getText(), Utils.getCircles().get((list.getSelectedIndex())).getColor().getRed()),
+                                Lab3.parseInt(field2.getText(), Utils.getCircles().get((list.getSelectedIndex())).getColor().getGreen()),
+                                Lab3.parseInt(field3.getText(), Utils.getCircles().get((list.getSelectedIndex())).getColor().getBlue())
                         );
                         break;
                 }
@@ -176,20 +176,16 @@ public class TransformCircle extends JDialog {
             Lab3.getPicture().revalidate();
             jPanel2.repaint();
             jPanel2.revalidate();
-            //Lab3.getjPanel().repaint();
-            //Lab3.getjPanel().revalidate();
-            //Lab3.getjFrame().repaint();
-            //Lab3.getjFrame().revalidate();
         });
 
     }
 
-    public void reload(){
-        circle_list.removeAllItems();
+    public void  reload(){
+        list.removeAllItems();
         for(int i = 0;i<Utils.getCircles().size();i++){
-            circle_list.addItem(i+"");
+            list.addItem(i+"");
         }
-        circle_list.addItem("all");
+        list.addItem("all");
 
     }
 

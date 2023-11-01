@@ -8,12 +8,12 @@ import java.awt.*;
 import java.util.Objects;
 
 public class TransformLine extends JDialog {
-    JComboBox jcb,line_list;
+    JComboBox jcb, list;
     TextField field1,field2,field3;
     JButton cancel,edit;
     JPanel jPanel1,jPanel2,jPanel3;
     public TransformLine(){
-        line_list = new JComboBox<>();
+        list = new JComboBox<>();
         reload();
         jcb = new JComboBox(new String[]{"move", "x", "y", "x1","y1","color"});
         cancel = new JButton("Cancel");
@@ -31,7 +31,7 @@ public class TransformLine extends JDialog {
         field3 = new TextField(5);
 
         jPanel1.add(new JLabel("Line № "));
-        jPanel1.add(line_list);
+        jPanel1.add(list);
         jPanel1.add(jcb);
         jPanel1.setBounds(0,0,325,75);
 
@@ -107,7 +107,7 @@ public class TransformLine extends JDialog {
         edit.addActionListener(e -> {
 
             String item = (String)jcb.getSelectedItem();
-            if(Objects.equals(line_list.getSelectedItem(), "all")) {
+            if(Objects.equals(list.getSelectedItem(), "all")) {
                 for(int i = 0;i<Utils.getLines().size();i++) {
                     switch (Objects.requireNonNull(item)) {
                         case "move":
@@ -138,25 +138,25 @@ public class TransformLine extends JDialog {
                 switch (Objects.requireNonNull(item)) {
                     case "move":
 
-                        Utils.getLines().get(line_list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
+                        Utils.getLines().get(list.getSelectedIndex()).move(Lab3.parseInt(field1.getText(), 0), Lab3.parseInt(field2.getText(), 0));
                         break;
                     case "x":
-                        Utils.getLines().get(line_list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getX()));
+                        Utils.getLines().get(list.getSelectedIndex()).setX(Lab3.parseInt(field1.getText(), Utils.getLines().get((list.getSelectedIndex())).getX()));
                         break;
                     case "y":
-                        Utils.getLines().get(line_list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getY()));
+                        Utils.getLines().get(list.getSelectedIndex()).setY(Lab3.parseInt(field1.getText(), Utils.getLines().get((list.getSelectedIndex())).getY()));
                         break;
                     case "x1":
-                        Utils.getLines().get(line_list.getSelectedIndex()).setX1(Lab3.parseInt(field1.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getX1()));
+                        Utils.getLines().get(list.getSelectedIndex()).setX1(Lab3.parseInt(field1.getText(), Utils.getLines().get((list.getSelectedIndex())).getX1()));
                         break;
                     case "y1":
-                        Utils.getLines().get(line_list.getSelectedIndex()).setY1(Lab3.parseInt(field1.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getY1()));
+                        Utils.getLines().get(list.getSelectedIndex()).setY1(Lab3.parseInt(field1.getText(), Utils.getLines().get((list.getSelectedIndex())).getY1()));
                         break;
                     case "color":
-                        Utils.getLines().get(line_list.getSelectedIndex()).setColor(
-                                Lab3.parseInt(field1.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getColor().getRed()),
-                                Lab3.parseInt(field2.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getColor().getGreen()),
-                                Lab3.parseInt(field3.getText(), Utils.getLines().get((line_list.getSelectedIndex())).getColor().getBlue())
+                        Utils.getLines().get(list.getSelectedIndex()).setColor(
+                                Lab3.parseInt(field1.getText(), Utils.getLines().get((list.getSelectedIndex())).getColor().getRed()),
+                                Lab3.parseInt(field2.getText(), Utils.getLines().get((list.getSelectedIndex())).getColor().getGreen()),
+                                Lab3.parseInt(field3.getText(), Utils.getLines().get((list.getSelectedIndex())).getColor().getBlue())
                         );
                         break;
                 }
@@ -169,20 +169,16 @@ public class TransformLine extends JDialog {
             Lab3.getPicture().revalidate();
             jPanel2.repaint();
             jPanel2.revalidate();
-            //Lab3.getjPanel().repaint();
-            //Lab3.getjPanel().revalidate();
-            //Lab3.getjFrame().repaint();
-            //Lab3.getjFrame().revalidate();
         });
 
     }
 
     public void reload() {
-        line_list.removeAllItems();
+        list.removeAllItems();
         for(int i = 0;i<Utils.getLines().size();i++){
-            line_list.addItem(i+"");
+            list.addItem(i+"");
         }
-        line_list.addItem("all");
+        list.addItem("all");
     }
 
 }

@@ -31,7 +31,7 @@ public class Picture extends JComponent {
         for(Romb r: Utils.getRombs()){
             r.show(g);
         }
-        for(Trapezoids t:Utils.getTrapezoids()){
+        for(Trapezoid t:Utils.getTrapezoids()){
             t.show(g);
         }
         for (Rect r: Utils.getRects()){
