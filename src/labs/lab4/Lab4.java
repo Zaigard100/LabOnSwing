@@ -1,12 +1,12 @@
-package labs.lab3;
+package labs.lab4;
 
-import labs.lab3.dialogs.create.*;
-import labs.lab3.dialogs.transform.*;
+import labs.lab4.dialogs.create.*;
+import labs.lab4.dialogs.transform.*;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Lab3 {
+public class Lab4 {
     static int windows_w = 1500;
     static int windows_h = 800;
     static int screen_w,screen_h;

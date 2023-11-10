@@ -6,9 +6,9 @@ import java.awt.*;
 
 public class Oval extends Circle{
     int diameter2;
-    public Oval(Point p, int diameterx,int dianetery, boolean fill, Color color) {
-        super(p, diameterx, fill, color);
-        diameter2 = dianetery;
+    public Oval(Point p, int diameterX,int diameterY, boolean fill, Color color) {
+        super(p, diameterX, fill, color);
+        diameter2 = diameterY;
     }
 
     @Override

@@ -1,10 +1,10 @@
-package labs.lab3.primitives;
+package labs.lab4.primitives;
 
-import labs.lab3.Lab3;
+import labs.lab4.Lab4;
 
 import java.awt.*;
 
-public class Ring extends Circle{
+public class Ring extends Circle {
 
     private final Circle c2;
     private int diameter1,diameter2;
@@ -41,14 +41,14 @@ public class Ring extends Circle{
     }
 
     public void setX(int x){
-        if(x< Lab3.getWindows_w()-Math.max(diameter1,diameter2)&&x>0) {
+        if(x< Lab4.getWindows_w()-Math.max(diameter1,diameter2)&&x>0) {
             super.setX(x);
             c2.setX(x);
         }
     }
 
     public void setY(int y){
-        if(y< Lab3.getWindows_h()-Math.max(diameter1,diameter2)&&y>0) {
+        if(y< Lab4.getWindows_h()-Math.max(diameter1,diameter2)&&y>0) {
             super.setY(y);
             c2.setY(y);
         }

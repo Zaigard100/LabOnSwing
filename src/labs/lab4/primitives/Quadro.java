@@ -1,15 +1,15 @@
-package labs.lab3.primitives;
+package labs.lab4.primitives;
 
-import labs.lab3.Lab3;
+import labs.lab4.Lab4;
 
 import java.awt.*;
 
-public class Quadro extends Figure{
+public class Quadro extends Figure {
 
     int width, height;
     boolean fill;
 
-    public Quadro(Point p,int width,int height,boolean fill, Color color) {
+    public Quadro(Point p, int width, int height, boolean fill, Color color) {
         super(p, color);
         this.width = width;
         this.height = height;
@@ -22,7 +22,22 @@ public class Quadro extends Figure{
     }
 
     @Override
-    public void move(int dx, int dy) {
+    public boolean checkBoundaries(int dx, int dy) {
+
+        if(p.getX() + dx + getWidth()/2 > Lab4.getWindows_w()){
+            return false;
+        }
+        if(p.getY() + dy + getHeight()/2 > Lab4.getWindows_h()){
+            return false;
+        }
+        if(p.getX()+dx - getWidth()/2 < 0){
+            return false;
+        }
+        if(p.getY()+dy - getHeight()/2 < 0){
+            return false;
+        }
+
+        return true;
 
     }
 
@@ -35,7 +50,7 @@ public class Quadro extends Figure{
     }
 
     public void setX(int x) {
-        if(x< Lab3.getWindows_w()-width/2&&x>width/2) {
+        if(x< Lab4.getWindows_w()-getWidth()/2&&x>getWidth()/2) {
             p.setX(x);
         }else {
             System.out.println("Overstepping boundaries");
@@ -43,7 +58,7 @@ public class Quadro extends Figure{
     }
 
     public void setY(int y) {
-        if(y<Lab3.getWindows_h()-height/2&&y>height/2) {
+        if(y< Lab4.getWindows_h()-getHeight()/2&&y> getHeight()/2) {
             p.setY(y);
         }else {
             System.out.println("Overstepping boundaries");

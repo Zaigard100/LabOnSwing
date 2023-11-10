@@ -38,6 +38,6 @@ public class Romb extends Quadro{
         if(p.getY()<getHeight()/2){
             p.setY(getHeight()/2);
         }
-        this.p = p;
+        setP(p);
     }
 }
