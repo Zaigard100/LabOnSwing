@@ -1,6 +1,6 @@
 package labs.lab5.dialogs.create;
 
-import labs.lab5.Lab4;
+import labs.lab5.Lab5;
 import labs.lab5.Utils;
 import labs.lab5.primitives.Point;
 import labs.lab5.primitives.Trapezoid;
@@ -17,7 +17,7 @@ public class CreateTrapezoid extends JDialog {
     int height = 175;
 
     public CreateTrapezoid(){
-        super(Lab4.getjFrame(),"Create Trapezoid",true);
+        super(Lab5.getjFrame(),"Create Trapezoid",true);
 
         mainPanel = new JPanel();
 
@@ -106,7 +106,7 @@ public class CreateTrapezoid extends JDialog {
                 int r = Integer.parseInt(rField.getText());
                 int g = Integer.parseInt(gField.getText());
                 int b = Integer.parseInt(bField.getText());
-                if((x>0) && (x< Lab4.getWindows_w() - width) && (y>0) && (y< Lab4.getWindows_h()-width2) && (width>0)&& (width2>0) && (width< Lab4.getWindows_w()-x) && (width2< Lab4.getWindows_h()-y)) {
+                if((x>0) && (x< Lab5.getWindows_w() - width) && (y>0) && (y< Lab5.getWindows_h()-width2) && (width>0)&& (width2>0) && (width< Lab5.getWindows_w()-x) && (width2< Lab5.getWindows_h()-y)) {
                     Utils.getFigures().add(new Trapezoid(new Point(x,y), width,width2,height,fill, new Color(r, g, b)));
                 }
                 xField.setText("");
@@ -119,8 +119,8 @@ public class CreateTrapezoid extends JDialog {
                 gField.setText("");
                 bField.setText("");
 
-                Lab4.getPicture().repaint();
-                Lab4.getPicture().revalidate();
+                Lab5.getPicture().repaint();
+                Lab5.getPicture().revalidate();
 
                 setVisible(false);
             }catch (NumberFormatException err){
@@ -129,7 +129,7 @@ public class CreateTrapezoid extends JDialog {
 
         });
 
-        setBounds((Lab4.getWindows_w()-width)/2, (Lab4.getWindows_h()-height)/2,width,height);
+        setBounds((Lab5.getWindows_w()-width)/2, (Lab5.getWindows_h()-height)/2,width,height);
     }
 
 }

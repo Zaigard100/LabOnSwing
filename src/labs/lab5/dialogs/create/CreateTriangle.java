@@ -1,6 +1,6 @@
 package labs.lab5.dialogs.create;
 
-import labs.lab5.Lab4;
+import labs.lab5.Lab5;
 import labs.lab5.Utils;
 import labs.lab5.primitives.Point;
 import labs.lab5.primitives.Triangle;
@@ -17,7 +17,7 @@ public class CreateTriangle extends JDialog {
     int height = 225;
 
     public CreateTriangle(){
-        super(Lab4.getjFrame(),"Create Triangle",true);
+        super(Lab5.getjFrame(),"Create Triangle",true);
 
         mainPanel = new JPanel();
 
@@ -127,7 +127,7 @@ public class CreateTriangle extends JDialog {
                 int r = Integer.parseInt(rField.getText());
                 int g = Integer.parseInt(gField.getText());
                 int b = Integer.parseInt(bField.getText());
-                if((x1>0) && (x1< Lab4.getWindows_w()) && (y1>0) && (y1< Lab4.getWindows_h()) && (x2>0) && (x2< Lab4.getWindows_w()) && (y2>0) && (y2< Lab4.getWindows_h()) && (x3>0) && (x3< Lab4.getWindows_w()) && (y3>0) && (y3< Lab4.getWindows_h()) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
+                if((x1>0) && (x1< Lab5.getWindows_w()) && (y1>0) && (y1< Lab5.getWindows_h()) && (x2>0) && (x2< Lab5.getWindows_w()) && (y2>0) && (y2< Lab5.getWindows_h()) && (x3>0) && (x3< Lab5.getWindows_w()) && (y3>0) && (y3< Lab5.getWindows_h()) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
                     Utils.getFigures().add(new Triangle(new Point(x1, y1), new Point(x2, y2), new Point(x3, y3), fill, new Color(r, g, b)));
                 }
                 x1Field.setText("");
@@ -141,8 +141,8 @@ public class CreateTriangle extends JDialog {
                 gField.setText("");
                 bField.setText("");
 
-                Lab4.getPicture().repaint();
-                Lab4.getPicture().revalidate();
+                Lab5.getPicture().repaint();
+                Lab5.getPicture().revalidate();
 
                 setVisible(false);
 
@@ -152,7 +152,7 @@ public class CreateTriangle extends JDialog {
 
         });
 
-        setBounds((Lab4.getWindows_w() -width)/2, (Lab4.getWindows_h()-height)/2,width,height);
+        setBounds((Lab5.getWindows_w() -width)/2, (Lab5.getWindows_h()-height)/2,width,height);
     }
 
 }

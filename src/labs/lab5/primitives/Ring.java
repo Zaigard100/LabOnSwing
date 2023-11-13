@@ -1,6 +1,6 @@
 package labs.lab5.primitives;
 
-import labs.lab5.Lab4;
+import labs.lab5.Lab5;
 
 import java.awt.*;
 
@@ -22,13 +22,13 @@ public class Ring extends Oval {
     }
 
     public void setX(int x){
-        if(x < Lab4.getWindows_w()-Math.max(getDiameterX(),getDiameterY())&&x>0) {
+        if(x < Lab5.getWindows_w()-Math.max(getDiameterX(),getDiameterY())&&x>0) {
             setX(x);
         }
     }
 
     public void setY(int y){
-        if(y < Lab4.getWindows_h()-Math.max(getDiameterX(),getDiameterY())&&y>0) {
+        if(y < Lab5.getWindows_h()-Math.max(getDiameterX(),getDiameterY())&&y>0) {
             setY(y);
         }
     }
@@ -47,6 +47,11 @@ public class Ring extends Oval {
 
     public void setDiameter1(int diameter1) {
         if(diameter1 > 0) {
+            if(getX()> Lab5.getWindows_w()-diameter1/2) return;
+            if(getX()<diameter1/2)return;
+            if(getY()> Lab5.getWindows_h()-diameter1/2)return;
+            if(getY()<diameter1/2)return;
+
             setDiameterX(diameter1);
             diameterNormalize();
         }
@@ -58,6 +63,11 @@ public class Ring extends Oval {
 
     public void setDiameter2(int diameter2) {
         if(diameter2 > 0) {
+            if(getX()> Lab5.getWindows_w()-diameter2/2) return;
+            if(getX()<diameter2/2)return;
+            if(getY()> Lab5.getWindows_h()-diameter2/2)return;
+            if(getY()<diameter2/2)return;
+
             setDiameterY(diameter2);
             diameterNormalize();
         }

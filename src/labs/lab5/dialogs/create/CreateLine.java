@@ -1,6 +1,6 @@
 package labs.lab5.dialogs.create;
 
-import labs.lab5.Lab4;
+import labs.lab5.Lab5;
 import labs.lab5.Utils;
 import labs.lab5.primitives.Line;
 import labs.lab5.primitives.Point;
@@ -16,7 +16,7 @@ public class CreateLine extends JDialog {
     int height = 150;
 
     public CreateLine(){
-        super(Lab4.getjFrame(),"Create Line",true);
+        super(Lab5.getjFrame(),"Create Line",true);
 
         mainPanel = new JPanel();
 
@@ -100,7 +100,7 @@ public class CreateLine extends JDialog {
                 int r = Integer.parseInt(rField.getText());
                 int g = Integer.parseInt(gField.getText());
                 int b = Integer.parseInt(bField.getText());
-                if((x>0) && (x< Lab4.getWindows_w()) && (y>0) && (y< Lab4.getWindows_h()) && (x1>0) && (x1< Lab4.getWindows_w()) && (y1>0) && (y1< Lab4.getWindows_h()) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
+                if((x>0) && (x< Lab5.getWindows_w()) && (y>0) && (y< Lab5.getWindows_h()) && (x1>0) && (x1< Lab5.getWindows_w()) && (y1>0) && (y1< Lab5.getWindows_h()) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
                     Utils.getFigures().add(new Line(new Point(x, y),new Point(x1, y1), new Color(r, g, b)));
                 }
 
@@ -113,8 +113,8 @@ public class CreateLine extends JDialog {
                 gField.setText("");
                 bField.setText("");
 
-                Lab4.getPicture().repaint();
-                Lab4.getPicture().revalidate();
+                Lab5.getPicture().repaint();
+                Lab5.getPicture().revalidate();
 
                 setVisible(false);
 
@@ -124,7 +124,7 @@ public class CreateLine extends JDialog {
 
         });
 
-        setBounds((Lab4.getWindows_w() -width)/2, (Lab4.getWindows_h()-height)/2,width,height);
+        setBounds((Lab5.getWindows_w() -width)/2, (Lab5.getWindows_h()-height)/2,width,height);
     }
 
 }

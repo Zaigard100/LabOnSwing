@@ -6,8 +6,8 @@ public abstract class Figure {
 
     Point p;
     Color color;
-
-    public Figure(Point p, Color color){
+    boolean fill;
+    public Figure(Point p,boolean fill, Color color){
         this.p = p;
         this.color = color;
     }
@@ -15,6 +15,7 @@ public abstract class Figure {
     public abstract void show(Graphics g);
 
     public abstract boolean checkBoundaries(int dx,int dy);
+
 
     public void move(int dx, int dy){
         if(checkBoundaries(dx,dy)){
@@ -28,6 +29,14 @@ public abstract class Figure {
 
     public void setP(Point p) {
         this.p = p;
+    }
+
+    public boolean isFill() {
+        return fill;
+    }
+
+    public void setFill(boolean fill) {
+        this.fill = fill;
     }
 
     public Color getColor() {

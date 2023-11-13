@@ -9,28 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Utils {
-    //TODO удалить лишние массивы
-    static private final ArrayList<Triangle> triangles;
-    static private final ArrayList<Line> lines;
-    static private final ArrayList<Circle> circles;
-    static private final ArrayList<Ring> ring;
-    static private final ArrayList<Oval> ovals;
-    static private final ArrayList<Romb> rombs;
-    static private final ArrayList<Trapezoid> trapezoids;
-    static private final ArrayList<Rect> rects;
-    static private final ArrayList<Figure> figures;
-
-
+    static private ArrayList<Figure> figures; //TODO создать свой контейнер
 
     static {
-        triangles = new ArrayList<>();
-        lines = new ArrayList<>();
-        circles = new ArrayList<>();
-        ring = new ArrayList<>();
-        ovals = new ArrayList<>();
-        rombs = new ArrayList<>();
-        trapezoids = new ArrayList<>();
-        rects = new ArrayList<>();
         figures = new ArrayList<>();
     }
 
@@ -137,45 +118,11 @@ public class Utils {
     }
 
     public static void dispose(){
-        triangles.clear();
-        lines.clear();
-        circles.clear();
-        ring.clear();
-        ovals.clear();
-        rombs.clear();
+        figures.clear();
     }
 
 
     public static ArrayList<Figure> getFigures(){
         return figures;
-    }
-    public static ArrayList<Triangle> getTriangles() {
-        return triangles;
-    }
-
-    public static ArrayList<Line> getLines() {
-        return lines;
-    }
-
-    public static ArrayList<Circle> getCircles() {
-        return circles;
-    }
-
-    public static ArrayList<Ring> getRing() {
-        return ring;
-    }
-
-    public static ArrayList<Oval> getOvals() {
-        return ovals;
-    }
-    public static ArrayList<Romb> getRombs(){
-        return  rombs;
-    }
-    public static ArrayList<Trapezoid> getTrapezoids() {
-        return trapezoids;
-    }
-
-    public static ArrayList<Rect> getRects() {
-        return rects;
     }
 }

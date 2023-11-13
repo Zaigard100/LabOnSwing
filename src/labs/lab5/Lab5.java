@@ -6,7 +6,7 @@ import labs.lab5.dialogs.transform.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class Lab4 {
+public class Lab5 {
     static int windows_w = 1200;
     static int windows_h = 600;
     static int screen_w,screen_h;
@@ -16,7 +16,7 @@ public class Lab4 {
     static JMenuBar jMenuBar;
     static JMenu file, transform,create;
     static JMenuItem load,del,exit;
-    static JMenuItem cir,lin,rin,ovl,tri,rmb,trp,rct;
+    static JMenuItem fig;
     static JMenuItem a_cir,a_lin,a_tri,a_rin,a_ovl,a_rmb,a_trp,a_rct;
     static CreateCircle createCircle = new CreateCircle();
     static CreateLine createLine = new CreateLine();
@@ -26,14 +26,7 @@ public class Lab4 {
     static CreateRomb createRomb = new CreateRomb();
     static CreateTrapezoid createTrapezoid = new CreateTrapezoid();
     static CreateRect createRect = new CreateRect();
-    static TransformCircle transformCircle = new TransformCircle();
-    static TransformLine transformLine = new TransformLine();
-    static TransformTriangle transformTriangle = new TransformTriangle();
-    static TransformRing transformRing = new TransformRing();
-    static TransformOval transformOval = new TransformOval();
-    static TransformRomb transformRomb = new TransformRomb();
-    static TransformTrapezoid transformTrapezoid = new TransformTrapezoid();
-    static TransformRect transformRect = new TransformRect();
+    static TransformFigure transformFigure = new TransformFigure();
     public static Toolkit toolkit;
     public static Dimension dimension;
     public static Picture picture;
@@ -97,14 +90,7 @@ public class Lab4 {
         a_trp = create.add(new JMenuItem("Trapezoid"));
         a_rct = create.add(new JMenuItem("Rect"));
 
-        cir = transform.add(new JMenuItem("Circle"));
-        lin = transform.add(new JMenuItem("Line"));
-        tri = transform.add(new JMenuItem("Triangle"));
-        rin = transform.add(new JMenuItem("Ring"));
-        ovl = transform.add(new JMenuItem("Oval"));
-        rmb = transform.add(new JMenuItem("Romb"));
-        trp = transform.add(new JMenuItem("Trapezoid"));
-        rct = transform.add(new JMenuItem("Rect"));
+        fig = transform.add(new JMenuItem("TransformFigure"));
 
     }
     static void menuBarFunctions(){
@@ -150,44 +136,9 @@ public class Lab4 {
 
         a_rct.addActionListener(actionEvent -> createRect.setVisible(true));
 
-        cir.addActionListener(actionEvent -> {
-            transformCircle.reload();
-            transformCircle.setVisible(true);
-        });
-
-        lin.addActionListener(actionEvent -> {
-            transformLine.reload();
-            transformLine.setVisible(true);
-        });
-
-        tri.addActionListener(actionEvent -> {
-            transformTriangle.reload();
-            transformTriangle.setVisible(true);
-        });
-
-        rin.addActionListener(actionEvent -> {
-            transformRing.reload();
-            transformRing.setVisible(true);
-        });
-
-        ovl.addActionListener(actionEvent -> {
-            transformOval.reload();
-            transformOval.setVisible(true);
-        });
-
-        rmb.addActionListener(actionEvent -> {
-            transformRomb.reload();
-            transformRomb.setVisible(true);
-        });
-
-        trp.addActionListener(actionEvent -> {
-            transformTrapezoid.reload();
-            transformTrapezoid.setVisible(true);
-        });
-
-        rct.addActionListener(actionEvent -> {
-            transformRect.reload();
-            transformRect.setVisible(true);
+        fig.addActionListener(actionEvent -> {
+            transformFigure.updateFigureList();
+            transformFigure.setVisible(true);
         });
 
     }

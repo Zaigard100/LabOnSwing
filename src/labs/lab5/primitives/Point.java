@@ -1,6 +1,6 @@
 package labs.lab5.primitives;
 
-import labs.lab5.Lab4;
+import labs.lab5.Lab5;
 
 public class Point {
 
@@ -19,8 +19,8 @@ public class Point {
             dy = 0;
         }
 
-        if(x+dx > Lab4.getWindows_w()){
-            x= Lab4.getWindows_w();
+        if(x+dx > Lab5.getWindows_w()){
+            x= Lab5.getWindows_w();
             dx = 0;
             dy = 0;
         }
@@ -31,8 +31,8 @@ public class Point {
             dy = 0;
         }
 
-        if(y+dy > Lab4.getWindows_h()){
-            y = Lab4.getWindows_h();
+        if(y+dy > Lab5.getWindows_h()){
+            y = Lab5.getWindows_h();
             dx = 0;
             dy = 0;
         }

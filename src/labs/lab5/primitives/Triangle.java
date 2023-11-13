@@ -1,18 +1,17 @@
 package labs.lab5.primitives;
 
-import labs.lab5.Lab4;
+import labs.lab5.Lab5;
 
 import java.awt.*;
 
 public class Triangle extends Figure {
 
     Point p2,p3;
-    private boolean fill;
 
     Color color;
 
     public Triangle(Point p1, Point p2, Point p3, boolean fill, Color color) {
-        super(p1,color);
+        super(p1, fill, color);
         this.p2 = p2;
         this.p3 = p3;
         this.fill = fill;
@@ -30,10 +29,10 @@ public class Triangle extends Figure {
 
     @Override
     public boolean checkBoundaries(int dx, int dy) {
-        if(Math.max(Math.max(p.getX(), p2.getX()),p3.getX())+dx> Lab4.getWindows_w()/2){
+        if(Math.max(Math.max(p.getX(), p2.getX()),p3.getX())+dx> Lab5.getWindows_w()/2){
             return false;
         }
-        if(Math.max(Math.max(p.getY(), p2.getY()),p3.getY())+dy> Lab4.getWindows_h()/2){
+        if(Math.max(Math.max(p.getY(), p2.getY()),p3.getY())+dy> Lab5.getWindows_h()/2){
             return false;
         }
         if(Math.max(Math.max(p.getX(), p2.getX()),p3.getX())+dx<0){
@@ -69,32 +68,32 @@ public class Triangle extends Figure {
     }
 
     public void setX1(int x1){
-        if(x1>0&&x1< Lab4.getWindows_w()) {
+        if(x1>0&&x1< Lab5.getWindows_w()) {
             p.setX(x1);
         }
     }
     public void setY1(int y1){
-        if(y1>0&&y1< Lab4.getWindows_h()) {
+        if(y1>0&&y1< Lab5.getWindows_h()) {
             p.setY(y1);
         }
     }
     public void setX2(int x2){
-        if(x2>0&&x2< Lab4.getWindows_w()) {
+        if(x2>0&&x2< Lab5.getWindows_w()) {
             p2.setX(x2);
         }
     }
     public void setY2(int y2){
-        if(y2>0&&y2< Lab4.getWindows_h()) {
+        if(y2>0&&y2< Lab5.getWindows_h()) {
             p2.setY(y2);
         }
     }
     public void setX3(int x3){
-        if(x3>0&&x3< Lab4.getWindows_w()) {
+        if(x3>0&&x3< Lab5.getWindows_w()) {
             p3.setX(x3);
         }
     }
     public void setY3(int y3){
-        if(y3>0&&y3< Lab4.getWindows_h()) {
+        if(y3>0&&y3< Lab5.getWindows_h()) {
             p3.setY(y3);
         }
     }
@@ -110,12 +109,6 @@ public class Triangle extends Figure {
         return color;
     }
 
-    public boolean isFill() {
-        return fill;
-    }
 
-    public void setFill(boolean fill) {
-        this.fill = fill;
-    }
 
 }

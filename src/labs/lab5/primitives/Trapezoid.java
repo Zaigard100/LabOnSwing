@@ -1,6 +1,6 @@
 package labs.lab5.primitives;
 
-import labs.lab5.Lab4;
+import labs.lab5.Lab5;
 
 import java.awt.*;
 
@@ -31,10 +31,10 @@ public class Trapezoid extends Quadro {
     @Override
     public boolean checkBoundaries(int dx, int dy) {
 
-        if(p.getX() + dx + Math.max(getWidth(),getWidth2())/2 > Lab4.getWindows_w()){
+        if(p.getX() + dx + Math.max(getWidth(),getWidth2())/2 > Lab5.getWindows_w()){
             return false;
         }
-        if(p.getY() + dy + getHeight()/2 > Lab4.getWindows_h()){
+        if(p.getY() + dy + getHeight()/2 > Lab5.getWindows_h()){
             return false;
         }
         if(p.getX()+dx - Math.max(getWidth(),getWidth2())/2 < 0){
@@ -53,6 +53,10 @@ public class Trapezoid extends Quadro {
     }
 
     public void setWidth2(int width2) {
-        this.width2 = width2;
+        if(width2>0) {
+            if (p.getX() + width / 2 > Lab5.getWindows_w()) return;
+            if (p.getX() - width / 2 < 0) return;
+            this.width2 = width2;
+        }
     }
 }

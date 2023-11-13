@@ -1,6 +1,6 @@
 package labs.lab5.primitives;
 
-import labs.lab5.Lab4;
+import labs.lab5.Lab5;
 
 import java.awt.*;
 
@@ -9,7 +9,7 @@ public class Line extends Figure {
     Point p2;
 
     public Line(Point p1, Point p2, Color color) {
-        super(p1,color);
+        super(p1, false, color);
         this.p2 = p2;
     }
 
@@ -20,10 +20,10 @@ public class Line extends Figure {
 
     @Override
     public boolean checkBoundaries(int dx, int dy) {
-        if(Math.max(p.getX(), p2.getX())+dx> Lab4.getWindows_w()/2){
+        if(Math.max(p.getX(), p2.getX())+dx> Lab5.getWindows_w()/2){
             return false;
         }
-        if(Math.max(p.getY(), p2.getY())+dy> Lab4.getWindows_h()/2){
+        if(Math.max(p.getY(), p2.getY())+dy> Lab5.getWindows_h()/2){
             return false;
         }
         if(Math.min(p.getX(), p2.getX())+dx<0){
@@ -53,25 +53,25 @@ public class Line extends Figure {
     }
 
     public void setX(int x) {
-        if (x > 0 && x < Lab4.getWindows_w()){
+        if (x > 0 && x < Lab5.getWindows_w()){
             p.setX(x);
         }
     }
 
     public void setY(int y) {
-        if (y > 0 && y < Lab4.getWindows_h()){
+        if (y > 0 && y < Lab5.getWindows_h()){
             p.setY(y);
         }
     }
 
     public void setX1(int x1) {
-        if (x1 > 0 && x1 < Lab4.getWindows_w()) {
+        if (x1 > 0 && x1 < Lab5.getWindows_w()) {
             p2.setX(x1);
         }
     }
 
     public void setY1(int y1) {
-        if (y1 > 0 && y1 < Lab4.getWindows_h()) {
+        if (y1 > 0 && y1 < Lab5.getWindows_h()) {
             p2.setY(y1);
         }
     }

@@ -1,6 +1,6 @@
 package labs.lab5.dialogs.create;
 
-import labs.lab5.Lab4;
+import labs.lab5.Lab5;
 import labs.lab5.Utils;
 import labs.lab5.primitives.Point;
 import labs.lab5.primitives.Ring;
@@ -17,7 +17,7 @@ public class CreateRing extends JDialog {
     int height = 175;
 
     public CreateRing(){
-        super(Lab4.getjFrame(),"Create Ring",true);
+        super(Lab5.getjFrame(),"Create Ring",true);
 
         mainPanel = new JPanel();
 
@@ -97,7 +97,7 @@ public class CreateRing extends JDialog {
                 int r = Integer.parseInt(rField.getText());
                 int g = Integer.parseInt(gField.getText());
                 int b = Integer.parseInt(bField.getText());
-                if((x>0) && (x< Lab4.getWindows_w()-Math.max(diameter1,diameter2)) && (y>0) && (y< Lab4.getWindows_h()-Math.max(diameter1,diameter2)) && (diameter1>0)&& (diameter2>0) && (Math.max(diameter1,diameter2)<Math.min(Lab4.getWindows_w()-x, Lab4.getWindows_h()-y))) {
+                if((x>0) && (x< Lab5.getWindows_w()-Math.max(diameter1,diameter2)) && (y>0) && (y< Lab5.getWindows_h()-Math.max(diameter1,diameter2)) && (diameter1>0)&& (diameter2>0) && (Math.max(diameter1,diameter2)<Math.min(Lab5.getWindows_w()-x, Lab5.getWindows_h()-y))) {
                     Utils.getFigures().add(new Ring(new Point(x,y), diameter1,diameter2, new Color(r, g, b)));
                 }
                 xField.setText("");
@@ -109,8 +109,8 @@ public class CreateRing extends JDialog {
                 gField.setText("");
                 bField.setText("");
 
-                Lab4.getPicture().repaint();
-                Lab4.getPicture().revalidate();
+                Lab5.getPicture().repaint();
+                Lab5.getPicture().revalidate();
 
                 setVisible(false);
             }catch (NumberFormatException err){
@@ -119,7 +119,7 @@ public class CreateRing extends JDialog {
 
         });
 
-        setBounds((Lab4.getWindows_w() -width)/2, (Lab4.getWindows_h()-height)/2,width,height);
+        setBounds((Lab5.getWindows_w() -width)/2, (Lab5.getWindows_h()-height)/2,width,height);
     }
 
 }

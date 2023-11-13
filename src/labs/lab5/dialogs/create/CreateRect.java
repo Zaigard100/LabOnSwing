@@ -1,6 +1,6 @@
 package labs.lab5.dialogs.create;
 
-import labs.lab5.Lab4;
+import labs.lab5.Lab5;
 import labs.lab5.Utils;
 import labs.lab5.primitives.Point;
 import labs.lab5.primitives.Rect;
@@ -17,7 +17,7 @@ public class CreateRect extends JDialog {
     int height = 175;
 
     public CreateRect(){
-        super(Lab4.getjFrame(),"Create Rect",true);
+        super(Lab5.getjFrame(),"Create Rect",true);
 
         mainPanel = new JPanel();
 
@@ -99,7 +99,7 @@ public class CreateRect extends JDialog {
                 int r = Integer.parseInt(rField.getText());
                 int g = Integer.parseInt(gField.getText());
                 int b = Integer.parseInt(bField.getText());
-                if((x>0) && (x< Lab4.getWindows_w() - diameter1) && (y>0) && (y< Lab4.getWindows_h()-diameter2) && (diameter1>0)&& (diameter2>0) && (diameter1< Lab4.getWindows_w()-x) && (diameter2< Lab4.getWindows_h()-y)) {
+                if((x>0) && (x< Lab5.getWindows_w() - diameter1) && (y>0) && (y< Lab5.getWindows_h()-diameter2) && (diameter1>0)&& (diameter2>0) && (diameter1< Lab5.getWindows_w()-x) && (diameter2< Lab5.getWindows_h()-y)) {
                     Utils.getFigures().add(new Rect(new Point(x,y), diameter1,diameter2, fill, new Color(r, g, b)));
                 }
                 xField.setText("");
@@ -111,8 +111,8 @@ public class CreateRect extends JDialog {
                 gField.setText("");
                 bField.setText("");
 
-                Lab4.getPicture().repaint();
-                Lab4.getPicture().revalidate();
+                Lab5.getPicture().repaint();
+                Lab5.getPicture().revalidate();
 
                 setVisible(false);
             }catch (NumberFormatException err){
@@ -121,7 +121,7 @@ public class CreateRect extends JDialog {
 
         });
 
-        setBounds((Lab4.getWindows_w()-width)/2, (Lab4.getWindows_h()-height)/2,width,height);
+        setBounds((Lab5.getWindows_w()-width)/2, (Lab5.getWindows_h()-height)/2,width,height);
     }
 
 }

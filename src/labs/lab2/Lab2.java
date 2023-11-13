@@ -18,7 +18,6 @@ public class Lab2 {
     static JMenuBar jMenuBar;
     static JMenu file,edit,create;
     static JMenuItem load,del,exit,cir,lin,rin,tri,a_cir,a_lin,a_tri,a_rin;
-
     public static Toolkit toolkit;
     public static Dimension dimension;
     static Picture picture;

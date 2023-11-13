@@ -1,6 +1,6 @@
 package labs.lab5.dialogs.create;
 
-import labs.lab5.Lab4;
+import labs.lab5.Lab5;
 import labs.lab5.Utils;
 import labs.lab5.primitives.Circle;
 import labs.lab5.primitives.Point;
@@ -17,7 +17,7 @@ public class CreateCircle extends JDialog {
     int height = 175;
 
     public CreateCircle(){
-        super(Lab4.getjFrame(),"Create Circle",true);
+        super(Lab5.getjFrame(),"Create Circle",true);
 
         mainPanel = new JPanel();
 
@@ -95,7 +95,7 @@ public class CreateCircle extends JDialog {
                 int r = Integer.parseInt(rField.getText());
                 int g = Integer.parseInt(gField.getText());
                 int b = Integer.parseInt(bField.getText());
-                if((x>0) && (x< Lab4.getWindows_w()-diameter) && (y>0) && (y< Lab4.getWindows_h()-diameter) && (diameter>0) && (diameter<Math.min(Lab4.getWindows_w()-x, Lab4.getWindows_h()-y))) {
+                if((x>0) && (x< Lab5.getWindows_w()-diameter) && (y>0) && (y< Lab5.getWindows_h()-diameter) && (diameter>0) && (diameter<Math.min(Lab5.getWindows_w()-x, Lab5.getWindows_h()-y))) {
                     Utils.getFigures().add(new Circle(new Point(x,y), diameter, fill, new Color(r, g, b)));
                 }
                 xField.setText("");
@@ -106,8 +106,8 @@ public class CreateCircle extends JDialog {
                 gField.setText("");
                 bField.setText("");
 
-                Lab4.getPicture().repaint();
-                Lab4.getPicture().revalidate();
+                Lab5.getPicture().repaint();
+                Lab5.getPicture().revalidate();
 
                 setVisible(false);
             }catch (NumberFormatException err){
@@ -116,7 +116,7 @@ public class CreateCircle extends JDialog {
 
         });
 
-        setBounds((Lab4.getWindows_w() -width)/2, (Lab4.getWindows_h()-height)/2,width,height);
+        setBounds((Lab5.getWindows_w() -width)/2, (Lab5.getWindows_h()-height)/2,width,height);
     }
 
 }
