@@ -1,7 +1,7 @@
-package labs.lab4;
+package labs.lab5;
 
-import labs.lab4.primitives.Point;
-import labs.lab4.primitives.*;
+import labs.lab5.primitives.Point;
+import labs.lab5.primitives.*;
 
 import java.awt.*;
 import java.io.FileReader;
@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Utils {
+    //TODO удалить лишние массивы
     static private final ArrayList<Triangle> triangles;
     static private final ArrayList<Line> lines;
     static private final ArrayList<Circle> circles;
@@ -17,6 +18,8 @@ public class Utils {
     static private final ArrayList<Romb> rombs;
     static private final ArrayList<Trapezoid> trapezoids;
     static private final ArrayList<Rect> rects;
+    static private final ArrayList<Figure> figures;
+
 
 
     static {
@@ -28,6 +31,7 @@ public class Utils {
         rombs = new ArrayList<>();
         trapezoids = new ArrayList<>();
         rects = new ArrayList<>();
+        figures = new ArrayList<>();
     }
 
     public static void load(String file){
@@ -58,7 +62,7 @@ public class Utils {
             String[] words = line.split(",");
             switch (words[0]) {
                 case "t":
-                    triangles.add(new Triangle(
+                    figures.add(new Triangle(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             new Point(Integer.parseInt(words[3]), Integer.parseInt(words[4])),
                             new Point(Integer.parseInt(words[5]), Integer.parseInt(words[6])),
@@ -67,14 +71,14 @@ public class Utils {
                     ));
                     break;
                 case "l":
-                    lines.add(new Line(
+                    figures.add(new Line(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             new Point(Integer.parseInt(words[3]), Integer.parseInt(words[4])),
                             new Color(Integer.parseInt(words[5]), Integer.parseInt(words[6]), Integer.parseInt(words[7]))
                     ));
                     break;
                 case "c":
-                    circles.add(new Circle(
+                    figures.add(new Circle(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]),
                             Boolean.parseBoolean(words[7]),
@@ -82,7 +86,7 @@ public class Utils {
                     ));
                     break;
                 case "ri":
-                    ring.add(new Ring(
+                    figures.add(new Ring(
                                     new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                                     Integer.parseInt(words[3]),
                                     Integer.parseInt(words[4]),
@@ -91,7 +95,7 @@ public class Utils {
                     );
                     break;
                 case "o":
-                    ovals.add(new Oval(
+                    figures.add(new Oval(
                                     new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                                     Integer.parseInt(words[3]),
                                     Integer.parseInt(words[4]),
@@ -101,7 +105,7 @@ public class Utils {
                     );
                     break;
                 case "ro":
-                    rombs.add(new Romb(
+                    figures.add(new Romb(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]),
                             Boolean.parseBoolean(words[8]),
@@ -109,7 +113,7 @@ public class Utils {
                     ));
                     break;
                 case "tr":
-                    trapezoids.add(new Trapezoid(
+                    figures.add(new Trapezoid(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]), Integer.parseInt(words[5]),
                             Boolean.parseBoolean(words[9]),
@@ -117,7 +121,7 @@ public class Utils {
                     ));
                     break;
                 case "re":
-                    rects.add(new Rect(
+                    figures.add(new Rect(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]),
                             Boolean.parseBoolean(words[8]),
@@ -142,6 +146,9 @@ public class Utils {
     }
 
 
+    public static ArrayList<Figure> getFigures(){
+        return figures;
+    }
     public static ArrayList<Triangle> getTriangles() {
         return triangles;
     }

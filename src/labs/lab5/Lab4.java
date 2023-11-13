@@ -1,7 +1,7 @@
-package labs.lab4;
+package labs.lab5;
 
-import labs.lab4.dialogs.create.*;
-import labs.lab4.dialogs.transform.*;
+import labs.lab5.dialogs.create.*;
+import labs.lab5.dialogs.transform.*;
 
 import javax.swing.*;
 import java.awt.*;
