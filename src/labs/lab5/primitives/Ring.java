@@ -17,10 +17,6 @@ public class Ring extends Oval {
         g.fillOval(getX(),getY(),getDiameterY(),getDiameterY());
     }
 
-    public void move(int dx,int dy){
-        super.move(dx, dy);
-    }
-
     public void setX(int x){
         if(x < Lab5.getWindows_w()-Math.max(getDiameterX(),getDiameterY())&&x>0) {
             setX(x);

@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Utils {
-    static private ArrayList<Figure> figures; //TODO создать свой контейнер
+    static private final ArrayList<Figure> figures; //TODO создать свой контейнер
 
     static {
         figures = new ArrayList<>();
@@ -19,10 +19,8 @@ public class Utils {
         StringBuilder line = new StringBuilder();
         try(FileReader reader = new FileReader(file))
         {
-
             int c;
             while((c=reader.read())!=-1){
-
                 if(c=='\n'){
                     parse_line(line.toString());
                     line = new StringBuilder();

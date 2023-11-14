@@ -6,12 +6,8 @@ import labs.lab5.primitives.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class TransformFigure extends Dialog {
-
     JPanel figureChoosing,dataPlain,editPanel;
     JComboBox<String> figureNumber,editParameter;
     TextField field1,field2,field3;
@@ -20,6 +16,9 @@ public class TransformFigure extends Dialog {
     public TransformFigure(){
 
         super(Lab5.getjFrame(),"Edit",false);
+
+        int width = 300;
+        int height = 150;
 
         figureChoosing = new JPanel();
         dataPlain = new JPanel();
@@ -38,78 +37,96 @@ public class TransformFigure extends Dialog {
         edit = new JButton("Edit");
         rotate = new JButton("Rotate");
 
-        updateFigureList();
-        figureNumber.setSelectedIndex(0);
-        updateParameters(parse((String) Objects.requireNonNull(figureNumber.getSelectedItem())));
-        editParameter.setSelectedIndex(0);
-        dataPlainUpdate(
-                parse((String) Objects.requireNonNull(figureNumber.getSelectedItem())),
-                parse((String) Objects.requireNonNull(editParameter.getSelectedItem()))
-        );
+        figureChoosing.add(new JLabel("Figure:"));
+        figureChoosing.add(figureNumber);
+        figureChoosing.add(editParameter);
+
+        dataPlain.add(new JLabel("Nothing"));
+
+        editPanel.add(cancel);
+        editPanel.add(edit);
+
+        add(figureChoosing,BorderLayout.NORTH);
+        add(dataPlain,BorderLayout.CENTER);
+        add(editPanel,BorderLayout.SOUTH);
+
+        setBounds((Lab5.getWindows_w()-width)/2,(Lab5.getWindows_h()-height)/2,width,height);
+
         figureNumber.addActionListener(e -> {
-            updateParameters(parse((String) Objects.requireNonNull(figureNumber.getSelectedItem())));
+
+            updateParameters(parse(noNull((String) figureNumber.getSelectedItem())));
             editParameter.setSelectedIndex(0);
-            dataPlainUpdate(
-                    parse((String) Objects.requireNonNull(figureNumber.getSelectedItem())),
-                    parse((String) Objects.requireNonNull(editParameter.getSelectedItem()))
-            );
 
         });
         editParameter.addActionListener(e -> {
+
             dataPlainUpdate(
-                    parse((String) Objects.requireNonNull(figureNumber.getSelectedItem())),
-                    parse((String) Objects.requireNonNull(editParameter.getSelectedItem()))
+                    parse(noNull((String) figureNumber.getSelectedItem())),
+                    noNull((String) editParameter.getSelectedItem())
             );
+
         });
 
         edit.addActionListener(e -> {
-            if(figureNumber.getSelectedItem().equals("all")) {
+
                 edit(
                         Utils.getFigures().get(figureNumber.getSelectedIndex()),
-                        parse((String) Objects.requireNonNull(figureNumber.getSelectedItem())),
-                        parse((String) Objects.requireNonNull(editParameter.getSelectedItem())),
-                        Integer.parseInt(field1.getText()),
-                        Integer.parseInt(field2.getText()),
-                        Integer.parseInt(field2.getText()),
+                        parse(noNull((String) figureNumber.getSelectedItem())),
+                        noNull((String) editParameter.getSelectedItem()),
+                        field1.getText(),
+                        field2.getText(),
+                        field2.getText(),
                         checkBox.isSelected()
                 );
-            }
+
         });
 
         cancel.addActionListener(e -> {
+
             setVisible(false);
+
         });
+
+
 
     }
 
     public void updateFigureList(){
-        figureNumber.removeAllItems();
+        if(figureNumber.getItemCount()!=0) {
+            figureNumber.removeAllItems();
+        }
         int i = 0;
-        System.out.println(Utils.getFigures().size());//TODO продолжить
         for(Figure figure:Utils.getFigures()){
+            System.out.println(i+" "+figure.getClass());
             if(figure instanceof Line){
-                figureNumber.addItem(i+"(Line)");
+                figureNumber.addItem((i+1)+"(Line)");
             }else if(figure instanceof Triangle){
-                figureNumber.addItem(i+"(Triangle)");
+                figureNumber.addItem((i+1)+"(Triangle)");
             }else if(figure instanceof Circle){
-                figureNumber.addItem(i+"(Circle)");
+                figureNumber.addItem((i+1)+"(Circle)");
             }else if(figure instanceof Ring){
-                figureNumber.addItem(i+"(Ring)");
+                figureNumber.addItem((i+1)+"(Ring)");
             }else if(figure instanceof Oval){
-                figureNumber.addItem(i+"(Oval)");
+                figureNumber.addItem((i+1)+"(Oval)");
             }else if(figure instanceof Rect){
-                figureNumber.addItem(i+"(Rect)");
+                figureNumber.addItem((i+1)+"(Rect)");
             }else if(figure instanceof Romb){
-                figureNumber.addItem(i+"(Romb)");
+                figureNumber.addItem((i+1)+"(Romb)");
             }else if(figure instanceof Trapezoid){
-                figureNumber.addItem(i+"(Trapezoid)");
+                figureNumber.addItem((i+1)+"(Trapezoid)");
             }else {
-                figureNumber.addItem(i+"(NoAdd)");
+                figureNumber.addItem((i+1)+"(NoAdd)");
             }
 
             i++;
         }
             figureNumber.addItem("all");
+
+        figureNumber.setSelectedIndex(0);
+        updateParameters(parse(noNull((String) figureNumber.getSelectedItem())));
+
+        repaint();
+        revalidate();
     }
 
     public void updateParameters(String figureName){
@@ -148,12 +165,27 @@ public class TransformFigure extends Dialog {
 
         }
         editParameter.addItem("color");
+
+        editParameter.setSelectedIndex(0);
+
+
+        dataPlainUpdate(
+                parse(noNull((String) figureNumber.getSelectedItem())),
+                noNull((String) editParameter.getSelectedItem())
+        );
+
+        field1.setText("");
+        field2.setText("");
+        field3.setText("");
+
     }
 
     public void dataPlainUpdate(String figureName,String parameter){
         dataPlain.removeAll();
+        System.out.println(parameter);
         switch (parameter){
             case "move":
+                System.out.println("m");
                 dataPlain.add(new JLabel("DX"));
                 dataPlain.add(field1);
                 dataPlain.add(new JLabel("DY"));
@@ -225,66 +257,78 @@ public class TransformFigure extends Dialog {
             case  "rotate":
                 dataPlain.add(rotate);
         }
+        dataPlain.repaint();
+        dataPlain.revalidate();
+
     }
 
-    public void edit(Figure figure,String figureName,String parameter,int f1,int f2 ,int f3,boolean cB){
-        switch (parameter){
-            case "move":
-                figure.move(f1,f2);
-                break;
-            case "p":
-                figure.getP().setX(f1);
-                figure.getP().setY(f2);
-                break;
-            case "p1":
-                if(figureName.equals("Line")) {
-                    ((Line) figure).setX1(f1);
-                    ((Line) figure).setY1(f2);
-                }else if(figureName.equals("Triangle")) {
-                    ((Triangle) figure).setX1(f1);
-                    ((Triangle) figure).setY1(f2);
-                }
-                break;
-            case "p2":
-                ((Triangle) figure).setX1(f1);
-                ((Triangle) figure).setY1(f2);
-                break;
-            case "diameter":
-                ((Circle)figure).setDiameter(f1);
-                break;
-            case "diameters":
-                if(figureName.equals("Oval")) {
-                    ((Oval) figure).setDiameterX(f1);
-                    ((Oval) figure).setDiameterY(f2);
-                }else if(figureName.equals("Ring")) {
-                    ((Ring) figure).setDiameterX(f1);
-                    ((Ring) figure).setDiameterY(f2);
-                }
-                break;
-            case "size":
-                switch (figureName) {
-                    case "Rect":
-                        ((Rect) figure).setWidth(f1);
-                        ((Rect) figure).setHeight(f2);
-                        break;
-                    case "Romb":
-                        ((Romb) figure).setWidth(f1);
-                        ((Romb) figure).setHeight(f2);
-                        break;
-                    case "Trapezoid":
-                        ((Trapezoid) figure).setWidth(f1);
-                        ((Trapezoid) figure).setWidth2(f2);
-                        ((Trapezoid) figure).setHeight(f3);
-                        break;
-                }
-                break;
-            case "fill":
-                figure.setFill(cB);
-                break;
-            case "color":
-                figure.setColor(f1,f2,f3);
-                break;
+    public void edit(Figure figure,String figureName,String parameter,String f1,String f2 ,String f3,boolean cB){
+        try {
+            switch (parameter) {
+                case "move":
+                    figure.move(Lab5.parseInt(f1,0), Lab5.parseInt(f1,0));
+                    break;
+                case "p":
+                    figure.getP().setX(Lab5.parseInt(f1, figure.getP().getX()));
+                    figure.getP().setY(Lab5.parseInt(f2, figure.getP().getY()));
+                    break;
+                case "p1":
+                    if (figureName.equals("Line")) {
+                        ((Line) figure).setX1(Lab5.parseInt(f1, ((Line) figure).getX1()));
+                        ((Line) figure).setY1(Lab5.parseInt(f2, ((Line) figure).getY1()));
+                    } else if (figureName.equals("Triangle")) {
+                        ((Triangle) figure).setX1(Lab5.parseInt(f1, ((Triangle) figure).getX1()));
+                        ((Triangle) figure).setY1(Lab5.parseInt(f2, ((Triangle) figure).getY1()));
+                    }
+                    break;
+                case "p2":
+                    ((Triangle) figure).setX2(Lab5.parseInt(f1, ((Triangle) figure).getX2()));
+                    ((Triangle) figure).setY2(Lab5.parseInt(f2, ((Triangle) figure).getY2()));
+                    break;
+                case "diameter":
+                    ((Circle) figure).setDiameter(Lab5.parseInt(f1, ((Circle) figure).getDiameter()));
+                    break;
+                case "diameters":
+                    if (figureName.equals("Oval")) {
+                        ((Oval) figure).setDiameterX(Lab5.parseInt(f1, ((Oval) figure).getDiameterX()));
+                        ((Oval) figure).setDiameterY(Lab5.parseInt(f2, ((Oval) figure).getDiameterY()));
+                    } else if (figureName.equals("Ring")) {
+                        ((Ring) figure).setDiameterX(Lab5.parseInt(f1, ((Ring) figure).getDiameterX()));
+                        ((Ring) figure).setDiameterY(Lab5.parseInt(f2, ((Ring) figure).getDiameterY()));
+                    }
+                    break;
+                case "size":
+                    switch (figureName) {
+                        case "Rect":
+                            ((Rect)  figure).setWidth(Lab5.parseInt(f1, ((Rect) figure).getWidth()) );
+                            ((Rect) figure).setHeight(Lab5.parseInt(f2, ((Rect) figure).getHeight()));
+                            break;
+                        case "Romb":
+                            ((Romb)  figure).setWidth(Lab5.parseInt(f1, ((Romb) figure).getWidth()) );
+                            ((Romb) figure).setHeight(Lab5.parseInt(f2, ((Romb) figure).getHeight()));
+                            break;
+                        case "Trapezoid":
+                            ((Trapezoid)  figure).setWidth(Lab5.parseInt(f1, ((Trapezoid) figure).getWidth()) );
+                            ((Trapezoid) figure).setWidth2(Lab5.parseInt(f2, ((Trapezoid) figure).getWidth2()));
+                            ((Trapezoid) figure).setHeight(Lab5.parseInt(f3, ((Trapezoid) figure).getHeight()));
+                            break;
+                    }
+                    break;
+                case "fill":
+                    figure.setFill(cB);
+                    break;
+                case "color":
+                    figure.setColor(
+                            Lab5.parseInt(f1,figure.getColor().getRed()),
+                            Lab5.parseInt(f2,figure.getColor().getGreen()),
+                            Lab5.parseInt(f3,figure.getColor().getBlue())
+                    );
+                    break;
+            }
+        }catch (NumberFormatException err){
+            err.printStackTrace();
         }
+
     }
     private String parse(String name) {
         StringBuilder figureName = new StringBuilder();
@@ -298,6 +342,14 @@ public class TransformFigure extends Dialog {
             }
         }
         return figureName.toString();
+    }
+
+    private String noNull(String s){
+        if(s == null){
+            System.out.println("Null");
+            return "";
+        }
+        return  s;
     }
 
 }
