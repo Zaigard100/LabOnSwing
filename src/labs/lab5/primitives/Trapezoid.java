@@ -4,48 +4,39 @@ import labs.lab5.Lab5;
 
 import java.awt.*;
 
-public class Trapezoid extends Quadro {
+public class Trapezoid extends Quadrangle {
 
-    int width2;
+    int width,width2,height;
 
     public Trapezoid(Point p, int width, int width2, int height, boolean fill, Color color) {
-
-        super(p, Math.max(width,width2), height, fill, color);
-        this.width2 = Math.min(width,width2);
+        super(
+                new Point(p.getX() - width / 2,  p.getY() - height / 2),
+                new Point(p.getX() + width / 2,  p.getY() - height / 2),
+                new Point(p.getX() + width2 / 2, p.getY() + height / 2),
+                new Point(p.getX() - width2 / 2, p.getY() + height / 2),
+                fill,
+                color
+        );
+        this.width2 = Math.min(width, width2);
     }
 
-    @Override
-    public void show(Graphics g) {
-        move(0,0);
-        int[] x_points = new int[]{p.getX()-getWidth2()/2, p.getX()-getWidth()/2, p.getX()+getWidth()/2, p.getX()+getWidth2()/2};
-        int[] y_point = new int[]{p.getY()-getHeight()/2,p.getY()+getHeight()/2,p.getY()+getHeight()/2, p.getY()-getHeight()/2};
-        g.setColor(color);
-        if(isFill()){
-            g.fillPolygon(x_points,y_point,4);
-        }else {
-            g.drawPolygon(x_points,y_point,4);
-        }
-
+    public int getWidth() {
+        return width;
     }
 
-    @Override
-    public boolean checkBoundaries(int dx, int dy) {
-
-        if(p.getX() + dx + Math.max(getWidth(),getWidth2())/2 > Lab5.getWindows_w()){
-            return false;
+    public void setWidth(int width) {
+        if(width>0) {
+            /*
+                востанавливаем изначальную точку,
+                т.к. у 1-ой точки(p) сдвиг по координатам равен -width,
+                то центральной координатой x будет p.getX()-this.width
+            */
+            if (p.getX() - this.width + width < Lab5.getWindows_w() && p.getX() - this.width - width > 0) {
+                getP().setX(p.getX() - width / 2);
+                getP2().setX(p.getX() + width / 2);
+                this.width = width;
+            }
         }
-        if(p.getY() + dy + getHeight()/2 > Lab5.getWindows_h()){
-            return false;
-        }
-        if(p.getX()+dx - Math.max(getWidth(),getWidth2())/2 < 0){
-            return false;
-        }
-        if(p.getY()+dy - getHeight()/2 < 0){
-            return false;
-        }
-
-        return true;
-
     }
 
     public int getWidth2() {
@@ -53,10 +44,38 @@ public class Trapezoid extends Quadro {
     }
 
     public void setWidth2(int width2) {
+        /*
+            востанавливаем изначальную точку,
+            т.к. у 1-ой точки(p) сдвиг по координатам равен -width,
+            то центральной координатой x будет p.getX()-this.width
+        */
         if(width2>0) {
-            if (p.getX() + width / 2 > Lab5.getWindows_w()) return;
-            if (p.getX() - width / 2 < 0) return;
-            this.width2 = width2;
+            if (p.getX() - this.width + width2 < Lab5.getWindows_w() && p.getX() - this.width - width2 > 0) {
+                getP3().setX(p.getX() + width2 / 2);
+                getP4().setX(p.getX() - width2 / 2);
+                this.width2 = width2;
+            }
+        }
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        if(height>0) {
+            /*
+                востанавливаем изначальную точку,
+                т.к. у 1-ой точки(p) сдвиг по координатам равен -height,
+                то центральной координатой н будет p.getY()-this.height
+            */
+            if (p.getY() - this.height + height < Lab5.getWindows_h() && p.getY() + this.height - height > 0) {
+                getP().setX(p.getX() - width / 2);
+                getP2().setX(p.getX() + width / 2);
+                getP3().setX(p.getX() + width / 2);
+                getP4().setX(p.getX() - width / 2);
+                this.height = height;
+            }
         }
     }
 }

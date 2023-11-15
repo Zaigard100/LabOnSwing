@@ -1,7 +1,7 @@
 package labs.lab5;
 
-import labs.lab5.dialogs.create.*;
-import labs.lab5.dialogs.transform.*;
+import labs.lab5.dialogs.CreateFigure;
+import labs.lab5.dialogs.TransformFigure;
 
 import javax.swing.*;
 import java.awt.*;

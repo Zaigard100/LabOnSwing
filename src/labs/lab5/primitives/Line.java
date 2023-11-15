@@ -32,7 +32,6 @@ public class Line extends Figure {
         if(Math.min(p.getY(), p2.getY())+dy<0){
             return false;
         }
-        p2.move(dx,dy);
         return true;
     }
 
@@ -76,4 +75,11 @@ public class Line extends Figure {
         }
     }
 
+    public Point getP2() {
+        return p2;
+    }
+
+    public void setP2(Point p2) {
+        this.p2 = p2;
+    }
 }

@@ -35,14 +35,12 @@ public class Triangle extends Figure {
         if(Math.max(Math.max(p.getY(), p2.getY()),p3.getY())+dy> Lab5.getWindows_h()/2){
             return false;
         }
-        if(Math.max(Math.max(p.getX(), p2.getX()),p3.getX())+dx<0){
+        if(Math.min(Math.min(p.getX(), p2.getX()),p3.getX())+dx<0){
             return false;
         }
-        if(Math.max(Math.max(p.getY(), p2.getY()),p3.getY())+dy<0){
+        if(Math.min(Math.min(p.getY(), p2.getY()),p3.getY())+dy<0){
             return false;
         }
-        p2.move(dx,dy);
-        p3.move(dx,dy);
         return true;
     }
 
@@ -96,6 +94,22 @@ public class Triangle extends Figure {
         if(y3>0&&y3< Lab5.getWindows_h()) {
             p3.setY(y3);
         }
+    }
+
+    public Point getP2() {
+        return p2;
+    }
+
+    public void setP2(Point p2) {
+        this.p2 = p2;
+    }
+
+    public Point getP3() {
+        return p3;
+    }
+
+    public void setP3(Point p3) {
+        this.p3 = p3;
     }
 
     public int[] getX_point(){

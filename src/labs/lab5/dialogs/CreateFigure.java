@@ -1,4 +1,4 @@
-package labs.lab5.dialogs.create;
+package labs.lab5.dialogs;
 
 import labs.lab5.Lab5;
 import labs.lab5.Utils;

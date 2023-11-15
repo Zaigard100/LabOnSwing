@@ -10,6 +10,7 @@ public abstract class Figure {
     public Figure(Point p,boolean fill, Color color){
         this.p = p;
         this.color = color;
+        this.fill = fill;
     }
 
     public abstract void show(Graphics g);
@@ -20,6 +21,18 @@ public abstract class Figure {
     public void move(int dx, int dy){
         if(checkBoundaries(dx,dy)){
             p.move(dx,dy);
+            if(this instanceof Line){
+                ((Line)this).getP2().move(dx,dy);
+            }
+            if(this instanceof Triangle){
+                ((Triangle)this).getP2().move(dx,dy);
+                ((Triangle)this).getP3().move(dx,dy);
+            }
+            if(this instanceof Quadrangle){
+                ((Quadrangle)this).getP2().move(dx,dy);
+                ((Quadrangle)this).getP3().move(dx,dy);
+                ((Quadrangle)this).getP4().move(dx,dy);
+            }
         }
     }
 
