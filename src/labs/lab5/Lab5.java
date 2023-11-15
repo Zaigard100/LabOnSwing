@@ -17,15 +17,7 @@ public class Lab5 {
     static JMenu file, transform,create;
     static JMenuItem load,del,exit;
     static JMenuItem fig;
-    static JMenuItem a_cir,a_lin,a_tri,a_rin,a_ovl,a_rmb,a_trp,a_rct,a_fig;
-    static CreateCircle createCircle = new CreateCircle();
-    static CreateLine createLine = new CreateLine();
-    static CreateTriangle createTriangle = new CreateTriangle();
-    static CreateRing createRing= new CreateRing();
-    static CreateOval createOval = new CreateOval();
-    static CreateRomb createRomb = new CreateRomb();
-    static CreateTrapezoid createTrapezoid = new CreateTrapezoid();
-    static CreateRect createRect = new CreateRect();
+    static JMenuItem a_fig;
     static CreateFigure createFigure = new CreateFigure();
     static TransformFigure transformFigure = new TransformFigure();
     public static Toolkit toolkit;
@@ -82,14 +74,6 @@ public class Lab5 {
         file.addSeparator();
         exit = file.add(new JMenuItem("Exit"));
 
-        a_cir = create.add(new JMenuItem("Circle"));
-        a_lin = create.add(new JMenuItem("Line"));
-        a_tri = create.add(new JMenuItem("Triangle"));
-        a_rin = create.add(new JMenuItem("Ring"));
-        a_ovl = create.add(new JMenuItem("Oval"));
-        a_rmb = create.add(new JMenuItem("Romb"));
-        a_trp = create.add(new JMenuItem("Trapezoid"));
-        a_rct = create.add(new JMenuItem("Rect"));
         a_fig = create.add(new JMenuItem("Figure"));
 
         fig = transform.add(new JMenuItem("TransformFigure"));
@@ -121,22 +105,6 @@ public class Lab5 {
             jFrame.repaint();
             jFrame.revalidate();
         });
-
-        a_cir.addActionListener(actionEvent -> createCircle.setVisible(true));
-
-        a_lin.addActionListener(actionEvent -> createLine.setVisible(true));
-
-        a_tri.addActionListener(actionEvent -> createTriangle.setVisible(true));
-
-        a_rin.addActionListener(actionEvent -> createRing.setVisible(true));
-
-        a_ovl.addActionListener(actionEvent -> createOval.setVisible(true));
-
-        a_rmb.addActionListener(actionEvent -> createRomb.setVisible(true));
-
-        a_trp.addActionListener(actionEvent -> createTrapezoid.setVisible(true));
-
-        a_rct.addActionListener(actionEvent -> createRect.setVisible(true));
 
         a_fig.addActionListener(actionEvent -> createFigure.setVisible(true));
 

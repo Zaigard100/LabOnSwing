@@ -19,10 +19,14 @@ public class CreateFigure extends Dialog {
 
     TextField xF, yF, x1F, y1F, x2F, y2F, dwF, dw1F, dhF, rF, gF, bF;
 
-    JCheckBox fillCB = new JCheckBox("Fill");
+    JCheckBox fillCB;
 
     public CreateFigure() {
+
         super(Lab5.getjFrame(),"Create",true);
+
+        int width = 530;
+        int height = 200;
 
         xF = new TextField(5);
         yF = new TextField(5);
@@ -37,6 +41,8 @@ public class CreateFigure extends Dialog {
         gF = new TextField(5);
         bF = new TextField(5);
 
+        fillCB = new JCheckBox("Fill");
+
         figureName = new JComboBox<>(new String[]{"Circle","Line","Triangle","Oval","Ring","Rect","Romb","Trapezoid"});
 
         figureName.setSelectedIndex(0);
@@ -45,28 +51,28 @@ public class CreateFigure extends Dialog {
         datas = new JPanel();
         dataColor = new JPanel();
 
-        dataP.add(new JLabel("X "));
+        dataP.add(new JLabel(" X "));
         dataP.add(xF);
-        dataP.add(new JLabel("Y "));
+        dataP.add(new JLabel(" Y "));
         dataP.add(yF);
 
 
 
-        dataColor.add(new JLabel("R "));
+        dataColor.add(new JLabel(" R "));
         dataColor.add(rF);
-        dataColor.add(new JLabel("G "));
+        dataColor.add(new JLabel(" G "));
         dataColor.add(gF);
-        dataColor.add(new JLabel("B "));
+        dataColor.add(new JLabel(" B "));
         dataColor.add(bF);
 
-        cancel = new JButton("Cancel");
-        create = new JButton("Create");
+        cancel = new JButton(" Cancel");
+        create = new JButton(" Create");
 
         figureChoosing = new JPanel();
         dataPlain = new JPanel();
         createPanel = new JPanel();
 
-        figureChoosing.add(new JLabel("Figure: "));
+        figureChoosing.add(new JLabel(" Figure: "));
         figureChoosing.add(figureName);
 
         dataPlain.add(dataP,BorderLayout.NORTH);
@@ -82,9 +88,12 @@ public class CreateFigure extends Dialog {
 
         updateData();
 
-        figureName.addActionListener(e -> {
-            updateData();
-        });
+        setBounds((Lab5.getWindows_w()-width)/2,(Lab5.getWindows_h()-height)/2,width,height);
+
+        repaint();
+        revalidate();
+
+        figureName.addActionListener(e -> updateData());
 
         cancel.addActionListener(e -> {
             clearFields();
@@ -103,53 +112,53 @@ public class CreateFigure extends Dialog {
         switch ((String) figureName.getSelectedItem()){
 
             case "Circle":
-                datas.add(new JLabel("Diameter "));
+                datas.add(new JLabel(" Diameter "));
                 datas.add(dwF);
                 datas.add(fillCB);
                 break;
             case "Line":
-                datas.add(new JLabel("X1 "));
+                datas.add(new JLabel(" X1 "));
                 datas.add(x1F);
-                datas.add(new JLabel("Y1 "));
+                datas.add(new JLabel(" Y1 "));
                 datas.add(y1F);
                 break;
             case "Triangle":
-                datas.add(new JLabel("X1 "));
+                datas.add(new JLabel(" X1 "));
                 datas.add(x1F);
-                datas.add(new JLabel("Y1 "));
+                datas.add(new JLabel(" Y1 "));
                 datas.add(y1F);
-                datas.add(new JLabel("X2 "));
+                datas.add(new JLabel(" X2 "));
                 datas.add(x2F);
-                datas.add(new JLabel("Y2 "));
+                datas.add(new JLabel(" Y2 "));
                 datas.add(y2F);
                 datas.add(fillCB);
                 break;
             case "Oval":
-                datas.add(new JLabel("DiameterX "));
+                datas.add(new JLabel(" DiameterX "));
                 datas.add(dwF);
-                datas.add(new JLabel("DiameterY "));
+                datas.add(new JLabel(" DiameterY "));
                 datas.add(dhF);
                 datas.add(fillCB);
                 break;
             case "Ring":
-                datas.add(new JLabel("Diameter1 "));
+                datas.add(new JLabel(" Diameter1 "));
                 datas.add(dwF);
-                datas.add(new JLabel("Diameter2 "));
+                datas.add(new JLabel(" Diameter2 "));
                 datas.add(dhF);
                 break;
             case "Rect":
             case "Romb":
-                datas.add(new JLabel("Width "));
+                datas.add(new JLabel(" Width "));
                 datas.add(dwF);
-                datas.add(new JLabel("Height "));
+                datas.add(new JLabel(" Height "));
                 datas.add(dhF);
                 datas.add(fillCB);
                 break;
             case "Trapezoid":
-                datas.add(new JLabel("Base "));
+                datas.add(new JLabel(" Base "));
                 datas.add(dwF);
                 datas.add(dw1F);
-                datas.add(new JLabel("Height "));
+                datas.add(new JLabel(" Height "));
                 datas.add(dhF);
                 datas.add(fillCB);
                 break;
@@ -211,11 +220,14 @@ public class CreateFigure extends Dialog {
                 }
                 break;
             case "Trapezoid":
-                if((x>0) && (x< Lab5.getWindows_w() - dw) && (y>0) && (y< Lab5.getWindows_h()-dw1) && (dw>0)&& (dw1>0)&& (dh>0) && (dw< Lab5.getWindows_w()-x) && (dh< Lab5.getWindows_h()-y)) {
-                    Utils.getFigures().add(new Trapezoid(new Point(x,y), dw,dw1,dh,fill, new Color(r, g, b)));
+                if((x-Math.max(dw,dw1)>0)&&(y-dh>0)&&(x+Math.max(dw,dw1)<Lab5.getWindows_w())&&(y+dh<Lab5.getWindows_h())){
+                Utils.getFigures().add(new Trapezoid(new Point(x,y), dw,dw1,dh,fill, new Color(r, g, b)));
                 }
                 break;
         }
+
+        Lab5.getPicture().repaint();
+        Lab5.getPicture().revalidate();
 
     }
 
