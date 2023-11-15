@@ -17,9 +17,16 @@ public class Quadrangle extends Figure {
     }
 
     @Override
+    public void move(int dx, int dy) {
+        super.move(dx, dy);//TODO решить проблему с move  в дочерних классах
+    }
+
+    @Override
     public void show(Graphics g) {
         int[] x_p = new int[]{p.getX(),p2.getX(),p3.getX(),p4.getX()};
         int[] y_p = new int[]{p.getY(),p2.getY(),p3.getY(),p4.getY()};
+
+        g.setColor(color);
 
         if(isFill()){
             g.fillPolygon(x_p,y_p,4);

@@ -28,7 +28,7 @@ public abstract class Figure {
                 ((Triangle)this).getP2().move(dx,dy);
                 ((Triangle)this).getP3().move(dx,dy);
             }
-            if(this instanceof Quadrangle){
+            if(this instanceof Quadrangle ){
                 ((Quadrangle)this).getP2().move(dx,dy);
                 ((Quadrangle)this).getP3().move(dx,dy);
                 ((Quadrangle)this).getP4().move(dx,dy);

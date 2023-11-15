@@ -30,14 +30,17 @@ public class Rect extends Quadrangle {
         if(width>0) {
             /*
                 востанавливаем изначальную точку,
-                т.к. у 1-ой точки(p) сдвиг по координатам равен -width,
-                то центральной координатой x будет p.getX()-this.width
+                т.к. у 1-ой точки(p) сдвиг по координатам равен -width/2,
+                то центральной координатой x будет p.getX()+this.width/2
             */
-            if(p.getX()-this.width + width<Lab5.getWindows_w()&&p.getX()-this.width - width>0) {
-                getP().setX(p.getX() - width / 2);
-                getP2().setX(p.getX() + width / 2);
-                getP3().setX(p.getX() + width / 2);
-                getP4().setX(p.getX() - width / 2);
+            int x = p.getX()+this.width/2;
+            if(x + width/2<Lab5.getWindows_w()&&x - width/2>0) {
+
+
+                getP().setX(x - width / 2);
+                getP2().setX(x + width / 2);
+                getP3().setX(x + width / 2);
+                getP4().setX(x - width / 2);
                 this.width = width;
             }
         }
@@ -51,14 +54,15 @@ public class Rect extends Quadrangle {
         if(height>0) {
             /*
                 востанавливаем изначальную точку,
-                т.к. у 1-ой точки(p) сдвиг по координатам равен -height,
-                то центральной координатой н будет p.getY()-this.height
+                т.к. у 1-ой точки(p) сдвиг по координатам равен -height/2,
+                то центральной координатой н будет p.getY()+this.height/2
             */
-            if(p.getY()-this.height + height<Lab5.getWindows_h()&&p.getY()-this.height - height>0) {
-                getP().setY(p.getY() - height / 2);
-                getP2().setY(p.getY() - height / 2);
-                getP3().setY(p.getY() + height / 2);
-                getP4().setY(p.getY() + height / 2);
+            int y = p.getY()+this.height/2;
+            if(y + height/2<Lab5.getWindows_h()&&y - height/2>0) {
+                getP().setY(y - height / 2);
+                getP2().setY(y - height / 2);
+                getP3().setY(y + height / 2);
+                getP4().setY(y + height / 2);
                 this.height = height;
             }
         }

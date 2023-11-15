@@ -26,7 +26,7 @@ public class CreateFigure extends Dialog {
         super(Lab5.getjFrame(),"Create",true);
 
         int width = 530;
-        int height = 200;
+        int height = 250;
 
         xF = new TextField(5);
         yF = new TextField(5);

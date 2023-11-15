@@ -236,23 +236,21 @@ public class TransformFigure extends Dialog {
                 }
                 break;
             case "size":
-                if(figureName.equals("Rect")) {
-                    dataPlain.add(new JLabel("Width"));
-                    dataPlain.add(field1);
-                    dataPlain.add(new JLabel("Height"));
-                    dataPlain.add(field2);
-                }else if(figureName.equals("Romb")) {
-                    dataPlain.add(new JLabel("Width"));
-                    dataPlain.add(field1);
-                    dataPlain.add(new JLabel("Height"));
-                    dataPlain.add(field2);
-                }else if(figureName.equals("Trapezoid")) {
-                    dataPlain.add(new JLabel("BaseUp"));
-                    dataPlain.add(field1);
-                    dataPlain.add(new JLabel("BaseDown"));
-                    dataPlain.add(field2);
-                    dataPlain.add(new JLabel("Height"));
-                    dataPlain.add(field3);
+                switch (figureName) {
+                    case "Rect":
+                    case "Romb":
+                        dataPlain.add(new JLabel("Width"));
+                        dataPlain.add(field1);
+                        dataPlain.add(new JLabel("Height"));
+                        dataPlain.add(field2);
+                        break;
+                    case "Trapezoid":
+                        dataPlain.add(new JLabel("BaseUp"));
+                        dataPlain.add(field1);
+                        dataPlain.add(field2);
+                        dataPlain.add(new JLabel("Height"));
+                        dataPlain.add(field3);
+                        break;
                 }
                 break;
             case "fill":
