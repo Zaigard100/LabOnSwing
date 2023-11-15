@@ -13,7 +13,6 @@ public class Picture extends JComponent {
 
     @Override
     protected void paintComponent(Graphics g){
-        System.out.println(Utils.getFigures().size());
         for(Figure figure: Utils.getFigures()){
             figure.show(g);
         }

@@ -17,7 +17,7 @@ public class Lab5 {
     static JMenu file, transform,create;
     static JMenuItem load,del,exit;
     static JMenuItem fig;
-    static JMenuItem a_cir,a_lin,a_tri,a_rin,a_ovl,a_rmb,a_trp,a_rct;
+    static JMenuItem a_cir,a_lin,a_tri,a_rin,a_ovl,a_rmb,a_trp,a_rct,a_fig;
     static CreateCircle createCircle = new CreateCircle();
     static CreateLine createLine = new CreateLine();
     static CreateTriangle createTriangle = new CreateTriangle();
@@ -26,6 +26,7 @@ public class Lab5 {
     static CreateRomb createRomb = new CreateRomb();
     static CreateTrapezoid createTrapezoid = new CreateTrapezoid();
     static CreateRect createRect = new CreateRect();
+    static CreateFigure createFigure = new CreateFigure();
     static TransformFigure transformFigure = new TransformFigure();
     public static Toolkit toolkit;
     public static Dimension dimension;
@@ -89,6 +90,7 @@ public class Lab5 {
         a_rmb = create.add(new JMenuItem("Romb"));
         a_trp = create.add(new JMenuItem("Trapezoid"));
         a_rct = create.add(new JMenuItem("Rect"));
+        a_fig = create.add(new JMenuItem("Figure"));
 
         fig = transform.add(new JMenuItem("TransformFigure"));
 
@@ -135,6 +137,8 @@ public class Lab5 {
         a_trp.addActionListener(actionEvent -> createTrapezoid.setVisible(true));
 
         a_rct.addActionListener(actionEvent -> createRect.setVisible(true));
+
+        a_fig.addActionListener(actionEvent -> createFigure.setVisible(true));
 
         fig.addActionListener(actionEvent -> {
             transformFigure.updateFigureList();

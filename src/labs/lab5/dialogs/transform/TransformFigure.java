@@ -15,7 +15,7 @@ public class TransformFigure extends Dialog {
     JButton cancel,edit,rotate;
     public TransformFigure(){
 
-        super(Lab5.getjFrame(),"Edit",false);
+        super(Lab5.getjFrame(),"Edit",true);
 
         int width = 300;
         int height = 150;
@@ -56,7 +56,7 @@ public class TransformFigure extends Dialog {
 
             updateParameters(parse(noNull((String) figureNumber.getSelectedItem())));
             editParameter.setSelectedIndex(0);
-
+            clearFields();
         });
         editParameter.addActionListener(e -> {
 
@@ -64,25 +64,37 @@ public class TransformFigure extends Dialog {
                     parse(noNull((String) figureNumber.getSelectedItem())),
                     noNull((String) editParameter.getSelectedItem())
             );
-
+            clearFields();
         });
 
         edit.addActionListener(e -> {
-
-                edit(
-                        Utils.getFigures().get(figureNumber.getSelectedIndex()),
-                        parse(noNull((String) figureNumber.getSelectedItem())),
-                        noNull((String) editParameter.getSelectedItem()),
-                        field1.getText(),
-                        field2.getText(),
-                        field2.getText(),
-                        checkBox.isSelected()
-                );
-
+                if(noNull((String) figureNumber.getSelectedItem()).equals("all")){
+                    for(Figure figure:Utils.getFigures()) {
+                        edit(
+                                figure,
+                                parse(noNull((String) figureNumber.getSelectedItem())),
+                                noNull((String) editParameter.getSelectedItem()),
+                                field1.getText(),
+                                field2.getText(),
+                                field3.getText(),
+                                checkBox.isSelected()
+                        );
+                    }
+                }else {
+                    edit(
+                            Utils.getFigures().get(figureNumber.getSelectedIndex()),
+                            parse(noNull((String) figureNumber.getSelectedItem())),
+                            noNull((String) editParameter.getSelectedItem()),
+                            field1.getText(),
+                            field2.getText(),
+                            field3.getText(),
+                            checkBox.isSelected()
+                    );
+                }
         });
 
         cancel.addActionListener(e -> {
-
+            clearFields();
             setVisible(false);
 
         });
@@ -97,7 +109,6 @@ public class TransformFigure extends Dialog {
         }
         int i = 0;
         for(Figure figure:Utils.getFigures()){
-            System.out.println(i+" "+figure.getClass());
             if(figure instanceof Line){
                 figureNumber.addItem((i+1)+"(Line)");
             }else if(figure instanceof Triangle){
@@ -182,10 +193,8 @@ public class TransformFigure extends Dialog {
 
     public void dataPlainUpdate(String figureName,String parameter){
         dataPlain.removeAll();
-        System.out.println(parameter);
         switch (parameter){
             case "move":
-                System.out.println("m");
                 dataPlain.add(new JLabel("DX"));
                 dataPlain.add(field1);
                 dataPlain.add(new JLabel("DY"));
@@ -257,6 +266,7 @@ public class TransformFigure extends Dialog {
             case  "rotate":
                 dataPlain.add(rotate);
         }
+
         dataPlain.repaint();
         dataPlain.revalidate();
 
@@ -266,7 +276,7 @@ public class TransformFigure extends Dialog {
         try {
             switch (parameter) {
                 case "move":
-                    figure.move(Lab5.parseInt(f1,0), Lab5.parseInt(f1,0));
+                    figure.move(Lab5.parseInt(f1,0), Lab5.parseInt(f2,0));
                     break;
                 case "p":
                     figure.getP().setX(Lab5.parseInt(f1, figure.getP().getX()));
@@ -329,6 +339,9 @@ public class TransformFigure extends Dialog {
             err.printStackTrace();
         }
 
+        Lab5.getPicture().repaint();
+        Lab5.getPicture().revalidate();
+
     }
     private String parse(String name) {
         StringBuilder figureName = new StringBuilder();
@@ -346,10 +359,15 @@ public class TransformFigure extends Dialog {
 
     private String noNull(String s){
         if(s == null){
-            System.out.println("Null");
             return "";
         }
         return  s;
+    }
+
+    private void clearFields(){
+        field1.setText("");
+        field2.setText("");
+        field3.setText("");
     }
 
 }
