@@ -73,10 +73,10 @@ public class Trapezoid extends Quadrangle {
             */
             int y = p.getY() + this.height/2;
             if ( y < Lab5.getWindows_h() && y > 0) {
-                getP().setY(y - width / 2);
-                getP2().setY(y + width / 2);
-                getP3().setY(y + width / 2);
-                getP4().setY(y - width / 2);
+                getP().setY(y - height / 2);
+                getP2().setY(y - height / 2);
+                getP3().setY(y + height / 2);
+                getP4().setY(y + height / 2);
                 this.height = height;
             }
         }
