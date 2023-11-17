@@ -1,5 +1,6 @@
 package labs.lab5;
 
+import labs.lab5.dialogs.CreateContainer;
 import labs.lab5.dialogs.CreateFigure;
 import labs.lab5.dialogs.TransformFigure;
 
@@ -17,8 +18,9 @@ public class Lab5 {
     static JMenu file, transform,create;
     static JMenuItem load,del,exit;
     static JMenuItem fig;
-    static JMenuItem a_fig;
+    static JMenuItem a_fig,a_cnt;
     static CreateFigure createFigure = new CreateFigure();
+    static CreateContainer createContainer = new CreateContainer();
     static TransformFigure transformFigure = new TransformFigure();
     public static Toolkit toolkit;
     public static Dimension dimension;
@@ -75,6 +77,7 @@ public class Lab5 {
         exit = file.add(new JMenuItem("Exit"));
 
         a_fig = create.add(new JMenuItem("Figure"));
+        a_cnt = create.add(new JMenuItem("Container"));
 
         fig = transform.add(new JMenuItem("TransformFigure"));
 
@@ -106,10 +109,17 @@ public class Lab5 {
             jFrame.revalidate();
         });
 
-        a_fig.addActionListener(actionEvent -> createFigure.setVisible(true));
+        a_fig.addActionListener(actionEvent -> {
+            createFigure.updateContainers();
+            createFigure.setVisible(true);
+        });
+
+        a_cnt.addActionListener(actionEvent ->{
+            createContainer.setVisible(true);
+        });
 
         fig.addActionListener(actionEvent -> {
-            transformFigure.updateFigureList();
+            transformFigure.updateContainers();
             transformFigure.setVisible(true);
         });
 

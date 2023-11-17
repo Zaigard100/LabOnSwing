@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Utils {
-    static private final ArrayList<FigureContainer> containers; //TODO создать свой контейнер
+    static private final ArrayList<FigureContainer> containers;
 
     static {
         containers = new ArrayList<>();

@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class TransformFigure extends JDialog {
     JPanel figureChoosing,dataPlain,editPanel;
-    JComboBox<String> figureNumber,editParameter;
+    JComboBox<String> figureNumber,editParameter,containers;
     TextField field1,field2,field3;
     JCheckBox checkBox;
     JButton cancel,edit,rotate;
@@ -26,6 +26,7 @@ public class TransformFigure extends JDialog {
 
         figureNumber = new JComboBox<>();
         editParameter = new JComboBox<>();
+        containers = new JComboBox<>();
 
         field1 = new TextField(5);
         field2 = new TextField(5);
@@ -40,6 +41,7 @@ public class TransformFigure extends JDialog {
         figureChoosing.add(new JLabel("Figure:"));
         figureChoosing.add(figureNumber);
         figureChoosing.add(editParameter);
+        figureChoosing.add(containers);
 
         dataPlain.add(new JLabel("Nothing"));
 
@@ -51,6 +53,12 @@ public class TransformFigure extends JDialog {
         add(editPanel,BorderLayout.SOUTH);
 
         setBounds((Lab5.getWindows_w()-width)/2,(Lab5.getWindows_h()-height)/2,width,height);
+
+
+        containers.addActionListener(e ->{
+            updateFigureList();
+            clearFields();
+        });
 
         figureNumber.addActionListener(e -> {
 
@@ -67,9 +75,10 @@ public class TransformFigure extends JDialog {
             clearFields();
         });
 
+
         edit.addActionListener(e -> {
                 if(noNull((String) figureNumber.getSelectedItem()).equals("all")){
-                    for(Figure figure:Utils.getFigures()) {
+                    for(Figure figure:Utils.getContainer((String) containers.getSelectedItem()).getFigures()) {
                         edit(
                                 figure,
                                 parse(noNull((String) figureNumber.getSelectedItem())),
@@ -80,9 +89,137 @@ public class TransformFigure extends JDialog {
                                 checkBox.isSelected()
                         );
                     }
+                }else if(noNull((String) figureNumber.getSelectedItem()).equals("circles")){
+
+                    for(Figure figure:Utils.getContainer((String) containers.getSelectedItem()).getFigures()) {
+                        if (figure.getClass().isAssignableFrom(Circle.class)) {
+                            edit(
+                                figure,
+                                parse(noNull((String) figureNumber.getSelectedItem())),
+                                noNull((String) editParameter.getSelectedItem()),
+                                field1.getText(),
+                                field2.getText(),
+                                field3.getText(),
+                                checkBox.isSelected()
+                            );
+                        }
+                    }
+
+                }else if(noNull((String) figureNumber.getSelectedItem()).equals("line")){
+
+                    for(Figure figure:Utils.getContainer((String) containers.getSelectedItem()).getFigures()) {
+                        if (figure.getClass().isAssignableFrom(Line.class)) {
+                            edit(
+                                    figure,
+                                    parse(noNull((String) figureNumber.getSelectedItem())),
+                                    noNull((String) editParameter.getSelectedItem()),
+                                    field1.getText(),
+                                    field2.getText(),
+                                    field3.getText(),
+                                    checkBox.isSelected()
+                            );
+                        }
+                    }
+
+                }else if(noNull((String) figureNumber.getSelectedItem()).equals("oval")){
+
+                    for(Figure figure:Utils.getContainer((String) containers.getSelectedItem()).getFigures()) {
+                        if (figure.getClass().isAssignableFrom(Oval.class)) {
+                            edit(
+                                    figure,
+                                    parse(noNull((String) figureNumber.getSelectedItem())),
+                                    noNull((String) editParameter.getSelectedItem()),
+                                    field1.getText(),
+                                    field2.getText(),
+                                    field3.getText(),
+                                    checkBox.isSelected()
+                            );
+                        }
+                    }
+
+                }else if(noNull((String) figureNumber.getSelectedItem()).equals("rect")){
+
+                    for(Figure figure:Utils.getContainer((String) containers.getSelectedItem()).getFigures()) {
+                        if (figure.getClass().isAssignableFrom(Rect.class)) {
+                            edit(
+                                    figure,
+                                    parse(noNull((String) figureNumber.getSelectedItem())),
+                                    noNull((String) editParameter.getSelectedItem()),
+                                    field1.getText(),
+                                    field2.getText(),
+                                    field3.getText(),
+                                    checkBox.isSelected()
+                            );
+                        }
+                    }
+
+                }else if(noNull((String) figureNumber.getSelectedItem()).equals("ring")){
+
+                    for(Figure figure:Utils.getContainer((String) containers.getSelectedItem()).getFigures()) {
+                        if (figure.getClass().isAssignableFrom(Ring.class)) {
+                            edit(
+                                    figure,
+                                    parse(noNull((String) figureNumber.getSelectedItem())),
+                                    noNull((String) editParameter.getSelectedItem()),
+                                    field1.getText(),
+                                    field2.getText(),
+                                    field3.getText(),
+                                    checkBox.isSelected()
+                            );
+                        }
+                    }
+
+                }else if(noNull((String) figureNumber.getSelectedItem()).equals("romb")){
+
+                    for(Figure figure:Utils.getContainer((String) containers.getSelectedItem()).getFigures()) {
+                        if (figure.getClass().isAssignableFrom(Romb.class)) {
+                            edit(
+                                    figure,
+                                    parse(noNull((String) figureNumber.getSelectedItem())),
+                                    noNull((String) editParameter.getSelectedItem()),
+                                    field1.getText(),
+                                    field2.getText(),
+                                    field3.getText(),
+                                    checkBox.isSelected()
+                            );
+                        }
+                    }
+
+                }else if(noNull((String) figureNumber.getSelectedItem()).equals("trapezoid")){
+
+                    for(Figure figure:Utils.getContainer((String) containers.getSelectedItem()).getFigures()) {
+                        if (figure.getClass().isAssignableFrom(Trapezoid.class)) {
+                            edit(
+                                    figure,
+                                    parse(noNull((String) figureNumber.getSelectedItem())),
+                                    noNull((String) editParameter.getSelectedItem()),
+                                    field1.getText(),
+                                    field2.getText(),
+                                    field3.getText(),
+                                    checkBox.isSelected()
+                            );
+                        }
+                    }
+
+                }else if(noNull((String) figureNumber.getSelectedItem()).equals("triangle")){
+
+                    for(Figure figure:Utils.getContainer((String) containers.getSelectedItem()).getFigures()) {
+                        if (figure.getClass().isAssignableFrom(Triangle.class)) {
+                            edit(
+                                    figure,
+                                    parse(noNull((String) figureNumber.getSelectedItem())),
+                                    noNull((String) editParameter.getSelectedItem()),
+                                    field1.getText(),
+                                    field2.getText(),
+                                    field3.getText(),
+                                    checkBox.isSelected()
+                            );
+                        }
+                    }
+
                 }else {
                     edit(
-                            Utils.getFigures().get(figureNumber.getSelectedIndex()),
+                            Utils.getContainer((String) containers.getSelectedItem()).getFigures().get(figureNumber.getSelectedIndex()),
                             parse(noNull((String) figureNumber.getSelectedItem())),
                             noNull((String) editParameter.getSelectedItem()),
                             field1.getText(),
@@ -99,8 +236,15 @@ public class TransformFigure extends JDialog {
 
         });
 
+    }
 
-
+    public void updateContainers(){
+        containers.removeAllItems();
+        for (FigureContainer fC:Utils.getFigureContainers()){
+            containers.addItem(fC.getName());
+        }
+        containers.setSelectedIndex(0);
+        updateFigureList();
     }
 
     public void updateFigureList(){
@@ -108,7 +252,7 @@ public class TransformFigure extends JDialog {
             figureNumber.removeAllItems();
         }
         int i = 0;
-        for(Figure figure:Utils.getFigures()){
+        for(Figure figure:Utils.getContainer((String) containers.getSelectedItem()).getFigures()){
             if(figure instanceof Line){
                 figureNumber.addItem((i+1)+"(Line)");
             }else if(figure instanceof Triangle){
@@ -131,7 +275,16 @@ public class TransformFigure extends JDialog {
 
             i++;
         }
-            figureNumber.addItem("all");
+
+        figureNumber.addItem("all");
+        figureNumber.addItem("circle");
+        figureNumber.addItem("line");
+        figureNumber.addItem("oval");
+        figureNumber.addItem("rect");
+        figureNumber.addItem("ring");
+        figureNumber.addItem("romb");
+        figureNumber.addItem("trapezoid");
+        figureNumber.addItem("triangle");
 
         figureNumber.setSelectedIndex(0);
         updateParameters(parse(noNull((String) figureNumber.getSelectedItem())));
@@ -361,6 +514,8 @@ public class TransformFigure extends JDialog {
         }
         return  s;
     }
+
+
 
     private void clearFields(){
         field1.setText("");

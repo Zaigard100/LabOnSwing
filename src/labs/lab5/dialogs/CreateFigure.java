@@ -73,6 +73,7 @@ public class CreateFigure extends JDialog {
 
         figureChoosing.add(new JLabel(" Figure: "));
         figureChoosing.add(figureName);
+        figureChoosing.add(containers);
 
         dataPlain.add(dataP,BorderLayout.NORTH);
         dataPlain.add(datas,BorderLayout.CENTER);
@@ -84,8 +85,6 @@ public class CreateFigure extends JDialog {
         add(figureChoosing,BorderLayout.NORTH);
         add(dataPlain,BorderLayout.CENTER);
         add(createPanel,BorderLayout.SOUTH);
-
-        updateData();
 
         setBounds((Lab5.getWindows_w()-width)/2,(Lab5.getWindows_h()-height)/2,width,height);
 
@@ -106,8 +105,16 @@ public class CreateFigure extends JDialog {
 
     }
 
+    public void updateContainers(){
+        containers.removeAllItems();
+        for (FigureContainer fC:Utils.getFigureContainers()){
+            containers.addItem(fC.getName());
+        }
+        containers.setSelectedIndex(0);
+        updateData();
+    }
+
     public void updateData() {
-        updateContainers();
         datas.removeAll();
         switch ((String) figureName.getSelectedItem()){
 
@@ -229,13 +236,6 @@ public class CreateFigure extends JDialog {
         Lab5.getPicture().repaint();
         Lab5.getPicture().revalidate();
 
-    }
-
-    void updateContainers(){
-        containers.removeAll();
-        for (FigureContainer fC:Utils.getFigureContainers()){
-            containers.addItem(fC.getName());
-        }
     }
 
     private void clearFields(){
