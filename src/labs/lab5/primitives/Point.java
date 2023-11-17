@@ -42,6 +42,14 @@ public class Point {
 
     }
 
+    public boolean inFrame(){
+        return x>0 && y>0 && x<Lab5.getWindows_w() && y<Lab5.getWindows_h();
+    }
+
+    public boolean inFrame(int dx,int dy){//TODO перепесать проверки под inFrame()
+        return x+dx>0 && y+dy>0 && x+dx<Lab5.getWindows_w() && y+dy<Lab5.getWindows_h();
+    }
+
     public int getX() {
         return x;
     }

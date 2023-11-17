@@ -29,19 +29,7 @@ public class Triangle extends Figure {
 
     @Override
     public boolean checkBoundaries(int dx, int dy) {
-        if(Math.max(Math.max(p.getX(), p2.getX()),p3.getX())+dx> Lab5.getWindows_w()/2){
-            return false;
-        }
-        if(Math.max(Math.max(p.getY(), p2.getY()),p3.getY())+dy> Lab5.getWindows_h()/2){
-            return false;
-        }
-        if(Math.min(Math.min(p.getX(), p2.getX()),p3.getX())+dx<0){
-            return false;
-        }
-        if(Math.min(Math.min(p.getY(), p2.getY()),p3.getY())+dy<0){
-            return false;
-        }
-        return true;
+        return p.inFrame(dx,dy) && p2.inFrame(dx,dy) && p3.inFrame(dx,dy) ;
     }
 
     public int getX1(){
