@@ -7,7 +7,7 @@ import labs.lab5.primitives.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class TransformFigure extends Dialog {
+public class TransformFigure extends JDialog {
     JPanel figureChoosing,dataPlain,editPanel;
     JComboBox<String> figureNumber,editParameter;
     TextField field1,field2,field3;
@@ -18,7 +18,7 @@ public class TransformFigure extends Dialog {
         super(Lab5.getjFrame(),"Edit",true);
 
         int width = 300;
-        int height = 150;
+        int height = 200;
 
         figureChoosing = new JPanel();
         dataPlain = new JPanel();

@@ -13,8 +13,12 @@ public class Picture extends JComponent {
 
     @Override
     protected void paintComponent(Graphics g){
-        for(Figure figure: Utils.getFigures()){
-            figure.show(g);
+        for(FigureContainer fC: Utils.getFigureContainers()){
+            if(fC.isVisible()){
+                for (Figure f: fC.getFigures()){
+                    f.show(g);
+                }
+            }
         }
 
     }

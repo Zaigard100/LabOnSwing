@@ -7,12 +7,14 @@ import java.awt.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Utils {
-    static private final ArrayList<Figure> figures; //TODO создать свой контейнер
+    static private final ArrayList<FigureContainer> containers; //TODO создать свой контейнер
 
     static {
-        figures = new ArrayList<>();
+        containers = new ArrayList<>();
+        containers.add(new FigureContainer("main"));
     }
 
     public static void load(String file){
@@ -41,7 +43,7 @@ public class Utils {
             String[] words = line.split(",");
             switch (words[0]) {
                 case "t":
-                    figures.add(new Triangle(
+                    containers.get(0).add(new Triangle(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             new Point(Integer.parseInt(words[3]), Integer.parseInt(words[4])),
                             new Point(Integer.parseInt(words[5]), Integer.parseInt(words[6])),
@@ -50,14 +52,14 @@ public class Utils {
                     ));
                     break;
                 case "l":
-                    figures.add(new Line(
+                    containers.get(0).add(new Line(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             new Point(Integer.parseInt(words[3]), Integer.parseInt(words[4])),
                             new Color(Integer.parseInt(words[5]), Integer.parseInt(words[6]), Integer.parseInt(words[7]))
                     ));
                     break;
                 case "c":
-                    figures.add(new Circle(
+                    containers.get(0).add(new Circle(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]),
                             Boolean.parseBoolean(words[7]),
@@ -65,7 +67,7 @@ public class Utils {
                     ));
                     break;
                 case "ri":
-                    figures.add(new Ring(
+                    containers.get(0).add(new Ring(
                                     new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                                     Integer.parseInt(words[3]),
                                     Integer.parseInt(words[4]),
@@ -74,7 +76,7 @@ public class Utils {
                     );
                     break;
                 case "o":
-                    figures.add(new Oval(
+                    containers.get(0).add(new Oval(
                                     new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                                     Integer.parseInt(words[3]),
                                     Integer.parseInt(words[4]),
@@ -84,7 +86,7 @@ public class Utils {
                     );
                     break;
                 case "ro":
-                    figures.add(new Romb(
+                    containers.get(0).add(new Romb(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]),
                             Boolean.parseBoolean(words[8]),
@@ -92,7 +94,7 @@ public class Utils {
                     ));
                     break;
                 case "tr":
-                    figures.add(new Trapezoid(
+                    containers.get(0).add(new Trapezoid(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]), Integer.parseInt(words[5]),
                             Boolean.parseBoolean(words[9]),
@@ -100,7 +102,7 @@ public class Utils {
                     ));
                     break;
                 case "re":
-                    figures.add(new Rect(
+                    containers.get(0).add(new Rect(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]),
                             Boolean.parseBoolean(words[8]),
@@ -115,12 +117,25 @@ public class Utils {
         }
     }
 
-    public static void dispose(){
-        figures.clear();
+    public static void dispose(String name){
+        for(FigureContainer fC:containers) {
+            if(Objects.equals(fC.getName(), name)|| Objects.equals(name, "all")) {
+                fC.dispose();
+            }
+        }
     }
 
+    public static FigureContainer getContainer(String name){
+        for(FigureContainer fC:containers){
+            if(Objects.equals(fC.getName(), name)){
+                return fC;
+            }
+        }
+        System.out.println("No find container with name: " + name);
+        return null;
+    }
 
-    public static ArrayList<Figure> getFigures(){
-        return figures;
+    public static ArrayList<FigureContainer> getFigureContainers(){
+        return containers;
     }
 }

@@ -8,12 +8,12 @@ import labs.lab5.primitives.Point;
 import javax.swing.*;
 import java.awt.*;
 
-public class CreateFigure extends Dialog {
+public class CreateFigure extends JDialog {
 
     JPanel figureChoosing,dataPlain,createPanel;
 
     JPanel dataP,datas,dataColor;
-    JComboBox<String> figureName;
+    JComboBox<String> figureName,containers;
 
     JButton cancel,create;
 
@@ -44,6 +44,7 @@ public class CreateFigure extends Dialog {
         fillCB = new JCheckBox("Fill");
 
         figureName = new JComboBox<>(new String[]{"Circle","Line","Triangle","Oval","Ring","Rect","Romb","Trapezoid"});
+        containers = new JComboBox<>();
 
         figureName.setSelectedIndex(0);
 
@@ -55,8 +56,6 @@ public class CreateFigure extends Dialog {
         dataP.add(xF);
         dataP.add(new JLabel(" Y "));
         dataP.add(yF);
-
-
 
         dataColor.add(new JLabel(" R "));
         dataColor.add(rF);
@@ -108,6 +107,7 @@ public class CreateFigure extends Dialog {
     }
 
     public void updateData() {
+        updateContainers();
         datas.removeAll();
         switch ((String) figureName.getSelectedItem()){
 
@@ -186,42 +186,42 @@ public class CreateFigure extends Dialog {
         switch ((String) figureName.getSelectedItem()){
             case "Circle":
                 if((x>0) && (x< Lab5.getWindows_w()-dw) && (y>0) && (y< Lab5.getWindows_h()-dw) && (dw>0) && (dw<Math.min(Lab5.getWindows_w()-x, Lab5.getWindows_h()-y))) {
-                    Utils.getFigures().add(new Circle(new Point(x, y), dw, fill, new Color(r, g, b)));
+                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Circle(new Point(x, y), dw, fill, new Color(r, g, b)));
                 }
                 break;
             case "Line":
                 if((x>0) && (x< Lab5.getWindows_w()) && (y>0) && (y< Lab5.getWindows_h()) && (x1>0) && (x1< Lab5.getWindows_w()) && (y1>0) && (y1< Lab5.getWindows_h()) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
-                    Utils.getFigures().add(new Line(new Point(x, y),new Point(x1, y1), new Color(r, g, b)));
+                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Line(new Point(x, y),new Point(x1, y1), new Color(r, g, b)));
                 }
                 break;
             case "Triangle":
                 if((x>0) && (x< Lab5.getWindows_w()) && (y>0) && (y< Lab5.getWindows_h()) && (x1>0) && (x1< Lab5.getWindows_w()) && (y1>0) && (y1< Lab5.getWindows_h()) && (x2>0) && (x2< Lab5.getWindows_w()) && (y2>0) && (y2< Lab5.getWindows_h()) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
-                    Utils.getFigures().add(new Triangle(new Point(x, y), new Point(x1, y1), new Point(x2, y2), fill, new Color(r, g, b)));
+                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Triangle(new Point(x, y), new Point(x1, y1), new Point(x2, y2), fill, new Color(r, g, b)));
                 }
                 break;
             case "Oval":
                 if((x>0) && (x< Lab5.getWindows_w() - dw) && (y>0) && (y< Lab5.getWindows_h()-dh) && (dw>0)&& (dh>0) && (dw< Lab5.getWindows_w()-x) && (dh< Lab5.getWindows_h()-y)) {
-                    Utils.getFigures().add(new Oval(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
+                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Oval(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
                 }
                 break;
             case "Ring":
                 if((x>0) && (x< Lab5.getWindows_w()-Math.max(dw,dh)) && (y>0) && (y< Lab5.getWindows_h()-Math.max(dw,dh)) && (dw>0)&& (dh>0) && (Math.max(dw,dh)<Math.min(Lab5.getWindows_w()-x, Lab5.getWindows_h()-y))) {
-                    Utils.getFigures().add(new Ring(new Point(x,y), dw,dh, new Color(r, g, b)));
+                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Ring(new Point(x,y), dw,dh, new Color(r, g, b)));
                 }
                 break;
             case "Rect":
                 if((x>0) && (x< Lab5.getWindows_w() - dw) && (y>0) && (y< Lab5.getWindows_h()-dh) && (dw>0)&& (dh>0) && (dw< Lab5.getWindows_w()-x) && (dh< Lab5.getWindows_h()-y)) {
-                    Utils.getFigures().add(new Rect(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
+                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Rect(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
                 }
                 break;
             case "Romb":
                 if((x>0) && (x< Lab5.getWindows_w() - dw) && (y>0) && (y< Lab5.getWindows_h()-dh) && (dw>0)&& (dh>0) && (dw< Lab5.getWindows_w()-x) && (dh< Lab5.getWindows_h()-y)) {
-                    Utils.getFigures().add(new Romb(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
+                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Romb(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
                 }
                 break;
             case "Trapezoid":
                 if((x-Math.max(dw,dw1)>0)&&(y-dh>0)&&(x+Math.max(dw,dw1)<Lab5.getWindows_w())&&(y+dh<Lab5.getWindows_h())){
-                Utils.getFigures().add(new Trapezoid(new Point(x,y), dw,dw1,dh,fill, new Color(r, g, b)));
+                Utils.getContainer(containers.getSelectedItem().toString()).add(new Trapezoid(new Point(x,y), dw,dw1,dh,fill, new Color(r, g, b)));
                 }
                 break;
         }
@@ -229,6 +229,13 @@ public class CreateFigure extends Dialog {
         Lab5.getPicture().repaint();
         Lab5.getPicture().revalidate();
 
+    }
+
+    void updateContainers(){
+        containers.removeAll();
+        for (FigureContainer fC:Utils.getFigureContainers()){
+            containers.addItem(fC.getName());
+        }
     }
 
     private void clearFields(){

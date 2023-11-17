@@ -97,7 +97,7 @@ public class Lab5 {
         });
 
         del.addActionListener(e -> {
-            Utils.dispose();
+            Utils.dispose("all");
             picture.repaint();
             picture.revalidate();
             jPanel.repaint();
