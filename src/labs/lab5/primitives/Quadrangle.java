@@ -6,10 +6,11 @@ import java.awt.*;
 
 public class Quadrangle extends Figure {
 
-    Point p2,p3,p4;
+    Point p1,p2,p3,p4;
 
-    public Quadrangle(Point p1, Point p2, Point p3, Point p4, boolean fill, Color color) {
-        super(p1, fill, color);
+    public Quadrangle(Point pc,Point p1, Point p2, Point p3, Point p4, boolean fill, Color color) {
+        super(pc, fill, color);
+        this.p1 = p1;
         this.p2 = p2;
         this.p3 = p3;
         this.p4 = p4;
@@ -17,14 +18,9 @@ public class Quadrangle extends Figure {
     }
 
     @Override
-    public void move(int dx, int dy) {
-        super.move(dx, dy);//TODO решить проблему с move  в дочерних классах
-    }
-
-    @Override
     public void show(Graphics g) {
-        int[] x_p = new int[]{p.getX(),p2.getX(),p3.getX(),p4.getX()};
-        int[] y_p = new int[]{p.getY(),p2.getY(),p3.getY(),p4.getY()};
+        int[] x_p = new int[]{p1.getX(),p2.getX(),p3.getX(),p4.getX()};
+        int[] y_p = new int[]{p1.getY(),p2.getY(),p3.getY(),p4.getY()};
 
         g.setColor(color);
 
@@ -37,21 +33,7 @@ public class Quadrangle extends Figure {
 
     @Override
     public boolean checkBoundaries(int dx, int dy) {
-
-        if(Math.max(Math.max(p.getX(), p2.getX()),Math.max(p3.getX(), p4.getX()))+dx> Lab5.getWindows_w()/2){
-            return false;
-        }
-        if(Math.max(Math.max(p.getY(), p2.getY()),Math.max(p3.getY(), p4.getY()))+dy> Lab5.getWindows_h()/2){
-            return false;
-        }
-        if(Math.min(Math.min(p.getX(), p2.getX()),Math.min(p3.getX(), p4.getX()))+dx<0){
-            return false;
-        }
-        if(Math.min(Math.min(p.getY(), p2.getY()),Math.min(p3.getY(), p4.getY()))+dy<0){
-            return false;
-        }
-        return true;
-
+        return p.inFrame(dx,dy) && p1.inFrame(dx,dy) && p2.inFrame(dx,dy) && p3.inFrame(dx,dy) && p4.inFrame(dx,dy);
     }
 
     public int getX(){
@@ -62,6 +44,13 @@ public class Quadrangle extends Figure {
         return p.getY();
     }
 
+    public Point getP1() {
+        return p1;
+    }
+
+    public void setP1(Point p1) {
+        this.p1 = p1;
+    }
 
     public Point getP2() {
         return p2;

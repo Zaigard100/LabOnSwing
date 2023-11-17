@@ -21,18 +21,20 @@ public abstract class Figure {
     public void move(int dx, int dy){
         if(checkBoundaries(dx,dy)){
             p.move(dx,dy);
-            if(this instanceof Line){
+            if(this.getClass().isAssignableFrom(Line.class)){
                 ((Line)this).getP2().move(dx,dy);
             }
-            if(this instanceof Triangle){
+            if(this.getClass().isAssignableFrom(Triangle.class)){
                 ((Triangle)this).getP2().move(dx,dy);
                 ((Triangle)this).getP3().move(dx,dy);
             }
-            if(this instanceof Quadrangle ){
+            if(this.getClass().isAssignableFrom(Quadrangle.class)|| this.getClass().isAssignableFrom(Rect.class)|| this.getClass().isAssignableFrom(Romb.class)|| this.getClass().isAssignableFrom(Trapezoid.class)){
+                ((Quadrangle)this).getP1().move(dx,dy);
                 ((Quadrangle)this).getP2().move(dx,dy);
                 ((Quadrangle)this).getP3().move(dx,dy);
                 ((Quadrangle)this).getP4().move(dx,dy);
             }
+
         }
     }
 
