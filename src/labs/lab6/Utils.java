@@ -1,7 +1,9 @@
-package labs.lab5;
+package labs.lab6;
 
-import labs.lab5.primitives.Point;
-import labs.lab5.primitives.*;
+import labs.lab6.contaners.AbstractContainer;
+import labs.lab6.contaners.FigureContainer;
+import labs.lab6.primitives.Point;
+import labs.lab6.primitives.*;
 
 import java.awt.*;
 import java.io.FileReader;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Utils {
-    static private final ArrayList<FigureContainer> containers;
+    static private final ArrayList<AbstractContainer> containers;
 
     static {
         containers = new ArrayList<>();
@@ -117,15 +119,15 @@ public class Utils {
     }
 
     public static void dispose(String name){
-        for(FigureContainer fC:containers) {
+        for(AbstractContainer fC:containers) {
             if(Objects.equals(fC.getName(), name)|| Objects.equals(name, "all")) {
                 fC.dispose();
             }
         }
     }
 
-    public static FigureContainer getContainer(String name){
-        for(FigureContainer fC:containers){
+    public static AbstractContainer getContainer(String name){
+        for(AbstractContainer fC:containers){
             if(Objects.equals(fC.getName(), name)){
                 return fC;
             }
@@ -134,7 +136,7 @@ public class Utils {
         return null;
     }
 
-    public static ArrayList<FigureContainer> getFigureContainers(){
+    public static ArrayList<AbstractContainer> getFigureContainers(){
         return containers;
     }
 }

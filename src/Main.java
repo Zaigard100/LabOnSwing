@@ -1,5 +1,6 @@
 import labs.lab4.Lab4;
 import labs.lab5.Lab5;
+import labs.lab6.Lab6;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,8 +25,14 @@ public class Main {
         lab4.start();
         //*/
 
+        /*
         Lab5 lab5 = new Lab5();
         lab5.start();
         //*/
+
+        Lab6 lab6 = new Lab6();
+        lab6.start();
+        //*/
+
     }
 }
