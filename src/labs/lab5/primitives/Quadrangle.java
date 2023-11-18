@@ -18,7 +18,7 @@ public class Quadrangle extends Figure {
     }
 
     @Override
-    public void show(Graphics g) {
+    public void draw(Graphics g) {
         int[] x_p = new int[]{p1.getX(),p2.getX(),p3.getX(),p4.getX()};
         int[] y_p = new int[]{p1.getY(),p2.getY(),p3.getY(),p4.getY()};
 

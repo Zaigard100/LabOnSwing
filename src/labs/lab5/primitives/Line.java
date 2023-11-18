@@ -13,7 +13,7 @@ public class Line extends Figure {
         this.p2 = p2;
     }
 
-    public void show(Graphics g){
+    public void draw(Graphics g){
         g.setColor(color);
         g.drawLine(p.getX(), p.getY(), p2.getX(), p2.getY());
     }

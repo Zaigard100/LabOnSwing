@@ -12,12 +12,12 @@ public class TransformFigure extends JDialog {
     JComboBox<String> figureNumber,editParameter,containers;
     TextField field1,field2,field3;
     JCheckBox checkBox;
-    JButton cancel,edit,rotate;
+    JButton cancel,edit,rotate,delete;
     public TransformFigure(){
 
         super(Lab5.getjFrame(),"Edit",true);
 
-        int width = 300;
+        int width = 350;
         int height = 200;
 
         figureChoosing = new JPanel();
@@ -37,6 +37,7 @@ public class TransformFigure extends JDialog {
         cancel = new JButton("Cancel");
         edit = new JButton("Edit");
         rotate = new JButton("Rotate");
+        delete = new JButton("Delete");
 
         figureChoosing.add(new JLabel("Figure:"));
         figureChoosing.add(figureNumber);
@@ -89,7 +90,7 @@ public class TransformFigure extends JDialog {
                                 checkBox.isSelected()
                         );
                     }
-                }else if(noNull((String) figureNumber.getSelectedItem()).equals("circles")){
+                }else if(noNull((String) figureNumber.getSelectedItem()).equals("circle")){
 
                     for(Figure figure:Utils.getContainer((String) containers.getSelectedItem()).getFigures()) {
                         if (figure.getClass().isAssignableFrom(Circle.class)) {
@@ -230,7 +231,20 @@ public class TransformFigure extends JDialog {
                 }
         });
 
+        delete.addActionListener(e -> {
+            Utils.getContainer((String) containers.getSelectedItem()).remove(Utils.getContainer((String) containers.getSelectedItem()).getFigures().get(figureNumber.getSelectedIndex()));
+
+            Lab5.getPicture().repaint();
+            Lab5.getPicture().revalidate();
+
+            containers.setSelectedIndex(0);
+            figureNumber.setSelectedIndex(0);
+
+            setVisible(false);
+        });
+
         cancel.addActionListener(e -> {
+
             clearFields();
             setVisible(false);
 
@@ -328,6 +342,7 @@ public class TransformFigure extends JDialog {
                 break;
 
         }
+        editParameter.addItem("delete");
         editParameter.addItem("color");
 
         editParameter.setSelectedIndex(0);
@@ -416,6 +431,9 @@ public class TransformFigure extends JDialog {
                 break;
             case  "rotate":
                 dataPlain.add(rotate);
+                break;
+            case  "delete":
+                dataPlain.add(delete);
         }
 
         dataPlain.repaint();

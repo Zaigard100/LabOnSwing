@@ -1,6 +1,7 @@
 package labs.lab4.primitives;
 
 import labs.lab4.Lab4;
+import labs.lab5.Lab5;
 
 import java.awt.*;
 
@@ -42,10 +43,14 @@ public class Oval extends Figure {
     }
 
     public void rotate90(){
-        int a = getDiameterX();
-        setDiameterX(getDiameterY());
-        setDiameterY(a);
-        move(0,0);
+        if(getP().getY()-getDiameterX()>0 && getP().getX()-getDiameterY()>0) {
+            if(getP().getY()+getDiameterX()< Lab5.getWindows_h() && getP().getX() + getDiameterY()< Lab5.getWindows_w()) {
+                int buf = getDiameterX();
+                setDiameterX(getDiameterY());
+                setDiameterY(buf);
+                move(0, 0);
+            }
+        }
     }
 
     public int getX() {

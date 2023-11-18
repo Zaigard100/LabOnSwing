@@ -16,7 +16,7 @@ public class Picture extends JComponent {
         for(FigureContainer fC: Utils.getFigureContainers()){
             if(fC.isVisible()){
                 for (Figure f: fC.getFigures()){
-                    f.show(g);
+                    f.draw(g);
                 }
             }
         }

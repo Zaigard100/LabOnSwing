@@ -13,7 +13,10 @@ public abstract class Figure {
         this.fill = fill;
     }
 
-    public abstract void show(Graphics g);
+    public abstract void draw(Graphics g);
+    public void show(Graphics g){
+        draw(g);
+    }
 
     public abstract boolean checkBoundaries(int dx,int dy);
 

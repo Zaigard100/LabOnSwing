@@ -10,7 +10,7 @@ public class Ring extends Oval {
         super(p,diameter1,diameter2,true,color);
     }
 
-    public void show(Graphics g){
+    public void draw(Graphics g){
         g.setColor(color);
         g.fillOval(getX(),getY(),getDiameterX(),getDiameterX());
         g.setColor(new Color(239,239,239));

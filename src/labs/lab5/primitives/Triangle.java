@@ -18,7 +18,7 @@ public class Triangle extends Figure {
         this.color = color;
     }
 
-    public void show(Graphics g){
+    public void draw(Graphics g){
         g.setColor(color);
         if(fill){
             g.fillPolygon(getX_point(),getY_point(),3);

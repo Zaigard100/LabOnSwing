@@ -14,7 +14,7 @@ public class Oval extends Figure {
     }
 
     @Override
-    public void show(Graphics g) {
+    public void draw(Graphics g) {
         g.setColor(color);
         if(isFill()){
             g.fillOval(p.getX()-getDiameterX()/2, p.getY()- getDiameterY() /2, getDiameterX(), getDiameterY());

@@ -2,6 +2,7 @@ package labs.lab5;
 
 import labs.lab5.dialogs.CreateContainer;
 import labs.lab5.dialogs.CreateFigure;
+import labs.lab5.dialogs.TransformContainer;
 import labs.lab5.dialogs.TransformFigure;
 
 import javax.swing.*;
@@ -17,11 +18,12 @@ public class Lab5 {
     static JMenuBar jMenuBar;
     static JMenu file, transform,create;
     static JMenuItem load,del,exit;
-    static JMenuItem fig;
+    static JMenuItem fig,cnt;
     static JMenuItem a_fig,a_cnt;
     static CreateFigure createFigure = new CreateFigure();
     static CreateContainer createContainer = new CreateContainer();
     static TransformFigure transformFigure = new TransformFigure();
+    static TransformContainer transformContainer = new TransformContainer();
     public static Toolkit toolkit;
     public static Dimension dimension;
     public static Picture picture;
@@ -79,7 +81,8 @@ public class Lab5 {
         a_fig = create.add(new JMenuItem("Figure"));
         a_cnt = create.add(new JMenuItem("Container"));
 
-        fig = transform.add(new JMenuItem("TransformFigure"));
+        fig = transform.add(new JMenuItem("Figure"));
+        cnt = transform.add((new JMenuItem("Container")));
 
     }
     static void menuBarFunctions(){
@@ -121,6 +124,10 @@ public class Lab5 {
         fig.addActionListener(actionEvent -> {
             transformFigure.updateContainers();
             transformFigure.setVisible(true);
+        });
+        cnt.addActionListener(actionEvent ->{
+            transformContainer.updateContainers();
+            transformContainer.setVisible(true);
         });
 
     }
