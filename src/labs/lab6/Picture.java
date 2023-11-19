@@ -1,8 +1,6 @@
 package labs.lab6;
 
 import labs.lab6.contaners.AbstractContainer;
-import labs.lab6.primitives.Figure;
-import labs.lab6.contaners.FigureContainer;
 
 import javax.swing.*;
 import java.awt.*;

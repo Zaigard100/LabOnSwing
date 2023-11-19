@@ -3,7 +3,7 @@ package labs.lab6.dialogs;
 import labs.lab6.Lab6;
 import labs.lab6.Utils;
 import labs.lab6.contaners.AbstractContainer;
-import labs.lab6.contaners.FigureContainer;
+import labs.lab6.contaners.FigureList;
 import labs.lab6.primitives.*;
 
 import javax.swing.*;
@@ -222,9 +222,9 @@ public class TransformFigure extends JDialog {
                     }while (Utils.getContainer((String) containers.getSelectedItem()).next());
 
                 }else {
-                    if(Utils.getContainer((String) containers.getSelectedItem()) instanceof FigureContainer) {
+                    if(Utils.getContainer((String) containers.getSelectedItem()) instanceof FigureList) {
                         edit(
-                                ((FigureContainer) Utils.getContainer((String) containers.getSelectedItem())).getFigures().get(figureNumber.getSelectedIndex()),
+                                ((FigureList) Utils.getContainer((String) containers.getSelectedItem())).getFigures().get(figureNumber.getSelectedIndex()),
                                 parse(noNull((String) figureNumber.getSelectedItem())),
                                 noNull((String) editParameter.getSelectedItem()),
                                 field1.getText(),

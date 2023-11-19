@@ -89,7 +89,9 @@ public class Lab6 {
         exit.addActionListener(e -> System.exit(0));
 
         load.addActionListener(e -> {
-            JFileChooser jFileChooser = new JFileChooser("/home/zaigard/Projects/LabOnSwing/src/labs");
+            //JFileChooser jFileChooser = new JFileChooser("/home/zaigard/Projects/LabOnSwing/src/labs");
+            JFileChooser jFileChooser = new JFileChooser("C:\\Users\\zaiga\\IdeaProjects\\LabOnSwing\\src\\labs");
+            //C:\Users\zaiga\IdeaProjects\LabOnSwing\src\labs\primitives.txt
             jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             int result = jFileChooser.showOpenDialog(jPanel);
             if(result == JFileChooser.APPROVE_OPTION){

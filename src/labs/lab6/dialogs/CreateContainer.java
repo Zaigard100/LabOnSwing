@@ -3,7 +3,7 @@ package labs.lab6.dialogs;
 import labs.lab6.Lab6;
 import labs.lab6.Utils;
 import labs.lab6.contaners.FigureArray;
-import labs.lab6.contaners.FigureContainer;
+import labs.lab6.contaners.FigureList;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,7 +61,7 @@ public class CreateContainer extends JDialog {
         create.addActionListener(e ->{
             if(Utils.getContainer(nameF.getText())==null){
                 if(Objects.equals((String) type.getSelectedItem(), "list")) {
-                    Utils.getFigureContainers().add(new FigureContainer(nameF.getText()));
+                    Utils.getFigureContainers().add(new FigureList(nameF.getText()));
                 }else if (Objects.equals((String) type.getSelectedItem(), "array")){
                     Utils.getFigureContainers().add(new FigureArray(nameF.getText()));
                 }

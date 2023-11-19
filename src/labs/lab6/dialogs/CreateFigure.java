@@ -3,7 +3,6 @@ package labs.lab6.dialogs;
 import labs.lab6.Lab6;
 import labs.lab6.Utils;
 import labs.lab6.contaners.AbstractContainer;
-import labs.lab6.contaners.FigureContainer;
 import labs.lab6.primitives.Point;
 import labs.lab6.primitives.*;
 
@@ -195,42 +194,42 @@ public class CreateFigure extends JDialog {
         switch ((String) figureName.getSelectedItem()){
             case "Circle":
                 if((x>0) && (x< Lab6.getWindows_w()-dw) && (y>0) && (y< Lab6.getWindows_h()-dw) && (dw>0) && (dw<Math.min(Lab6.getWindows_w()-x, Lab6.getWindows_h()-y))) {
-                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Circle(new Point(x, y), dw, fill, new Color(r, g, b)));
+                    Utils.getContainer((String) containers.getSelectedItem()).add(new Circle(new Point(x, y), dw, fill, new Color(r, g, b)));
                 }
                 break;
             case "Line":
                 if((x>0) && (x< Lab6.getWindows_w()) && (y>0) && (y< Lab6.getWindows_h()) && (x1>0) && (x1< Lab6.getWindows_w()) && (y1>0) && (y1< Lab6.getWindows_h()) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
-                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Line(new Point(x, y),new Point(x1, y1), new Color(r, g, b)));
+                    Utils.getContainer((String) containers.getSelectedItem()).add(new Line(new Point(x, y),new Point(x1, y1), new Color(r, g, b)));
                 }
                 break;
             case "Triangle":
                 if((x>0) && (x< Lab6.getWindows_w()) && (y>0) && (y< Lab6.getWindows_h()) && (x1>0) && (x1< Lab6.getWindows_w()) && (y1>0) && (y1< Lab6.getWindows_h()) && (x2>0) && (x2< Lab6.getWindows_w()) && (y2>0) && (y2< Lab6.getWindows_h()) && (r>=0&&g>=0&&b>=0&&r<=255&&g<=255&&b<=255)) {
-                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Triangle(new Point(x, y), new Point(x1, y1), new Point(x2, y2), fill, new Color(r, g, b)));
+                    Utils.getContainer((String) containers.getSelectedItem()).add(new Triangle(new Point(x, y), new Point(x1, y1), new Point(x2, y2), fill, new Color(r, g, b)));
                 }
                 break;
             case "Oval":
                 if((x>0) && (x< Lab6.getWindows_w() - dw) && (y>0) && (y< Lab6.getWindows_h()-dh) && (dw>0)&& (dh>0) && (dw< Lab6.getWindows_w()-x) && (dh< Lab6.getWindows_h()-y)) {
-                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Oval(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
+                    Utils.getFigureContainers().get(containers.getSelectedIndex()).add(new Oval(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
                 }
                 break;
             case "Ring":
                 if((x>0) && (x< Lab6.getWindows_w()-Math.max(dw,dh)) && (y>0) && (y< Lab6.getWindows_h()-Math.max(dw,dh)) && (dw>0)&& (dh>0) && (Math.max(dw,dh)<Math.min(Lab6.getWindows_w()-x, Lab6.getWindows_h()-y))) {
-                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Ring(new Point(x,y), dw,dh, new Color(r, g, b)));
+                    Utils.getFigureContainers().get(containers.getSelectedIndex()).add(new Ring(new Point(x,y), dw,dh, new Color(r, g, b)));
                 }
                 break;
             case "Rect":
                 if((x>0) && (x< Lab6.getWindows_w() - dw) && (y>0) && (y< Lab6.getWindows_h()-dh) && (dw>0)&& (dh>0) && (dw< Lab6.getWindows_w()-x) && (dh< Lab6.getWindows_h()-y)) {
-                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Rect(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
+                    Utils.getFigureContainers().get(containers.getSelectedIndex()).add(new Rect(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
                 }
                 break;
             case "Romb":
                 if((x>0) && (x< Lab6.getWindows_w() - dw) && (y>0) && (y< Lab6.getWindows_h()-dh) && (dw>0)&& (dh>0) && (dw< Lab6.getWindows_w()-x) && (dh< Lab6.getWindows_h()-y)) {
-                    Utils.getContainer(containers.getSelectedItem().toString()).add(new Romb(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
+                    Utils.getFigureContainers().get(containers.getSelectedIndex()).add(new Romb(new Point(x,y), dw,dh, fill, new Color(r, g, b)));
                 }
                 break;
             case "Trapezoid":
                 if((x-Math.max(dw,dw1)>0)&&(y-dh>0)&&(x+Math.max(dw,dw1)< Lab6.getWindows_w())&&(y+dh< Lab6.getWindows_h())){
-                Utils.getContainer(containers.getSelectedItem().toString()).add(new Trapezoid(new Point(x,y), dw,dw1,dh,fill, new Color(r, g, b)));
+                Utils.getFigureContainers().get(containers.getSelectedIndex()).add(new Trapezoid(new Point(x,y), dw,dw1,dh,fill, new Color(r, g, b)));
                 }
                 break;
         }

@@ -3,7 +3,6 @@ package labs.lab6.dialogs;
 import labs.lab6.Lab6;
 import labs.lab6.Utils;
 import labs.lab6.contaners.AbstractContainer;
-import labs.lab6.contaners.FigureContainer;
 
 import javax.swing.*;
 import java.awt.*;

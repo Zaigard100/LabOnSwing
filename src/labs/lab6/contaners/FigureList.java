@@ -4,17 +4,18 @@ import labs.lab6.primitives.Figure;
 
 import java.util.ArrayList;
 
-public class FigureContainer extends AbstractContainer{
+public class FigureList extends AbstractContainer{
 
     private final ArrayList<Figure> figures;
     Figure iter;
 
-    public FigureContainer(String name){
+    public FigureList(String name){
         super(name);
         figures = new ArrayList<>();
     }
 
     public void add(Figure f){
+        System.out.println(f + "container");//TODO Проверка на входждени фигуры
         if(f != null) {
             figures.add(f);
         }

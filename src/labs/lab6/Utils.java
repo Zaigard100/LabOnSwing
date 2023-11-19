@@ -1,7 +1,7 @@
 package labs.lab6;
 
 import labs.lab6.contaners.AbstractContainer;
-import labs.lab6.contaners.FigureContainer;
+import labs.lab6.contaners.FigureArray;
 import labs.lab6.primitives.Point;
 import labs.lab6.primitives.*;
 
@@ -16,7 +16,7 @@ public class Utils {
 
     static {
         containers = new ArrayList<>();
-        containers.add(new FigureContainer("main"));
+        containers.add(new FigureArray("main"));
     }
 
     public static void load(String file){

@@ -24,12 +24,17 @@ public class FigureArray extends AbstractContainer{
 
     @Override
     public void add(Figure f) {
-        System.out.println(f);//TODO проверка на входящий элемент
+        //System.out.println(f+" array");//TODO проверка на входящий элемент
         if(f != null){
-            if (figures.length <= count) {
+            if (count >= figures.length) {
                 Figure[] buf = figures.clone();
                 figures = new Figure[count + sizeAdd];
-                System.arraycopy(buf, 0, figures, 0, buf.length);
+                System.out.println("start");
+                for(int i = 0;i<buf.length;i++){
+                    figures[i] = buf[i];
+                    System.out.println(buf[i]);
+                }
+                System.out.println("end");
             }
             figures[count] = f;
             count++;
@@ -78,7 +83,7 @@ public class FigureArray extends AbstractContainer{
 
     @Override
     public void dispose() {
-
+        figures = new Figure[sizeAdd];
     }
 
 
