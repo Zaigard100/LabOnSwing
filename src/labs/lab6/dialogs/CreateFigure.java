@@ -191,6 +191,10 @@ public class CreateFigure extends JDialog {
         int g = Lab6.parseInt(gF.getText(),-1);
         int b = Lab6.parseInt(bF.getText(),-1);
         boolean fill = fillCB.isSelected();
+        if (Utils.getContainer((String) containers.getSelectedItem()) == null){
+            System.out.println("Container is not exist");
+            return;
+        }
         switch ((String) figureName.getSelectedItem()){
             case "Circle":
                 if((x>0) && (x< Lab6.getWindows_w()-dw) && (y>0) && (y< Lab6.getWindows_h()-dw) && (dw>0) && (dw<Math.min(Lab6.getWindows_w()-x, Lab6.getWindows_h()-y))) {

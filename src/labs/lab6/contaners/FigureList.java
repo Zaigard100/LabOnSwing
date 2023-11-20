@@ -2,6 +2,7 @@ package labs.lab6.contaners;
 
 import labs.lab6.primitives.Figure;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class FigureList extends AbstractContainer{
@@ -12,6 +13,13 @@ public class FigureList extends AbstractContainer{
     public FigureList(String name){
         super(name);
         figures = new ArrayList<>();
+    }
+
+    @Override
+    public void show(Graphics g) {
+        for (Figure f:figures){
+            f.show(g);
+        }
     }
 
     public void add(Figure f){

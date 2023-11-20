@@ -2,6 +2,8 @@ package labs.lab6.contaners;
 
 import labs.lab6.primitives.Figure;
 
+import java.awt.*;
+
 public abstract class AbstractContainer {
     String name;
     boolean visible = true;
@@ -9,6 +11,8 @@ public abstract class AbstractContainer {
     public AbstractContainer(String name){
         this.name = name;
     }
+
+    public abstract void show(Graphics g);
 
     public abstract void  add(Figure f);
 

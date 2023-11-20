@@ -15,11 +15,7 @@ public class Picture extends JComponent {
     protected void paintComponent(Graphics g){
         for(AbstractContainer fC: Utils.getFigureContainers()){
             if(fC.isVisible()){
-                do{
-                    if(fC.iterator()!=null) {
-                        fC.iterator().draw(g);
-                    }
-                }while (fC.next());
+                fC.show(g);
             }
         }
 
