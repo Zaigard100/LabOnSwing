@@ -4,7 +4,6 @@ import labs.lab6.primitives.Figure;
 
 import java.awt.*;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class FigureArray extends AbstractContainer{
 
@@ -27,6 +26,7 @@ public class FigureArray extends AbstractContainer{
     public void show(Graphics g) {
         if (count>0) {
             for (int i = 0;i<count;i++) {
+                if(figures[i] != null);
                 figures[i].show(g);
             }
         }
@@ -34,11 +34,17 @@ public class FigureArray extends AbstractContainer{
 
     @Override
     public void add(Figure f) {
-        if (count >= figures.length) {
-            figures = Arrays.copyOf(figures,count+sizeAdd);
+        for(int i = 0;i < figures.length;i++){
+            if(figures[i] == null){
+                figures[i] = f;
+                count++;
+                return;
+            }
         }
-        figures[count] = f;
-        count++;
+            figures = Arrays.copyOf(figures, figures.length + sizeAdd);
+            figures[figures.length-sizeAdd] = f;
+            count++;
+
     }
 
     @Override
@@ -48,14 +54,12 @@ public class FigureArray extends AbstractContainer{
 
     @Override
     public void remove(Figure f) { //TODO проблема при удалении объектов
-        Figure[] buf = figures.clone();
-        figures = new Figure[figures.length];
-        count = 0;
-        for (Figure figure : buf) {
-            if (figure != f) {
-                add(figure);
+        for(int i = 0;i < figures.length;i++){
+            if(figures[i] == f){
+                figures[i] = null;
             }
         }
+        count--;
     }
 
     @Override
@@ -71,16 +75,18 @@ public class FigureArray extends AbstractContainer{
 
     @Override
     public boolean next() {
-        if(numIter+1< count){
+        while(figures[numIter]==null){
+            if(numIter+1< figures.length) return false;
             numIter++;
-            return true;
         }
-        return false;
+        return true;
     }
 
     @Override
-    public void iteratorStart() {
+    public boolean iteratorStart() {
+        if(size()== 0) return false;
         numIter = 0;
+        return true;
     }
 
     @Override

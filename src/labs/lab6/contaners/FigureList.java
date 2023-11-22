@@ -23,7 +23,6 @@ public class FigureList extends AbstractContainer{
     }
 
     public void add(Figure f){
-        System.out.println(f + "container");//TODO Проверка на входждени фигуры
         if(f != null) {
             figures.add(f);
         }
@@ -58,10 +57,12 @@ public class FigureList extends AbstractContainer{
     }
 
     @Override
-    public void iteratorStart() {
+    public boolean iteratorStart() {
         if(size()!=0) {
             iter = figures.get(0);
+            return true;
         }
+        return false;
     }
 
     public void  dispose(){

@@ -24,7 +24,7 @@ public abstract class AbstractContainer {
 
     public abstract Figure iterator();
     public abstract boolean next();
-    public abstract void iteratorStart();
+    public abstract boolean iteratorStart();
 
     public String getName() {
         return name;

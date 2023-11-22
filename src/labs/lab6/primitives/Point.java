@@ -46,7 +46,7 @@ public class Point {
         return x>0 && y>0 && x< Lab6.getWindows_w() && y< Lab6.getWindows_h();
     }
 
-    public boolean inFrame(int dx,int dy){//TODO перепесать проверки под inFrame()
+    public boolean inFrame(int dx,int dy){
         return x+dx>0 && y+dy>0 && x+dx< Lab6.getWindows_w() && y+dy< Lab6.getWindows_h();
     }
 

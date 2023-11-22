@@ -241,6 +241,8 @@ public class TransformFigure extends JDialog {
         delete.addActionListener(e -> {
             Utils.getContainer((String) containers.getSelectedItem()).remove((Utils.getContainer((String) containers.getSelectedItem())).get(figureNumber.getSelectedIndex()));
 
+            updateContainers();
+
             Lab6.getPicture().repaint();
             Lab6.getPicture().revalidate();
 
@@ -248,6 +250,7 @@ public class TransformFigure extends JDialog {
             figureNumber.setSelectedIndex(0);
 
             setVisible(false);
+
         });
 
         cancel.addActionListener(e -> {
@@ -272,9 +275,16 @@ public class TransformFigure extends JDialog {
         if(figureNumber.getItemCount()!=0) {
             figureNumber.removeAllItems();
         }
+
+
         int i = 0;
-        Utils.getContainer((String) containers.getSelectedItem()).iteratorStart();
-            do {
+        if(containers.getSelectedItem() == null){
+            updateContainers();
+            return;
+        }
+        if(!Utils.getContainer((String) containers.getSelectedItem()).iteratorStart()) return;
+
+        do {
             if(Utils.getContainer((String) containers.getSelectedItem()).iterator() instanceof Line){
                 figureNumber.addItem((i+1)+"(Line)");
             }else if(Utils.getContainer((String) containers.getSelectedItem()).iterator() instanceof Triangle){
