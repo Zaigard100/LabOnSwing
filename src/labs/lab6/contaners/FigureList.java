@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class FigureList extends AbstractContainer{
 
     private final ArrayList<Figure> figures;
-    Figure iter;
 
     public FigureList(String name){
         super(name);
@@ -41,36 +40,14 @@ public class FigureList extends AbstractContainer{
         return figures.size();
     }
 
-    @Override
-    public Figure iterator() {
-        return iter;
-    }
 
     @Override
-    public boolean next() {
-        int n = figures.indexOf(iter)+1;
-        if(n<figures.size()){
-            iter = figures.get(n);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean iteratorStart() {
-        if(size()!=0) {
-            iter = figures.get(0);
-            return true;
-        }
-        return false;
+    public Figure[] toArray() {
+        return (Figure[]) figures.toArray();
     }
 
     public void  dispose(){
         figures.clear();
-    }
-
-    public ArrayList<Figure> getFigures() {
-        return figures;
     }
 
 

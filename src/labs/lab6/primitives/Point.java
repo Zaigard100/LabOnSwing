@@ -12,39 +12,10 @@ public class Point {
     }
 
     public void move(int dx,int dy){
-
-        if(x+dx < 0){
-            x = 0;
-            dx = 0;
-            dy = 0;
-        }
-
-        if(x+dx > Lab6.getWindows_w()){
-            x= Lab6.getWindows_w();
-            dx = 0;
-            dy = 0;
-        }
-
-        if(y+dy < 0){
-            y = 0;
-            dx = 0;
-            dy = 0;
-        }
-
-        if(y+dy > Lab6.getWindows_h()){
-            y = Lab6.getWindows_h();
-            dx = 0;
-            dy = 0;
-        }
-
-        x += dx;
-        y += dy;
-
+            x += dx;
+            y += dy;
     }
 
-    public boolean inFrame(){
-        return x>0 && y>0 && x< Lab6.getWindows_w() && y< Lab6.getWindows_h();
-    }
 
     public boolean inFrame(int dx,int dy){
         return x+dx>0 && y+dy>0 && x+dx< Lab6.getWindows_w() && y+dy< Lab6.getWindows_h();

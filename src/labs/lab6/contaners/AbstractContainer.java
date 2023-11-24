@@ -22,10 +22,6 @@ public abstract class AbstractContainer {
 
     public abstract int size();
 
-    public abstract Figure iterator();
-    public abstract boolean next();
-    public abstract boolean iteratorStart();
-
     public String getName() {
         return name;
     }
@@ -37,6 +33,7 @@ public abstract class AbstractContainer {
     public boolean isVisible() {
         return visible;
     }
+    public abstract Figure[] toArray();
 
     public void setVisible(boolean visible) {
         this.visible = visible;

@@ -198,7 +198,7 @@ public class CreateFigure extends JDialog {
         switch ((String) figureName.getSelectedItem()){
             case "Circle":
                 if((x>0) && (x< Lab6.getWindows_w()-dw) && (y>0) && (y< Lab6.getWindows_h()-dw) && (dw>0) && (dw<Math.min(Lab6.getWindows_w()-x, Lab6.getWindows_h()-y))) {
-                    Utils.getContainer((String) containers.getSelectedItem()).add(new Circle(new Point(x, y), dw, fill, new Color(r, g, b)));
+                    Utils.getFigureContainers().get(containers.getSelectedIndex()).add(new Circle(new Point(x, y), dw, fill, new Color(r, g, b)));
                 }
                 break;
             case "Line":

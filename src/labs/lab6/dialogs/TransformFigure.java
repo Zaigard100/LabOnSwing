@@ -3,7 +3,6 @@ package labs.lab6.dialogs;
 import labs.lab6.Lab6;
 import labs.lab6.Utils;
 import labs.lab6.contaners.AbstractContainer;
-import labs.lab6.contaners.FigureList;
 import labs.lab6.primitives.*;
 
 import javax.swing.*;
@@ -80,11 +79,11 @@ public class TransformFigure extends JDialog {
 
 
         edit.addActionListener(e -> {
-            Utils.getContainer((String) containers.getSelectedItem()).iteratorStart();
+            for(Figure f: Utils.getContainer((String) containers.getSelectedItem()).toArray()) {
                 if(noNull((String) figureNumber.getSelectedItem()).equals("all")){
-                    do {
+
                         edit(
-                                Utils.getContainer((String) containers.getSelectedItem()).iterator(),
+                                f,
                                 parse(noNull((String) figureNumber.getSelectedItem())),
                                 noNull((String) editParameter.getSelectedItem()),
                                 field1.getText(),
@@ -92,13 +91,13 @@ public class TransformFigure extends JDialog {
                                 field3.getText(),
                                 checkBox.isSelected()
                         );
-                    }while (Utils.getContainer((String) containers.getSelectedItem()).next());
+
                 }else if(noNull((String) figureNumber.getSelectedItem()).equals("circle")){
 
-                    do {
-                        if (Utils.getContainer((String) containers.getSelectedItem()).iterator().getClass().isAssignableFrom(Circle.class)) {
+
+                        if (f.getClass().isAssignableFrom(Circle.class)) {
                             edit(
-                                    Utils.getContainer((String) containers.getSelectedItem()).iterator(),
+                                    f,
                                 parse(noNull((String) figureNumber.getSelectedItem())),
                                 noNull((String) editParameter.getSelectedItem()),
                                 field1.getText(),
@@ -107,14 +106,14 @@ public class TransformFigure extends JDialog {
                                 checkBox.isSelected()
                             );
                         }
-                    }while (Utils.getContainer((String) containers.getSelectedItem()).next());
+
 
                 }else if(noNull((String) figureNumber.getSelectedItem()).equals("line")){
 
-                    do {
-                        if (Utils.getContainer((String) containers.getSelectedItem()).iterator().getClass().isAssignableFrom(Line.class)) {
+
+                        if (f.getClass().isAssignableFrom(Line.class)) {
                             edit(
-                                    Utils.getContainer((String) containers.getSelectedItem()).iterator(),
+                                    f,
                                     parse(noNull((String) figureNumber.getSelectedItem())),
                                     noNull((String) editParameter.getSelectedItem()),
                                     field1.getText(),
@@ -122,15 +121,13 @@ public class TransformFigure extends JDialog {
                                     field3.getText(),
                                     checkBox.isSelected()
                             );
-                        }
-                    }while (Utils.getContainer((String) containers.getSelectedItem()).next());
+                        
+                    }
 
                 }else if(noNull((String) figureNumber.getSelectedItem()).equals("oval")){
-
-                    do {
-                        if (Utils.getContainer((String) containers.getSelectedItem()).iterator().getClass().isAssignableFrom(Oval.class)) {
+                        if (f.getClass().isAssignableFrom(Oval.class)) {
                             edit(
-                                    Utils.getContainer((String) containers.getSelectedItem()).iterator(),
+                                    f,
                                     parse(noNull((String) figureNumber.getSelectedItem())),
                                     noNull((String) editParameter.getSelectedItem()),
                                     field1.getText(),
@@ -139,14 +136,13 @@ public class TransformFigure extends JDialog {
                                     checkBox.isSelected()
                             );
                         }
-                    }while (Utils.getContainer((String) containers.getSelectedItem()).next());
-
+                    
                 }else if(noNull((String) figureNumber.getSelectedItem()).equals("rect")){
 
-                    do {
-                        if (Utils.getContainer((String) containers.getSelectedItem()).iterator().getClass().isAssignableFrom(Rect.class)) {
+
+                        if (f.getClass().isAssignableFrom(Rect.class)) {
                             edit(
-                                    Utils.getContainer((String) containers.getSelectedItem()).iterator(),
+                                    f,
                                     parse(noNull((String) figureNumber.getSelectedItem())),
                                     noNull((String) editParameter.getSelectedItem()),
                                     field1.getText(),
@@ -155,14 +151,14 @@ public class TransformFigure extends JDialog {
                                     checkBox.isSelected()
                             );
                         }
-                    }while (Utils.getContainer((String) containers.getSelectedItem()).next());
+
 
                 }else if(noNull((String) figureNumber.getSelectedItem()).equals("ring")){
 
-                    do {
-                        if (Utils.getContainer((String) containers.getSelectedItem()).iterator().getClass().isAssignableFrom(Ring.class)) {
+
+                        if (f.getClass().isAssignableFrom(Ring.class)) {
                             edit(
-                                    Utils.getContainer((String) containers.getSelectedItem()).iterator(),
+                                    f,
                                     parse(noNull((String) figureNumber.getSelectedItem())),
                                     noNull((String) editParameter.getSelectedItem()),
                                     field1.getText(),
@@ -171,14 +167,14 @@ public class TransformFigure extends JDialog {
                                     checkBox.isSelected()
                             );
                         }
-                    }while (Utils.getContainer((String) containers.getSelectedItem()).next());
+
 
                 }else if(noNull((String) figureNumber.getSelectedItem()).equals("romb")){
 
-                    do {
-                        if (Utils.getContainer((String) containers.getSelectedItem()).iterator().getClass().isAssignableFrom(Romb.class)) {
+
+                        if (f.getClass().isAssignableFrom(Romb.class)) {
                             edit(
-                                    Utils.getContainer((String) containers.getSelectedItem()).iterator(),
+                                    f,
                                     parse(noNull((String) figureNumber.getSelectedItem())),
                                     noNull((String) editParameter.getSelectedItem()),
                                     field1.getText(),
@@ -187,14 +183,14 @@ public class TransformFigure extends JDialog {
                                     checkBox.isSelected()
                             );
                         }
-                    }while (Utils.getContainer((String) containers.getSelectedItem()).next());
+
 
                 }else if(noNull((String) figureNumber.getSelectedItem()).equals("trapezoid")){
 
-                    do {
-                        if (Utils.getContainer((String) containers.getSelectedItem()).iterator().getClass().isAssignableFrom(Trapezoid.class)) {
+
+                        if (f.getClass().isAssignableFrom(Trapezoid.class)) {
                             edit(
-                                    Utils.getContainer((String) containers.getSelectedItem()).iterator(),
+                                    f,
                                     parse(noNull((String) figureNumber.getSelectedItem())),
                                     noNull((String) editParameter.getSelectedItem()),
                                     field1.getText(),
@@ -203,14 +199,14 @@ public class TransformFigure extends JDialog {
                                     checkBox.isSelected()
                             );
                         }
-                    }while (Utils.getContainer((String) containers.getSelectedItem()).next());
+
 
                 }else if(noNull((String) figureNumber.getSelectedItem()).equals("triangle")){
 
-                    do {
-                        if (Utils.getContainer((String) containers.getSelectedItem()).iterator().getClass().isAssignableFrom(Triangle.class)) {
+
+                        if (f.getClass().isAssignableFrom(Triangle.class)) {
                             edit(
-                                    Utils.getContainer((String) containers.getSelectedItem()).iterator(),
+                                    f,
                                     parse(noNull((String) figureNumber.getSelectedItem())),
                                     noNull((String) editParameter.getSelectedItem()),
                                     field1.getText(),
@@ -219,22 +215,19 @@ public class TransformFigure extends JDialog {
                                     checkBox.isSelected()
                             );
                         }
-                    }while (Utils.getContainer((String) containers.getSelectedItem()).next());
 
-                }else {
-                    if(Utils.getContainer((String) containers.getSelectedItem()) instanceof FigureList) {
-                        edit(
-                                ((FigureList) Utils.getContainer((String) containers.getSelectedItem())).getFigures().get(figureNumber.getSelectedIndex()),
-                                parse(noNull((String) figureNumber.getSelectedItem())),
-                                noNull((String) editParameter.getSelectedItem()),
-                                field1.getText(),
-                                field2.getText(),
-                                field3.getText(),
-                                checkBox.isSelected()
-                        );
-                    }else {
 
-                    }
+                }else{
+                    edit(
+                            Utils.getFigureContainers().get(containers.getSelectedIndex()).get(figureNumber.getSelectedIndex()),
+                            parse(noNull((String) figureNumber.getSelectedItem())),
+                            noNull((String) editParameter.getSelectedItem()),
+                            field1.getText(),
+                            field2.getText(),
+                            field3.getText(),
+                            checkBox.isSelected()
+                    );
+                }
                 }
         });
 
@@ -282,32 +275,31 @@ public class TransformFigure extends JDialog {
             updateContainers();
             return;
         }
-        if(!Utils.getContainer((String) containers.getSelectedItem()).iteratorStart()) return;
 
-        do {
-            if(Utils.getContainer((String) containers.getSelectedItem()).iterator() instanceof Line){
+        for(Figure f: Utils.getContainer((String) containers.getSelectedItem()).toArray()) {
+            if(f instanceof Line){
                 figureNumber.addItem((i+1)+"(Line)");
-            }else if(Utils.getContainer((String) containers.getSelectedItem()).iterator() instanceof Triangle){
+            }else if(f instanceof Triangle){
                 figureNumber.addItem((i+1)+"(Triangle)");
-            }else if(Utils.getContainer((String) containers.getSelectedItem()).iterator() instanceof Circle){
+            }else if(f instanceof Circle){
                 figureNumber.addItem((i+1)+"(Circle)");
-            }else if(Utils.getContainer((String) containers.getSelectedItem()).iterator() instanceof Ring){
+            }else if(f instanceof Ring){
                 figureNumber.addItem((i+1)+"(Ring)");
-            }else if(Utils.getContainer((String) containers.getSelectedItem()).iterator() instanceof Oval){
+            }else if(f instanceof Oval){
                 figureNumber.addItem((i+1)+"(Oval)");
-            }else if(Utils.getContainer((String) containers.getSelectedItem()).iterator() instanceof Rect){
+            }else if(f instanceof Rect){
                 figureNumber.addItem((i+1)+"(Rect)");
-            }else if(Utils.getContainer((String) containers.getSelectedItem()).iterator() instanceof Romb){
+            }else if(f instanceof Romb){
                 figureNumber.addItem((i+1)+"(Romb)");
-            }else if(Utils.getContainer((String) containers.getSelectedItem()).iterator() instanceof Trapezoid){
+            }else if(f instanceof Trapezoid){
                 figureNumber.addItem((i+1)+"(Trapezoid)");
             }else {
-                if (Utils.getContainer((String) containers.getSelectedItem()).iterator() != null){
+                if (f != null){
                     figureNumber.addItem((i + 1) + "(NoAdd)");
                 }
             }
             i++;
-        }while (Utils.getContainer((String) containers.getSelectedItem()).next());
+        }
 
         figureNumber.addItem("all");
         figureNumber.addItem("circle");
