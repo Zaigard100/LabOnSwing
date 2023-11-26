@@ -2,6 +2,7 @@ package labs.lab6;
 
 import labs.lab6.contaners.AbstractContainer;
 import labs.lab6.contaners.FigureArray;
+import labs.lab6.contaners.FigureList;
 import labs.lab6.primitives.Point;
 import labs.lab6.primitives.*;
 
@@ -12,12 +13,94 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Utils {
+
     static private final ArrayList<AbstractContainer> containers;
 
     static {
         containers = new ArrayList<>();
         containers.add(new FigureArray("main"));
     }
+
+    //TODO сделать м.б. save
+
+    public static void random(boolean isList, int count,String name){
+
+        if (isList) containers.add(new FigureList(name));
+        else containers.add(new FigureArray(name));
+
+        for(int i = 0;i<count;i++){
+            getContainer(name).add(randomFigure());
+        }
+
+    }
+
+     static Figure randomFigure(){//TODO выход за границы круг или овел
+        int num = (int)(Math.random()*8);
+        if(num == 8) num--;
+        int x,y,x1,x2,x3,y1,y2,y3,width,height;
+        switch (num){
+            case 0://Circle
+                int diameter = (int)(((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2))+1)/2);// {1,minWinSize}
+                x = (int)(diameter/2+1+(Math.random()*(Lab6.getWindows_w()-diameter-2)));// {diameter/2+1,winX-diameter-1}
+                y = (int)(diameter/2+1+(Math.random()*(Lab6.getWindows_h()-diameter-2)));// {diameter/2+1,winY-diameter-1}
+                return new Circle(new Point(x,y),diameter,Math.random() < 0.5,randomColor());
+            case 1://Line
+                x1 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));// {1,winX-1}
+                y1 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));// {1,winY-1}
+                x2 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));
+                y2 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));
+                return new Line(new Point(x1,y1),new Point(x2,y2),randomColor());
+            case 2://Oval
+                int diameterX = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                int diameterY = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                x = (int)(diameterX/2+1+(Math.random()*(Lab6.getWindows_w()-diameterX-2)));// {diameterX/2+1,winX-diameterX/2-1}
+                y = (int)(diameterY/2+1+(Math.random()*(Lab6.getWindows_h()-diameterY-2)));// {diameterY/2+1,winY-diameterY/2-1}
+                return new Oval(new Point(x,y),diameterX,diameterY,Math.random() < 0.5,randomColor());
+            case 3://Rect
+                width = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                height = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                x = (int)(width/2+1+(Math.random()*(Lab6.getWindows_w()-width-2)));// {width/2+1,winX-width/2-1}
+                y = (int)(height/2+1+(Math.random()*(Lab6.getWindows_h()-height-2)));// {height/2+1,winY-height/2-1}
+                return new Rect(new Point(x,y),width,height,Math.random() < 0.5,randomColor());
+            case 4://Ring
+                int diameter1 = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                int diameter2 = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                x = (int)(Math.max(diameter1,diameter2)/2+1+(Math.random()*(Lab6.getWindows_w()-Math.max(diameter1,diameter2)-2)));// {diameterMax/2+1,winX-diameterMax/2-1}
+                y = (int)(Math.max(diameter1,diameter2)/2+1+(Math.random()*(Lab6.getWindows_h()-Math.max(diameter1,diameter2)-2)));// {diameterMax/2+1,winY-diameterMax/2-1}
+                return new Ring(new Point(x,y),diameter1,diameter2,randomColor());
+            case 5://Romb
+                width = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                height = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                x = (int)(width/2+1+(Math.random()*(Lab6.getWindows_w()-width-2)));// {width/2+1,winX-width/2-1}
+                y = (int)(height/2+1+(Math.random()*(Lab6.getWindows_h()-height-2)));// {height/2+1,winY-height/2-1}
+                return  new Romb(new Point(x,y),width,height,Math.random() < 0.5, randomColor());
+            case 6://Trapezoid
+                int baseUp = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                int baseDown = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                height = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                x = (int)(Math.max(baseUp,baseDown)/2+1+(Math.random()*(Lab6.getWindows_w()-Math.max(baseUp,baseDown)-2)));// {baseMax/2+1,winX-baseMax/2-1}
+                y = (int)(height/2+1+(Math.random()*(Lab6.getWindows_h()-height-2)));// {height/2+1,winY-height/2-1}
+                return new Trapezoid(new Point(x,y),baseUp,baseDown,height,Math.random() < 0.5,randomColor());
+            case 7://Triangle
+                x1 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));// {1,winX-1}
+                y1 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));// {1,winY-1}
+                x2 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));
+                y2 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));
+                x3 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));
+                y3 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));
+                return new Triangle(new Point(x1,y1),new Point(x2,y2),new Point(x3,y3),Math.random() < 0.5,randomColor());
+
+        }
+        return null;
+    }
+
+    public static Color randomColor(){
+        int r = (int)(Math.random()*255);
+        int g = (int)(Math.random()*255);
+        int b = (int)(Math.random()*255);
+        return new Color(r,g,b);
+    }
+
 
     public static void load(String file){
         StringBuilder line = new StringBuilder();

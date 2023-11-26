@@ -56,6 +56,7 @@ public class TransformFigure extends JDialog {
 
         setBounds((Lab6.getWindows_w()-width)/2,(Lab6.getWindows_h()-height)/2,width,height);
 
+        //TODO опять не отображаются фигуры в комбо боксе
 
         containers.addActionListener(e ->{
             updateFigureList();

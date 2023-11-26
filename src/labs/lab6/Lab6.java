@@ -1,9 +1,6 @@
 package labs.lab6;
 
-import labs.lab6.dialogs.CreateContainer;
-import labs.lab6.dialogs.CreateFigure;
-import labs.lab6.dialogs.TransformContainer;
-import labs.lab6.dialogs.TransformFigure;
+import labs.lab6.dialogs.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +14,15 @@ public class Lab6 {
     static JPanel jPanel;
     static JMenuBar jMenuBar;
     static JMenu file, transform,create;
-    static JMenuItem load,del,exit;
+    static JMenuItem load,random,del,exit;
     static JMenuItem fig,cnt;
     static JMenuItem a_fig,a_cnt;
     static CreateFigure createFigure = new CreateFigure();
     static CreateContainer createContainer = new CreateContainer();
     static TransformFigure transformFigure = new TransformFigure();
     static TransformContainer transformContainer = new TransformContainer();
+
+    static RandomFigures randomFigures = new RandomFigures();
     public static Toolkit toolkit;
     public static Dimension dimension;
     public static Picture picture;
@@ -74,6 +73,7 @@ public class Lab6 {
         jMenuBar.add(create);
 
         load = file.add(new JMenuItem("Load",'L'));
+        random = file.add(new JMenuItem("Random",'R'));
         del = file.add(new JMenuItem("Delete all",'D'));
         file.addSeparator();
         exit = file.add(new JMenuItem("Exit"));
@@ -104,6 +104,8 @@ public class Lab6 {
             jFrame.revalidate();
         });
 
+        random.addActionListener(e -> randomFigures.setVisible(true));
+
         del.addActionListener(e -> {
             Utils.dispose("all");
             picture.repaint();
@@ -119,9 +121,7 @@ public class Lab6 {
             createFigure.setVisible(true);
         });
 
-        a_cnt.addActionListener(actionEvent ->{
-            createContainer.setVisible(true);
-        });
+        a_cnt.addActionListener(actionEvent -> createContainer.setVisible(true));
 
         fig.addActionListener(actionEvent -> {
             transformFigure.updateContainers();

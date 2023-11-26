@@ -7,7 +7,7 @@ import java.awt.*;
 public class Ring extends Oval {
 
     public Ring(Point p, int diameter1, int diameter2, Color color){
-        super(p,diameter1,diameter2,true,color);
+        super(p,Math.max(diameter1,diameter2),Math.min(diameter1,diameter2),true,color);
     }
 
     public void draw(Graphics g){
