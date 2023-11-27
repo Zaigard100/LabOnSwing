@@ -21,7 +21,7 @@ public class Lab6 {
     static CreateContainer createContainer = new CreateContainer();
     static TransformFigure transformFigure = new TransformFigure();
     static TransformContainer transformContainer = new TransformContainer();
-
+    static SaveLoadDialog saveLoadDialog = new SaveLoadDialog();
     static RandomFigures randomFigures = new RandomFigures();
     public static Toolkit toolkit;
     public static Dimension dimension;
@@ -72,7 +72,7 @@ public class Lab6 {
         jMenuBar.add(transform);
         jMenuBar.add(create);
 
-        load = file.add(new JMenuItem("Load",'L'));
+        load = file.add(new JMenuItem("Save/Load",'S'));
         random = file.add(new JMenuItem("Random",'R'));
         del = file.add(new JMenuItem("Delete all",'D'));
         file.addSeparator();
@@ -89,19 +89,8 @@ public class Lab6 {
         exit.addActionListener(e -> System.exit(0));
 
         load.addActionListener(e -> {
-            //JFileChooser jFileChooser = new JFileChooser("/home/zaigard/Projects/LabOnSwing/src/labs");
-            JFileChooser jFileChooser = new JFileChooser("C:\\Users\\zaiga\\IdeaProjects\\LabOnSwing\\src\\labs");
-            //C:\Users\zaiga\IdeaProjects\LabOnSwing\src\labs\primitives.txt
-            jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            int result = jFileChooser.showOpenDialog(jPanel);
-            if(result == JFileChooser.APPROVE_OPTION){
-                System.out.println(jFileChooser.getSelectedFile().getAbsolutePath());
-                Utils.load(jFileChooser.getSelectedFile().getAbsolutePath());
-            }
-            jPanel.repaint();
-            jPanel.revalidate();
-            jFrame.repaint();
-            jFrame.revalidate();
+            saveLoadDialog.updateContainers();
+            saveLoadDialog.setVisible(true);
         });
 
         random.addActionListener(e -> randomFigures.setVisible(true));

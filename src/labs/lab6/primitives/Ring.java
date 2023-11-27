@@ -12,9 +12,10 @@ public class Ring extends Oval {
 
     public void draw(Graphics g){
         g.setColor(color);
-        g.fillOval(getX(),getY(),getDiameterX(),getDiameterX());
+        g.fillOval(getX()-getDiameterX()/2,getY()-getDiameterX()/2,getDiameterX(),getDiameterX());
         g.setColor(new Color(239,239,239));
-        g.fillOval(getX(),getY(),getDiameterY(),getDiameterY());
+        g.fillOval(getX()-getDiameterY()/2,getY()-getDiameterY()/2,getDiameterY(),getDiameterY());
+
     }
 
     public void setX(int x){

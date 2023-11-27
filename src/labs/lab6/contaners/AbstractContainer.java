@@ -6,7 +6,7 @@ import java.awt.*;
 
 public abstract class AbstractContainer {
     String name;
-    boolean visible = true;
+    boolean show = true;
 
     public AbstractContainer(String name){
         this.name = name;
@@ -30,13 +30,13 @@ public abstract class AbstractContainer {
         this.name = name;
     }
 
-    public boolean isVisible() {
-        return visible;
+    public boolean isShow() {
+        return show;
     }
     public abstract Figure[] toArray();
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
+    public void setShow(boolean show) {
+        this.show = show;
     }
 
     public abstract void dispose();

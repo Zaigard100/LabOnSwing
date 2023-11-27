@@ -8,6 +8,7 @@ import labs.lab6.primitives.*;
 
 import java.awt.*;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -40,7 +41,7 @@ public class Utils {
         int x,y,x1,x2,x3,y1,y2,y3,width,height;
         switch (num){
             case 0://Circle
-                int diameter = (int)(((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2))+1)/2);// {1,minWinSize}
+                int diameter = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2))/2)+1;// {1,minWinSize}
                 x = (int)(diameter/2+1+(Math.random()*(Lab6.getWindows_w()-diameter-2)));// {diameter/2+1,winX-diameter-1}
                 y = (int)(diameter/2+1+(Math.random()*(Lab6.getWindows_h()-diameter-2)));// {diameter/2+1,winY-diameter-1}
                 return new Circle(new Point(x,y),diameter,Math.random() < 0.5,randomColor());
@@ -51,8 +52,8 @@ public class Utils {
                 y2 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));
                 return new Line(new Point(x1,y1),new Point(x2,y2),randomColor());
             case 2://Oval
-                int diameterX = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
-                int diameterY = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
+                int diameterX = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2-1}
+                int diameterY = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2-1}
                 x = (int)(diameterX/2+1+(Math.random()*(Lab6.getWindows_w()-diameterX-2)));// {diameterX/2+1,winX-diameterX/2-1}
                 y = (int)(diameterY/2+1+(Math.random()*(Lab6.getWindows_h()-diameterY-2)));// {diameterY/2+1,winY-diameterY/2-1}
                 return new Oval(new Point(x,y),diameterX,diameterY,Math.random() < 0.5,randomColor());
@@ -102,33 +103,33 @@ public class Utils {
     }
 
 
-    public static void load(String file){
+    public static void load(String name,String file){
         StringBuilder line = new StringBuilder();
         try(FileReader reader = new FileReader(file))
         {
             int c;
             while((c=reader.read())!=-1){
                 if(c=='\n'){
-                    parse_line(line.toString());
+                    parse_line(name,line.toString());
                     line = new StringBuilder();
                     continue;
                 }
                 line.append((char) c);
 
             }
-            parse_line(line.toString());
+            parse_line(name,line.toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    private static void parse_line(String line){
+    private static void parse_line(String name,String line){
         try {
             String[] words = line.split(",");
             switch (words[0]) {
                 case "t":
-                    containers.get(0).add(new Triangle(
+                    getContainer(name).add(new Triangle(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             new Point(Integer.parseInt(words[3]), Integer.parseInt(words[4])),
                             new Point(Integer.parseInt(words[5]), Integer.parseInt(words[6])),
@@ -137,14 +138,14 @@ public class Utils {
                     ));
                     break;
                 case "l":
-                    containers.get(0).add(new Line(
+                    getContainer(name).add(new Line(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             new Point(Integer.parseInt(words[3]), Integer.parseInt(words[4])),
                             new Color(Integer.parseInt(words[5]), Integer.parseInt(words[6]), Integer.parseInt(words[7]))
                     ));
                     break;
                 case "c":
-                    containers.get(0).add(new Circle(
+                    getContainer(name).add(new Circle(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]),
                             Boolean.parseBoolean(words[7]),
@@ -152,7 +153,7 @@ public class Utils {
                     ));
                     break;
                 case "ri":
-                    containers.get(0).add(new Ring(
+                    getContainer(name).add(new Ring(
                                     new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                                     Integer.parseInt(words[3]),
                                     Integer.parseInt(words[4]),
@@ -161,7 +162,7 @@ public class Utils {
                     );
                     break;
                 case "o":
-                    containers.get(0).add(new Oval(
+                    getContainer(name).add(new Oval(
                                     new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                                     Integer.parseInt(words[3]),
                                     Integer.parseInt(words[4]),
@@ -171,7 +172,7 @@ public class Utils {
                     );
                     break;
                 case "ro":
-                    containers.get(0).add(new Romb(
+                    getContainer(name).add(new Romb(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]),
                             Boolean.parseBoolean(words[8]),
@@ -179,7 +180,7 @@ public class Utils {
                     ));
                     break;
                 case "tr":
-                    containers.get(0).add(new Trapezoid(
+                    getContainer(name).add(new Trapezoid(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]), Integer.parseInt(words[5]),
                             Boolean.parseBoolean(words[9]),
@@ -187,7 +188,7 @@ public class Utils {
                     ));
                     break;
                 case "re":
-                    containers.get(0).add(new Rect(
+                    getContainer(name).add(new Rect(
                             new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]),
                             Boolean.parseBoolean(words[8]),
@@ -198,6 +199,105 @@ public class Utils {
         }catch(NumberFormatException err) {
             System.out.println(line);
             err.printStackTrace();
+        }
+    }
+
+    public static void save(String name,String file) {
+        try(FileWriter writer = new FileWriter(file, false)) {
+            for (Figure f : getContainer(name).toArray()) {
+                String line = "";
+                if (f instanceof Circle) {
+                    line = "c," +
+                            ((Circle) f).getX() + "," +
+                            ((Circle) f).getY() + "," +
+                            ((Circle) f).getDiameter() + "," +
+                            f.getColor().getRed() + "," +
+                            f.getColor().getGreen() + "," +
+                            f.getColor().getBlue() + "," +
+                            f.isFill() + ",";
+                } else if (f instanceof Ring) {
+                    line = "ri," +
+                            ((Ring) f).getX() + "," +
+                            ((Ring) f).getY() + "," +
+                            ((Ring) f).getDiameterX() + "," +
+                            ((Ring) f).getDiameterY() + "," +
+                            f.getColor().getRed() + "," +
+                            f.getColor().getGreen() + "," +
+                            f.getColor().getBlue() + "," +
+                            f.isFill() + ",";
+                } else if (f instanceof Line) {
+                    line = "l," +
+                            ((Line) f).getX() + "," +
+                            ((Line) f).getY() + "," +
+                            ((Line) f).getX1() + "," +
+                            ((Line) f).getY1() + "," +
+                            f.getColor().getRed() + "," +
+                            f.getColor().getGreen() + "," +
+                            f.getColor().getBlue() + ",";
+                } else if (f instanceof Oval) {
+                    line = "o," +
+                            ((Oval) f).getX() + "," +
+                            ((Oval) f).getY() + "," +
+                            ((Oval) f).getDiameterX() + "," +
+                            ((Oval) f).getDiameterY() + "," +
+                            f.getColor().getRed() + "," +
+                            f.getColor().getGreen() + "," +
+                            f.getColor().getBlue() + "," +
+                            f.isFill() + ",";
+
+                } else if (f instanceof Rect) {
+                    line = "re," +
+                            ((Rect) f).getX() + "," +
+                            ((Rect) f).getY() + "," +
+                            ((Rect) f).getWidth() + "," +
+                            ((Rect) f).getHeight() + "," +
+                            f.getColor().getRed() + "," +
+                            f.getColor().getGreen() + "," +
+                            f.getColor().getBlue() + "," +
+                            f.isFill() + ",";
+                } else if (f instanceof Romb) {
+                    line = "ro," +
+                            ((Romb) f).getX() + "," +
+                            ((Romb) f).getY() + "," +
+                            ((Romb) f).getWidth() + "," +
+                            ((Romb) f).getHeight() + "," +
+                            f.getColor().getRed() + "," +
+                            f.getColor().getGreen() + "," +
+                            f.getColor().getBlue() + "," +
+                            f.isFill() + ",";
+                } else if (f instanceof Trapezoid) {
+                    line = "tr," +
+                            ((Trapezoid) f).getX() + "," +
+                            ((Trapezoid) f).getY() + "," +
+                            ((Trapezoid) f).getWidth() + "," +
+                            ((Trapezoid) f).getWidth2() + "," +
+                            ((Trapezoid) f).getHeight() + "," +
+                            f.getColor().getRed() + "," +
+                            f.getColor().getGreen() + "," +
+                            f.getColor().getBlue() + "," +
+                            f.isFill() + ",";
+                } else if (f instanceof Triangle) {
+                    line = "t," +
+                            ((Triangle) f).getX1() + "," +
+                            ((Triangle) f).getY1() + "," +
+                            ((Triangle) f).getX2() + "," +
+                            ((Triangle) f).getY2() + "," +
+                            ((Triangle) f).getX3() + "," +
+                            ((Triangle) f).getY3() + "," +
+                            f.getColor().getRed() + "," +
+                            f.getColor().getGreen() + "," +
+                            f.getColor().getBlue() + "," +
+                            f.isFill() + ",";
+                }
+                System.out.println(line);
+                writer.write(line);
+                writer.append('\n');
+                writer.flush();
+            }
+
+        }catch(IOException ex){
+
+            System.out.println(ex.getMessage());
         }
     }
 

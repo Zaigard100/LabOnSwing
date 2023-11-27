@@ -58,16 +58,14 @@ public class TransformContainer extends JDialog {
         setBounds((Lab6.getWindows_w()-width)/2,(Lab6.getWindows_h()-height)/2,width,height);
 
         visibleCb.addActionListener(e -> {
-            Utils.getContainer((String) containers.getSelectedItem()).setVisible(visibleCb.isSelected());
+            Utils.getContainer((String) containers.getSelectedItem()).setShow(visibleCb.isSelected());
 
             Lab6.getPicture().repaint();
             Lab6.getPicture().revalidate();
 
         });
 
-        containers.addActionListener(e ->{
-            updateData();
-        });
+        containers.addActionListener(e -> updateData());
 
         delete.addActionListener(e ->{
             if(Utils.getFigureContainers().size() == 1){
@@ -84,9 +82,7 @@ public class TransformContainer extends JDialog {
 
         });
 
-        cancel.addActionListener(e -> {
-            setVisible(false);
-        });
+        cancel.addActionListener(e -> setVisible(false));
         edit.addActionListener(e -> {
             if(Utils.getContainer((String) containers.getSelectedItem())!=null){
                 Utils.getContainer((String) containers.getSelectedItem()).setName(nameF.getText());
@@ -111,7 +107,7 @@ public class TransformContainer extends JDialog {
     public void updateData(){
         if(Utils.getContainer((String) containers.getSelectedItem())!=null) {
             nameF.setText(Utils.getContainer((String) containers.getSelectedItem()).getName());
-            visibleCb.setSelected(Utils.getContainer((String) containers.getSelectedItem()).isVisible());
+            visibleCb.setSelected(Utils.getContainer((String) containers.getSelectedItem()).isShow());
         }
     }
 

@@ -43,7 +43,11 @@ public class FigureList extends AbstractContainer{
 
     @Override
     public Figure[] toArray() {
-        return (Figure[]) figures.toArray();
+        Figure[] c = new Figure[figures.size()];
+        for(int i = 0; i< figures.size();i++){
+            c[i] = figures.get(i);
+        }
+        return c;
     }
 
     public void  dispose(){

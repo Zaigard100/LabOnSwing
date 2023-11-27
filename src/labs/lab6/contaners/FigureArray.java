@@ -84,7 +84,7 @@ public class FigureArray extends AbstractContainer{
 
     private void ensureCapacity() {
         if (size == array.length) {
-            int newCapacity = array.length * 2;
+            int newCapacity = array.length + DEFAULT_CAPACITY;
             array = Arrays.copyOf(array, newCapacity);
         }
     }
