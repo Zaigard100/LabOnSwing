@@ -503,6 +503,9 @@ public class TransformFigure extends JDialog {
                             break;
                     }
                     break;
+                case "rotate":
+                    ((Oval)figure).rotate90();
+                    break;
                 case "fill":
                     figure.setFill(cB);
                     break;
