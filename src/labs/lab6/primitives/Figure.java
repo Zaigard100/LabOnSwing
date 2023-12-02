@@ -7,6 +7,13 @@ public abstract class Figure {
     Point p;
     Color color;
     boolean fill;
+
+    public Figure(int x, int y, boolean fill, Color color){
+        this.p = new Point(x,y);
+        this.color = color;
+        this.fill = fill;
+    }
+
     public Figure(Point p, boolean fill, Color color){
         this.p = p;
         this.color = color;
@@ -19,7 +26,6 @@ public abstract class Figure {
     }
 
     public abstract boolean checkBoundaries(int dx,int dy);
-
 
     public void move(int dx, int dy){
         if(checkBoundaries(dx,dy)){

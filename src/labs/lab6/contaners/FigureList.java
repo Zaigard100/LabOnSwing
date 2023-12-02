@@ -7,51 +7,51 @@ import java.util.ArrayList;
 
 public class FigureList extends AbstractContainer{
 
-    private final ArrayList<Figure> figures;
+    private final ArrayList<Figure> list;
 
     public FigureList(String name){
         super(name);
-        figures = new ArrayList<>();
+        list = new ArrayList<>();
     }
 
     @Override
     public void show(Graphics g) {
-        for (Figure f:figures){
+        for (Figure f: list){
             f.show(g);
         }
     }
 
     public void add(Figure f){
         if(f != null) {
-            figures.add(f);
+            list.add(f);
         }
     }
 
     public Figure get(int i){
-        return figures.get(i);
+        return list.get(i);
     }
 
     public void remove(Figure f){
-        figures.remove(f);
+        list.remove(f);
     }
 
     @Override
     public int size() {
-        return figures.size();
+        return list.size();
     }
 
 
     @Override
     public Figure[] toArray() {
-        Figure[] c = new Figure[figures.size()];
-        for(int i = 0; i< figures.size();i++){
-            c[i] = figures.get(i);
+        Figure[] c = new Figure[list.size()];
+        for(int i = 0; i< list.size(); i++){
+            c[i] = list.get(i);
         }
         return c;
     }
 
     public void  dispose(){
-        figures.clear();
+        list.clear();
     }
 
 

@@ -22,8 +22,6 @@ public class Utils {
         containers.add(new FigureArray("main"));
     }
 
-    //TODO сделать м.б. save
-
     public static void random(boolean isList, int count,String name){
 
         if (isList) containers.add(new FigureList(name));
@@ -35,62 +33,60 @@ public class Utils {
 
     }
 
-     static Figure randomFigure(){//TODO выход за границы круг или овел
-        int num = (int)(Math.random()*8);
-        if(num == 8) num--;
-        int x,y,x1,x2,x3,y1,y2,y3,width,height;
+     static Figure randomFigure(){
+        int num = (int)(Math.random()*7.999f);
+        int x,y,x1,x2,x3,y1,y2,y3,width,height,diameter,diameterX,diameterY,baseUp,baseDown;
         switch (num){
-            case 0://Circle
-                int diameter = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2))/2)+1;// {1,minWinSize}
-                x = (int)(diameter/2+1+(Math.random()*(Lab6.getWindows_w()-diameter-2)));// {diameter/2+1,winX-diameter-1}
-                y = (int)(diameter/2+1+(Math.random()*(Lab6.getWindows_h()-diameter-2)));// {diameter/2+1,winY-diameter-1}
+            case 0:
+                diameter = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2))/2)+1;
+                x = (int)(diameter/2+1+(Math.random()*(Lab6.getWindows_w()-diameter-2)));
+                y = (int)(diameter/2+1+(Math.random()*(Lab6.getWindows_h()-diameter-2)));
                 return new Circle(new Point(x,y),diameter,Math.random() < 0.5,randomColor());
-            case 1://Line
-                x1 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));// {1,winX-1}
-                y1 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));// {1,winY-1}
+            case 1:
+                x1 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));
+                y1 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));
                 x2 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));
                 y2 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));
                 return new Line(new Point(x1,y1),new Point(x2,y2),randomColor());
-            case 2://Oval
-                int diameterX = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2-1}
-                int diameterY = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2-1}
-                x = (int)(diameterX/2+1+(Math.random()*(Lab6.getWindows_w()-diameterX-2)));// {diameterX/2+1,winX-diameterX/2-1}
-                y = (int)(diameterY/2+1+(Math.random()*(Lab6.getWindows_h()-diameterY-2)));// {diameterY/2+1,winY-diameterY/2-1}
+            case 2:
+                diameterX = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;
+                diameterY = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;
+                x = (int)(diameterX/2+1+(Math.random()*(Lab6.getWindows_w()-diameterX-2)));
+                y = (int)(diameterY/2+1+(Math.random()*(Lab6.getWindows_h()-diameterY-2)));
                 return new Oval(new Point(x,y),diameterX,diameterY,Math.random() < 0.5,randomColor());
-            case 3://Rect
-                width = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
-                height = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
-                x = (int)(width/2+1+(Math.random()*(Lab6.getWindows_w()-width-2)));// {width/2+1,winX-width/2-1}
-                y = (int)(height/2+1+(Math.random()*(Lab6.getWindows_h()-height-2)));// {height/2+1,winY-height/2-1}
+            case 3:
+                width = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;
+                height = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;
+                x = (int)(width/2+1+(Math.random()*(Lab6.getWindows_w()-width-2)));
+                y = (int)(height/2+1+(Math.random()*(Lab6.getWindows_h()-height-2)));
                 return new Rect(new Point(x,y),width,height,Math.random() < 0.5,randomColor());
-            case 4://Ring
-                int diameter1 = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
-                int diameter2 = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
-                x = (int)(Math.max(diameter1,diameter2)/2+1+(Math.random()*(Lab6.getWindows_w()-Math.max(diameter1,diameter2)-2)));// {diameterMax/2+1,winX-diameterMax/2-1}
-                y = (int)(Math.max(diameter1,diameter2)/2+1+(Math.random()*(Lab6.getWindows_h()-Math.max(diameter1,diameter2)-2)));// {diameterMax/2+1,winY-diameterMax/2-1}
+            case 4:
+                int diameter1 = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;
+                int diameter2 = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;
+                x = (int)(Math.max(diameter1,diameter2)/2+1+(Math.random()*(Lab6.getWindows_w()-Math.max(diameter1,diameter2)-2)));
+                y = (int)(Math.max(diameter1,diameter2)/2+1+(Math.random()*(Lab6.getWindows_h()-Math.max(diameter1,diameter2)-2)));
                 return new Ring(new Point(x,y),diameter1,diameter2,randomColor());
-            case 5://Romb
-                width = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
-                height = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
-                x = (int)(width/2+1+(Math.random()*(Lab6.getWindows_w()-width-2)));// {width/2+1,winX-width/2-1}
-                y = (int)(height/2+1+(Math.random()*(Lab6.getWindows_h()-height-2)));// {height/2+1,winY-height/2-1}
+            case 5:
+                width = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;
+                height = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;
+                x = (int)(width/2+1+(Math.random()*(Lab6.getWindows_w()-width-2)));
+                y = (int)(height/2+1+(Math.random()*(Lab6.getWindows_h()-height-2)));
                 return  new Romb(new Point(x,y),width,height,Math.random() < 0.5, randomColor());
-            case 6://Trapezoid
-                int baseUp = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
-                int baseDown = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
-                height = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;// {1,minWinSize/2}
-                x = (int)(Math.max(baseUp,baseDown)/2+1+(Math.random()*(Lab6.getWindows_w()-Math.max(baseUp,baseDown)-2)));// {baseMax/2+1,winX-baseMax/2-1}
-                y = (int)(height/2+1+(Math.random()*(Lab6.getWindows_h()-height-2)));// {height/2+1,winY-height/2-1}
+            case 6:
+                baseUp = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;
+                baseDown = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;
+                height = (int)((Math.random()*(Math.min(Lab6.getWindows_h(),Lab6.getWindows_w())-2)))/2+1;
+                x = (int)(Math.max(baseUp,baseDown)/2+1+(Math.random()*(Lab6.getWindows_w()-Math.max(baseUp,baseDown)-2)));
+                y = (int)(height/2+1+(Math.random()*(Lab6.getWindows_h()-height-2)));
                 return new Trapezoid(new Point(x,y),baseUp,baseDown,height,Math.random() < 0.5,randomColor());
-            case 7://Triangle
-                x1 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));// {1,winX-1}
-                y1 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));// {1,winY-1}
+            case 7:
+                x1 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));
+                y1 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));
                 x2 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));
                 y2 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));
                 x3 = (int)(1+(Math.random()*(Lab6.getWindows_w()-2)));
                 y3 = (int)(1+(Math.random()*(Lab6.getWindows_h()-2)));
                 return new Triangle(new Point(x1,y1),new Point(x2,y2),new Point(x3,y3),Math.random() < 0.5,randomColor());
-
         }
         return null;
     }
@@ -101,7 +97,6 @@ public class Utils {
         int b = (int)(Math.random()*255);
         return new Color(r,g,b);
     }
-
 
     public static void load(String name,String file){
         StringBuilder line = new StringBuilder();
@@ -130,23 +125,23 @@ public class Utils {
             switch (words[0]) {
                 case "t":
                     getContainer(name).add(new Triangle(
-                            new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
-                            new Point(Integer.parseInt(words[3]), Integer.parseInt(words[4])),
-                            new Point(Integer.parseInt(words[5]), Integer.parseInt(words[6])),
+                            Integer.parseInt(words[1]), Integer.parseInt(words[2]),
+                            Integer.parseInt(words[3]), Integer.parseInt(words[4]),
+                            Integer.parseInt(words[5]), Integer.parseInt(words[6]),
                             Boolean.parseBoolean(words[10]),
                             new Color(Integer.parseInt(words[7]), Integer.parseInt(words[8]), Integer.parseInt(words[9]))
                     ));
                     break;
                 case "l":
                     getContainer(name).add(new Line(
-                            new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
-                            new Point(Integer.parseInt(words[3]), Integer.parseInt(words[4])),
+                            Integer.parseInt(words[1]), Integer.parseInt(words[2]),
+                            Integer.parseInt(words[3]), Integer.parseInt(words[4]),
                             new Color(Integer.parseInt(words[5]), Integer.parseInt(words[6]), Integer.parseInt(words[7]))
                     ));
                     break;
                 case "c":
                     getContainer(name).add(new Circle(
-                            new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
+                            Integer.parseInt(words[1]), Integer.parseInt(words[2]),
                             Integer.parseInt(words[3]),
                             Boolean.parseBoolean(words[7]),
                             new Color(Integer.parseInt(words[4]), Integer.parseInt(words[5]), Integer.parseInt(words[6]))
@@ -154,26 +149,24 @@ public class Utils {
                     break;
                 case "ri":
                     getContainer(name).add(new Ring(
-                                    new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
-                                    Integer.parseInt(words[3]),
-                                    Integer.parseInt(words[4]),
-                                    new Color(Integer.parseInt(words[5]), Integer.parseInt(words[6]), Integer.parseInt(words[7]))
-                            )
+                            Integer.parseInt(words[1]), Integer.parseInt(words[2]),
+                            Integer.parseInt(words[3]),
+                            Integer.parseInt(words[4]),
+                            new Color(Integer.parseInt(words[5]), Integer.parseInt(words[6]), Integer.parseInt(words[7])))
                     );
                     break;
                 case "o":
                     getContainer(name).add(new Oval(
-                                    new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
-                                    Integer.parseInt(words[3]),
-                                    Integer.parseInt(words[4]),
-                                    Boolean.parseBoolean(words[8]),
-                                    new Color(Integer.parseInt(words[5]), Integer.parseInt(words[6]), Integer.parseInt(words[7]))
-                            )
+                            Integer.parseInt(words[1]), Integer.parseInt(words[2]),
+                            Integer.parseInt(words[3]),
+                            Integer.parseInt(words[4]),
+                            Boolean.parseBoolean(words[8]),
+                            new Color(Integer.parseInt(words[5]), Integer.parseInt(words[6]), Integer.parseInt(words[7])))
                     );
                     break;
                 case "ro":
                     getContainer(name).add(new Romb(
-                            new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
+                            Integer.parseInt(words[1]), Integer.parseInt(words[2]),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]),
                             Boolean.parseBoolean(words[8]),
                             new Color(Integer.parseInt(words[5]), Integer.parseInt(words[6]), Integer.parseInt(words[7]))
@@ -181,7 +174,7 @@ public class Utils {
                     break;
                 case "tr":
                     getContainer(name).add(new Trapezoid(
-                            new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
+                            Integer.parseInt(words[1]), Integer.parseInt(words[2]),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]), Integer.parseInt(words[5]),
                             Boolean.parseBoolean(words[9]),
                             new Color(Integer.parseInt(words[6]), Integer.parseInt(words[7]), Integer.parseInt(words[8]))
@@ -189,7 +182,7 @@ public class Utils {
                     break;
                 case "re":
                     getContainer(name).add(new Rect(
-                            new Point(Integer.parseInt(words[1]), Integer.parseInt(words[2])),
+                            Integer.parseInt(words[1]), Integer.parseInt(words[2]),
                             Integer.parseInt(words[3]), Integer.parseInt(words[4]),
                             Boolean.parseBoolean(words[8]),
                             new Color(Integer.parseInt(words[5]), Integer.parseInt(words[6]), Integer.parseInt(words[7]))

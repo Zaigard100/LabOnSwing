@@ -13,10 +13,10 @@ public class Lab6 {
     static Utils utils;
     static JPanel jPanel;
     static JMenuBar jMenuBar;
-    static JMenu file, transform,create;
+    static JMenu file,transform,create;
     static JMenuItem load,random,del,exit;
     static JMenuItem fig,cnt;
-    static JMenuItem a_fig,a_cnt;
+    static JMenuItem createFigureItem,createContainerItem;
     static CreateFigure createFigure = new CreateFigure();
     static CreateContainer createContainer = new CreateContainer();
     static TransformFigure transformFigure = new TransformFigure();
@@ -47,7 +47,6 @@ public class Lab6 {
     }
 
     static JFrame getFrame(){
-        //создание окна
         JFrame jFrame = new JFrame() {};
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(windows_w, windows_h+60);
@@ -56,7 +55,7 @@ public class Lab6 {
         screen_w = dimension.width;
         screen_h = dimension.height;
         jFrame.setLocation(screen_w/2- windows_w /2,screen_h/2- windows_h /2);
-        jFrame.setTitle("labs5");
+        jFrame.setTitle("labs6");
         jFrame.setResizable(false);
         jFrame.setVisible(true);
         return jFrame;
@@ -78,8 +77,8 @@ public class Lab6 {
         file.addSeparator();
         exit = file.add(new JMenuItem("Exit"));
 
-        a_fig = create.add(new JMenuItem("Figure"));
-        a_cnt = create.add(new JMenuItem("Container"));
+        createFigureItem = create.add(new JMenuItem("Figure"));
+        createContainerItem = create.add(new JMenuItem("Container"));
 
         fig = transform.add(new JMenuItem("Figure"));
         cnt = transform.add((new JMenuItem("Container")));
@@ -105,12 +104,12 @@ public class Lab6 {
             jFrame.revalidate();
         });
 
-        a_fig.addActionListener(actionEvent -> {
+        createFigureItem.addActionListener(actionEvent -> {
             createFigure.updateContainers();
             createFigure.setVisible(true);
         });
 
-        a_cnt.addActionListener(actionEvent -> createContainer.setVisible(true));
+        createContainerItem.addActionListener(actionEvent -> createContainer.setVisible(true));
 
         fig.addActionListener(actionEvent -> {
             transformFigure.updateContainers();

@@ -6,6 +6,10 @@ import java.awt.*;
 
 public class Ring extends Oval {
 
+    public Ring(int x,int y, int diameter1, int diameter2, Color color){
+        super(x,y,Math.max(diameter1,diameter2),Math.min(diameter1,diameter2),true,color);
+    }
+
     public Ring(Point p, int diameter1, int diameter2, Color color){
         super(p,Math.max(diameter1,diameter2),Math.min(diameter1,diameter2),true,color);
     }

@@ -6,6 +6,29 @@ import java.awt.*;
 
 public class Romb extends Quadrangle {
     int width,height;
+
+    public Romb(int x, int y, int width, int height, boolean fill, Color color) {
+        super(
+                x, y,
+
+                x - width /2,
+                y,
+
+                x,
+                y - height /2,
+
+                x + width /2,
+                y,
+
+                x,
+                y + height /2,
+                fill,
+                color
+        );
+        this.width = width;
+        this.height = height;
+    }
+
     public Romb(Point p, int width, int height, boolean fill, Color color) {
         super(
                 p,

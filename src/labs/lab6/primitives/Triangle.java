@@ -10,6 +10,14 @@ public class Triangle extends Figure {
 
     Color color;
 
+    public Triangle(int x1,int y1, int x2,int y2, int x3,int y3, boolean fill, Color color) {
+        super(x1,y1, fill, color);
+        this.p2 = new Point(x2,y2);
+        this.p3 = new Point(x3,y3);
+        this.fill = fill;
+        this.color = color;
+    }
+
     public Triangle(Point p1, Point p2, Point p3, boolean fill, Color color) {
         super(p1, fill, color);
         this.p2 = p2;
@@ -94,10 +102,6 @@ public class Triangle extends Figure {
 
     public Point getP3() {
         return p3;
-    }
-
-    public void setP3(Point p3) {
-        this.p3 = p3;
     }
 
     public int[] getX_point(){

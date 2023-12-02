@@ -8,6 +8,27 @@ public class Trapezoid extends Quadrangle {
 
     int width,width2,height;
 
+    public Trapezoid(int x, int y, int width, int width2, int height, boolean fill, Color color) {
+        super(
+                x, y,
+
+                x - width / 2,
+                y - height / 2,
+
+                x + width / 2,
+                y - height / 2,
+
+                x + width2 / 2,
+                y + height / 2,
+
+                x - width2 / 2,
+                y + height / 2,
+                fill,
+                color
+        );
+        this.width2 = Math.min(width, width2);
+    }
+
     public Trapezoid(Point p, int width, int width2, int height, boolean fill, Color color) {
         super(
                 p,

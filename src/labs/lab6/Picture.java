@@ -13,9 +13,9 @@ public class Picture extends JComponent {
 
     @Override
     protected void paintComponent(Graphics g){
-        for(AbstractContainer fC: Utils.getFigureContainers()){
-            if(fC.isShow()){
-                fC.show(g);
+        for(AbstractContainer figureContainers: Utils.getFigureContainers()){
+            if(figureContainers.isShow()){
+                figureContainers.show(g);
             }
         }
 

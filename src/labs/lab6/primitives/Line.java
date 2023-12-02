@@ -8,6 +8,11 @@ import java.awt.*;
 public class Line extends Figure {
     Point p2;
 
+    public Line(int x1, int y1, int x2, int y2, Color color) {
+        super(new Point(x1,y1), false, color);
+        this.p2 = new Point(x2,y2);
+    }
+
     public Line(Point p1, Point p2, Color color) {
         super(p1, false, color);
         this.p2 = p2;

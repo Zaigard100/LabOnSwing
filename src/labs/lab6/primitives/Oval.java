@@ -6,6 +6,13 @@ import java.awt.*;
 
 public class Oval extends Figure {
     int diameterX, diameterY;
+
+    public Oval(int x ,int y, int diameterX, int diameterY, boolean fill, Color color) {
+        super(x, y, fill, color);
+        this.diameterX = diameterX;
+        this.diameterY = diameterY;
+        this.fill = fill;
+    }
     public Oval(Point p, int diameterX, int diameterY, boolean fill, Color color) {
         super(p, fill, color);
         this.diameterX = diameterX;

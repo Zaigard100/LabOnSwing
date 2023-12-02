@@ -8,6 +8,30 @@ public class Rect extends Quadrangle {
 
     int width,height;
 
+    public Rect(int x, int y, int width, int height, boolean fill, Color color) {
+        super(
+                x, y,
+
+                x- width /2,
+                y- height /2,
+
+                x+ width /2,
+                y- height /2,
+
+                x+ width /2,
+                y+ height /2,
+
+                x- width /2,
+                y+ height /2,
+
+                fill,
+                color
+        );
+        this.width = width;
+        this.height = height;
+
+    }
+
     public Rect(Point p, int width, int height, boolean fill, Color color) {
         super(
                 p,
